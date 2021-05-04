@@ -1,0 +1,63 @@
+<app-agent-bo></app-agent-bo>
+<br>
+
+<br>
+<br>
+<div class="tools">
+    <button (click)="exportData('contactJs')" style="margin-left:60em;width:1em;display:inline-block;" >
+        <img src="../../../assets/images/excel.png">
+    </button>
+  
+
+ 
+ 
+  <button (click)="convert()" style="margin-left:8em;display:inline-block;"> <img src="../../../assets/images/pdfDownload.png"></button>
+</div>
+  <br>
+
+<!-- <input type="submit" value="Enregistrer" name="enregistrer" style="margin-left:20em;width:8em;display:inline-block;">
+<input type="reset" value="Effacer" name="effacer" style="margin-left:8em;display:inline-block;"> -->
+
+
+
+    <nav class="navbar">
+        <input class="form-control" type="text" name="searching" [(ngModel)]="firstn" (ngModelChange)="Search()" placeholder="Rechercher par Créateur | Nom" style="width: 260px;border-radius: 20px;">
+    </nav><br>
+    <table id="contactJs" class="table table-bordered table-light table-hover" >
+        <thead>
+          <tr>
+            <th  (click)="sort('id')" style="width: 400px;">Id&nbsp;<i class="fa fa-sort"></i></th>
+            <th>Nom</th>
+            <th>Categorie</th>
+            <th>ID fiscale</th>
+            <th>Adresse</th>
+            <th>Nationnalite</th>
+            <th>créé par</th>
+            <th>créé le</th>
+            <th>mis à jour le</th>
+
+  
+          </tr>
+        </thead>
+    <tbody>
+        <tr *ngFor="let f of Fournisseurs | orderBy: key: reverse |paginate: {itemsPerPage:5,currentPage:p};">
+            <td>{{f.iderp}}</td>
+            <td>{{f.name}}</td>
+            <td>{{f.categorie}}</td>
+            <td>{{f.idFiscale}}</td>
+            <td>{{f.adresse}}</td>
+            <td>{{f.nationnalite}}</td>
+            <td>{{f.createdBy}}</td>
+            <td>{{f.createdAt}}</td>
+            <td>{{f.updatedAt}}</td>
+          
+            
+
+        </tr>
+    </tbody>
+    <br> 
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+
+
+

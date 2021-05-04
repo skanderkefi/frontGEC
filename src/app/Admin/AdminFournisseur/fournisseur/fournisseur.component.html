@@ -1,0 +1,262 @@
+<app-adminnavbar></app-adminnavbar>
+
+<br>
+<br>
+<button type="button" title="Modifier" class="btn btn-light pb-modalreglog-submit" (click)="fournisseurModal(fournisseurToUpdate)" data-toggle="modal" data-target="#myModalcr"
+              style="margin-left: 1100px;" ><img src="../../../assets/images/creation.png"  
+               style="border-radius: 10px; border-image-width: 5px;">  </button>
+<br>
+<br>
+
+<div class="container">
+    <div class="tools">
+        <button title="Importer excel">
+          <label>
+            <span class="mdi mdi-file-export"> </span>
+            <img src="../../../assets/images/excel.png">
+            <input hidden type="file" (change)="onFileChange($event)" multiple="false">
+          </label>
+        </button>
+      </div>
+      
+<br>
+
+  <button type="button" *ngIf="insertButton" class="btn btn-success" style="border-radius: 50px;" (click)="insertAll()">Insérer</button>
+</div> <br>
+  <br>
+
+    <nav class="navbar">
+        <input class="form-control" type="text" name="searching" [(ngModel)]="firstn" (ngModelChange)="Search()" placeholder="Rechercher par Créateur | Nom" style="width: 260px;border-radius: 20px;">
+    </nav><br>
+    <table class="table table-bordered" >
+        <thead>
+          <tr>
+            <th  (click)="sort('id')" style="width: 400px;">Id&nbsp;<i class="fa fa-sort"></i></th>
+            <th>Nom</th>
+            <th>Categorie</th>
+            <th>ID fiscale</th>
+            <th>Adresse</th>
+            <th>Nationnalite</th>
+            <th>créé par</th>
+            <th>créé à</th>
+            <th>mis à jour à</th>
+            <th class="cellules">Actions</th>
+
+  
+          </tr>
+        </thead>
+    <tbody>
+        <tr *ngFor="let f of Fournisseurs | orderBy: key: reverse |paginate: {itemsPerPage:5,currentPage:p};">
+            <td>{{f.iderp}}</td>
+            <td>{{f.name}}</td>
+            <td>{{f.categorie}}</td>
+            <td>{{f.idFiscale}}</td>
+            <td>{{f.adresse}}</td>
+            <td>{{f.nationnalite}}</td>
+            <td>{{f.createdBy}}</td>
+            <td>{{f.createdAt}}</td>
+            <td>{{f.updatedAt}}</td>
+            <td><button type="button" title="Modifier" class="btn btn-light pb-modalreglog-submit" (click)="fournisseurModal(f)" data-toggle="modal" data-target="#myModalmodif"
+            ><img src="../../../assets/images/modifier.png"  
+            style="border-radius: 10px; border-image-width: 5px;">  </button>
+            
+           <button type="button" title="Effacer" class="btn btn-light"  (click)="deleteFournisseur(f.iderp)"><a routerLink="/fournisseurs">  <img src="../../../assets/images/eff.png"  style="border-radius: 10px; border-image-width: 5px;"></a></button>
+           </td> 
+            
+
+        </tr>
+    </tbody>
+    <br> 
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+
+
+
+
+ 
+
+    <div class="container pb-modalreglog-container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <div class="input-group pb-modalreglog-input-group">
+                </div>
+                <div class="modal fade" id="myModalmodif" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm" role="document" style="max-width: 80%;">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <form class="pb-modalreglog-form-reg">
+                                  
+                                  <div class="row mb-4">
+                                    <div class="col">
+                                      <div class="form-outline">
+                                      <label for="id">Id</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                          <input type="text" class="form-control " id="id" placeholder="Id" name="id" [(ngModel)]='fournisseurToUpdate.iderp' readonly>
+                                      </div>
+                                  </div></div>
+                                  <div class="col">
+                                    <div class="form-outline">
+                                      <label for="name">Nom</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                          <input type="text" class="form-control" id="name" placeholder="Nom" name="name" [(ngModel)]='fournisseurToUpdate.name'>
+                                      </div>
+                                  </div></div></div>
+                                  <div class="row mb-4">
+                                    <div class="col">
+                                      <div class="form-outline">
+                                      <label for="categorie">Catégorie</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                          <input type="text" class="form-control" id="categorie" placeholder="Catégorie" name="categorie" [(ngModel)]='fournisseurToUpdate.categorie'>
+                                      </div></div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="form-outline">
+                                      <label for="idf">Id Fiscale</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                          <input type="text" class="form-control" id="idf" placeholder="Id fiscale" name="idf" [(ngModel)]='fournisseurToUpdate.idFiscale' #idfiscl="ngModel" required  >
+                                          <br>
+                                          <br>
+                                           <div class="error" *ngIf="idfiscl.errors?.required && idfiscl.touched" 
+                                           style="color:firebrick;" >Obligatoire !</div>
+                                      </div>
+                                  </div></div></div>
+                                  <div class="row mb-4">
+                                    <div class="col">
+                                      <div class="form-outline">
+                                    <label for="adr">Adresse</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="adr" placeholder="Adresse" name="adr" [(ngModel)]='fournisseurToUpdate.adresse'>
+                                    </div>
+                                </div></div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                    <label for="nat">Nationnalité</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="nat" placeholder="Nationnalité" name="nat" [(ngModel)]='fournisseurToUpdate.nationnalite'> 
+                                    </div>
+                                </div></div></div>
+                              
+                                <div class="form-group">
+                                    <label for="cby">Créé par</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="cby" placeholder="Créé par" name="cby" [(ngModel)]='fournisseurToUpdate.createdBy' #crbyyy="ngModel" required  >
+                                        <br>
+                                        <br>
+                                         <div class="error" *ngIf="crbyyy.errors?.required && crbyyy.touched" 
+                                         style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
+                                </div>
+                             
+                            
+                                
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                              <button type="button" class="btn btn-primary" (click)="updateFournisseur()" routerLink="/fournisseurs"
+                              *ngIf="!crbyyy.errors?.required && !idfiscl.errors?.required">Modifier</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal fade" id="myModalcr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document" style="max-width: 80%;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="pb-modalreglog-form-reg">
+                                
+                               
+                                <div class="row mb-4">
+                                    <div class="col">
+                                      <div class="form-outline">
+                                    <label for="name">Nom</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="name" placeholder="Nom" name="name" [(ngModel)]='fournisseurToCreate.name'>
+                                    </div>
+                                </div></div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                    <label for="categorie">Catégorie</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="categorie" placeholder="Catégorie" name="categorie" [(ngModel)]='fournisseurToCreate.categorie'>
+                                    </div>
+                                </div></div></div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                      <div class="form-outline">
+                                    <label for="idf">Id Fiscale</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="idf" placeholder="Id fiscale" name="idf" [(ngModel)]='fournisseurToCreate.idFiscale' #idfisc="ngModel" required  >
+                                        <br>
+                                        <br>
+                                         <div class="error" *ngIf="idfisc.errors?.required && idfisc.touched" 
+                                         style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
+                                </div></div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                  <label for="adr">Adresse</label>
+                                  <div class="input-group pb-modalreglog-input-group">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                      <input type="text" class="form-control" id="adr" placeholder="Adresse" name="adr" [(ngModel)]='fournisseurToCreate.adresse'>
+                                  </div>
+                              </div></div></div>
+                              <div class="row mb-4">
+                                <div class="col">
+                                  <div class="form-outline">
+                                  <label for="nat">Nationnalité</label>
+                                  <div class="input-group pb-modalreglog-input-group">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                      <input type="text" class="form-control" id="nat" placeholder="Nationnalité" name="nat" [(ngModel)]='fournisseurToCreate.nationnalite'> 
+                                  </div>
+                              </div></div>
+                             
+                              <div class="col">
+                                <div class="form-outline">
+                              <div class="form-group">
+                                  <label for="cby">Créé par</label>
+                                  <div class="input-group pb-modalreglog-input-group">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                      <input type="text" class="form-control" id="cby" placeholder="Créé par" name="cby" [(ngModel)]='fournisseurToCreate.createdBy' #crbyy="ngModel" required  >
+                                      <br>
+                                      <br>
+                                       <div class="error" *ngIf="crbyy.errors?.required && crbyy.touched" 
+                                       style="color:firebrick;" >Obligatoire !</div>
+                                  </div>
+                              </div></div></div></div>
+                            
+                          
+                              
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-primary" (click)="createFournisseur()" 
+                            *ngIf="!crbyy.errors?.required && !idfisc.errors?.required"  >Créer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div> 

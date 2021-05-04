@@ -1,0 +1,339 @@
+<app-adminnavbar></app-adminnavbar>
+
+<br>
+<button type="button" title="Nouveau utilisateur" class="btn btn-light pb-modalreglog-submit" (click)="userModal(userToUpdate)" data-toggle="modal" data-target="#myModal2"
+              style="margin-left: 1100px;" ><img src="../../../assets/images/creermf.png"  
+               style="border-radius: 10px; border-image-width: 5px;">  </button>
+<br>
+<br>
+
+    <nav class="navbar">
+        <input class="form-control" type="text" name="firstname" [(ngModel)]="firstn" (ngModelChange)="Search()" placeholder="Rechercher par Matricule | Nom" style="width: 260px;border-radius: 20px;">
+    </nav><br>
+    
+
+
+    <table class="table table-bordered" style="width: 100%;">
+        <thead>
+          <tr>
+            <th class="cellules" (click)="sort('id')">Id&nbsp;<i class="fa fa-sort"></i></th>
+            <th class="cellules">Image</th>
+            <th class="cellules">Nom</th>
+            <th class="cellules">Matricule</th>
+            <th class="cellules">Téléphone</th>
+            <th class="cellules">Profil</th>
+            <th class="cellules">Email</th>
+            <th class="cellules">Créé par</th>
+            <th class="cellules">Actions</th> 
+ 
+             <!-- | orderBy: key: reverse |paginate: {itemsPerPage:5,currentPage:p};" -->
+
+           </tr>
+        </thead>
+    <tbody>
+        <tr *ngFor=" let i=index ; let userr of Users | orderBy: key: reverse |paginate: {itemsPerPage:5,currentPage:p};"  >
+            <td class="cellules">{{userr.id}} </td>
+            <td class="cellules"><img [src]="userCompletesImages[i]" style="width: 60px;height:60px;border-radius: 30px;"/></td>
+            <td class="cellules">{{userr.name}}</td>
+            <td class="cellules">{{userr.matricule}}</td>
+            <td class="cellules">{{userr.phone}}</td>
+            <td class="cellules">{{userr.profil}}</td>
+            <td class="cellules">{{userr.email}}</td>
+            <td class="cellules">{{userr.created_by}}</td>
+            <td class="cellules">
+              <button type="button" title="Modifier" class="btn btn-light pb-modalreglog-submit" (click)="userModal(userr)" data-toggle="modal" data-target="#myModal"
+               ><img src="../../../assets/images/modifier.png"  
+               style="border-radius: 10px; border-image-width: 5px;">  </button>
+               
+              <button type="button" title="Effacer" class="btn btn-light"   (click)="deleteUser(userr.id)">  <img  src="../../../assets/images/eff.png"  style="border-radius: 10px; border-image-width: 5px;"></button>
+              </td> </tr>
+    
+
+    </tbody>
+
+    <br>
+    <br>
+    <br>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table> 
+
+   
+ 
+
+
+ 
+
+      <div class="container pb-modalreglog-container" >
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <div class="input-group pb-modalreglog-input-group">
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm" role="document" style="max-width: 80%;">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <form class="pb-modalreglog-form-reg" >
+                                <div class="row mb-4">
+                                       <div class="col">
+                                        <div class="form-outline">   
+                                      <label for="id">Id</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                          <input type="text" class="form-control" id="id" placeholder="Id" name="id" [(ngModel)]='userToUpdate.id' readonly>
+                                      </div></div></div>
+                                   
+                                      <div class="col">
+                                        <div class="form-outline"> 
+                                      <label for="createdBy">Créé par</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                          <input type="text" class="form-control" id="createdBy" placeholder="Créé par" name="createdBy"  [(ngModel)]='userToUpdate.created_by'
+                                          #cb="ngModel" required  >
+                                          <br>
+                                          <br>
+                                           <div class="error" *ngIf="cb.errors?.required && cb.touched" 
+                                           style="color:firebrick;" >Obligatoire !</div>
+                                      </div>
+                                  </div></div></div>
+
+                                  <div class="row mb-4">
+                                    <div class="col">
+                                      <div class="form-outline"> 
+                                      <label for="direction">Direction</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                          <input type="text" class="form-control" id="direction" placeholder="Direction" name="direction" [(ngModel)]='userToUpdate.direction'
+                                          #dir="ngModel" required>
+                                          <div class="error" *ngIf="dir.errors?.required && dir.touched" 
+                                           style="color:firebrick;" >Obligatoire !</div>
+                                      </div>
+                                  </div></div>
+                                    <div class="col">
+                                      <div class="form-outline"> 
+                                      <label for="email">Email</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                          <input type="email" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]='userToUpdate.email'
+                                          #em="ngModel" required>
+                                          <div class="error" *ngIf="em.errors?.required && em.touched" 
+                                           style="color:firebrick;" >Obligatoire !</div>
+                                      </div>
+                                  </div></div></div>
+
+                                  <div class="row mb-4">
+                                    <div class="col">
+                                      <div class="form-outline">
+                                    <label for="matricule">Matricule</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="matricule" placeholder="Matricule" name="matricule" [(ngModel)]='userToUpdate.matricule'
+                                        #mtr="ngModel" required>
+                                        <div class="error" *ngIf="em.errors?.required && em.touched" 
+                                           style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
+                                </div></div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                    <label for="password">Mot de passe</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="password" placeholder="Mot de passe" name="password" [(ngModel)]='userToUpdate.password'
+                                        #psswd="ngModel" required>
+                                        <div class="error" *ngIf="psswd.errors?.required && psswd.touched" 
+                                           style="color:firebrick;" >Obligatoire !</div> 
+                                    </div>
+                                </div>
+                                </div></div>
+                                <div class="row mb-4">
+                                <div class="col">
+                                    <div class="form-outline">
+                                    <label for="phone">Téléphone</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="phone" placeholder="Téléphone" name="phone" [(ngModel)]='userToUpdate.phone'>
+                                    </div>
+                                </div></div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                    <label for="profil">Profil</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="profil" placeholder="Profil" name="profil" [(ngModel)]='userToUpdate.profil'
+                                        #prf="ngModel" required>
+                                        <div class="error" *ngIf="prf.errors?.required && prf.touched" 
+                                           style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
+                                </div></div></div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-outline">
+                                        <label for="nom">Nom</label>
+                                        <div class="input-group pb-modalreglog-input-group">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                            <input type="text" class="form-control" id="nom" placeholder="Nom" name="nom" [(ngModel)]='userToUpdate.name'
+                                            #nm="ngModel" required>
+                                            <div class="error" *ngIf="nm.errors?.required && nm.touched" 
+                                            style="color:firebrick;" >Obligatoire !</div>
+                                        </div>
+                                    </div></div>
+                                    <div class="col">
+                                        <div class="form-outline">
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="file" class="form-control" id="image" placeholder="Image" (change)="onFileChanged($event)">
+                                        <input *ngIf="!uploadedSuccessfullyToUpdate" type="button" (click)="onUploadToUpdate()" value="upload">
+                                        <div class="error" *ngIf="notImageToUpdate" style="color:firebrick;"> Le fichier doit être une image !</div>
+    
+                                    </div></div></div>
+                               </div>
+
+                            
+                                
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                              <button type="button" class="btn btn-primary" (click)="updateUser()"
+                              *ngIf="!notImageToUpdate  && !psswd.errors?.required && !mtr.errors?.required">Modifier</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+
+              <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document" style="max-width: 80%; ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="pb-modalreglog-form-reg" (submit)="createUser()" >
+                                
+                                <div class="row mb-4">
+                                    
+                                <div class="col">
+                                    <div class="form-outline">
+                                    <label for="createdBy">Créé par</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="createdBy" placeholder="Créé par" name="createdBy" [(ngModel)]='userToCreate.created_by'>
+                                    </div></div></div>
+                                
+                               
+                                    <div class="col">
+                                      <div class="form-outline">
+                                    <label for="direction">Direction</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="direction" placeholder="Direction" name="direction" [(ngModel)]='userToCreate.direction'>
+                                    </div></div></div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-outline">
+                                    <label for="email">Email</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                        <input type="text" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]='userToCreate.email'>
+                                    </div></div></div>
+                                
+                               
+                                    <div class="col">
+                                      <div class="form-outline">
+                                  <label for="matricule">Matricule</label>
+                                  <div class="input-group pb-modalreglog-input-group">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                      <input type="text" class="form-control" id="matricule" placeholder="Matricule" name="matricule" [(ngModel)]='userToCreate.matricule'
+                                      #matr="ngModel" required>
+                                      <div class="error" *ngIf="matr.errors?.required && matr.touched" 
+                                      style="color:firebrick;" >Obligatoire !</div>
+                                  </div></div></div></div>
+                                  <div class="row mb-4">
+                              <div class="col">
+                                <div class="form-outline">
+                                  <label for="mdp">Mot de passe</label>
+                                  <div class="input-group pb-modalreglog-input-group">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                      <input type="text" class="form-control" id="mdp" placeholder="Mot de passe" name="mdp" [(ngModel)]='userToCreate.password'  #modps="ngModel" required>
+                                      <div class="error" *ngIf="modps.errors?.required && modps.touched" 
+                                      style="color:firebrick;" >Obligatoire !</div>
+                                  </div></div></div>
+                                
+                              
+                                <div class="col">
+                                  <div class="form-outline">
+                                  <label for="phone">Téléphone</label>
+                                  <div class="input-group pb-modalreglog-input-group">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                      <input type="text" class="form-control" id="phone" placeholder="Téléphone" name="phone" [(ngModel)]='userToCreate.phone'>
+                                  </div></div>
+                              </div></div>
+                              <div class="row mb-4">
+                                <div class="col">
+                                    <div class="form-outline">
+                                      <label for="nom">Nom</label>
+                                      <div class="input-group pb-modalreglog-input-group">
+                                          <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                          <input type="text" class="form-control" id="nom" placeholder="Nom" name="profil" [(ngModel)]='userToCreate.name'>
+                                      </div></div></div>
+                              <div class="col">
+                                <div class="form-outline">
+                                  <label for="profil">Profil</label>
+                                  <div class="input-group pb-modalreglog-input-group">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                      <input type="text" class="form-control" id="profil" placeholder="Profil" name="profil" [(ngModel)]='userToCreate.profil'>
+                                  </div></div></div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div class="form-outline">
+                                <label for="image">Image (maximum <u>1000 Ko</u>)</label>
+                                <div class="input-group pb-modalreglog-input-group">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                    <input type="file" class="form-control" id="image" placeholder="Image" (change)="onFileChanged($event)">
+                                    <input *ngIf="!uploadedSuccessfullyToCreate" type="button" (click)="onUploadToCreate()" value="upload">
+                                    <div class="error" *ngIf="notImageToCreate" style="color:firebrick;"> Le fichier doit être une image !</div>
+
+                                </div></div></div>
+                            </div> 
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary" *ngIf="!notImageToCreate  && !modps.errors?.required && !matr.errors?.required">Créer</button>
+                            </div></form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- <div class="container row">
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
+                name="name" />
+        </div>
+        <div class="col-md-6">
+            <input type="button" (click)="getImage()" value="Get Image">
+        </div>
+    </div>
+    <div class="container row">
+        <div class="col-md-12">
+            <div *ngIf=retrievedImage>
+                <img [src]="retrievedImage">
+            </div>
+        </div>
+    </div> -->

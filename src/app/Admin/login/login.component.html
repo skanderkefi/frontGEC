@@ -1,0 +1,14 @@
+
+<app-loginnavbar></app-loginnavbar>
+
+<form #f="ngForm" (submit)="loginF()" style="width: 800px;padding-top: 120px;padding-left: 500px;">
+    <div class="mb-5">
+      <!-- <label for="matricule" class="form-label" style="color: antiquewhite;font-style:italic;">MATRICULE</label> -->
+      <input type="text" class="form-control" [(ngModel)]='login.matricule' id="matricule" name="matricule" style="border-radius: 20px;" placeholder="MATRICULE">
+    </div>
+    <div class="mb-5">
+      <!-- <label for="password" class="form-label" style="color: antiquewhite;font-style:italic;">MOT DE PASSE</label> -->
+      <input type="password" class="form-control" [(ngModel)]='login.mdp' id="password" name="password" style="border-radius: 20px;" placeholder="MOT DE PASSE">
+    </div>
+    <button type="submit" class="btn btn-primary" style="background-color: rgb(28, 124, 148);color:ivory; border-radius: 20px;">submit</button>
+  </form>
