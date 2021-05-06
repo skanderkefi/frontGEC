@@ -8,7 +8,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-stegtndenv',
   templateUrl: './stegtndenv.component.html',
-  styleUrls: ['./stegtndenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class StegtndenvComponent implements OnInit {
 

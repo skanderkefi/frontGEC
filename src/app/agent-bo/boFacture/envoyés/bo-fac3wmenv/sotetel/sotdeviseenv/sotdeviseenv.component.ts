@@ -9,7 +9,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-sotdeviseenv',
   templateUrl: './sotdeviseenv.component.html',
-  styleUrls: ['./sotdeviseenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class SotdeviseenvComponent implements OnInit {
 

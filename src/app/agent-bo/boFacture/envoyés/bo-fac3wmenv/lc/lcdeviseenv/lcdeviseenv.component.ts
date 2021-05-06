@@ -10,7 +10,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-lcdeviseenv',
   templateUrl: './lcdeviseenv.component.html',
-  styleUrls: ['./lcdeviseenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class LcdeviseenvComponent implements OnInit {
 

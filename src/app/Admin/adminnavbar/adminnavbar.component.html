@@ -13,40 +13,359 @@
         <li class="nav-item ">
           <a class="nav-link" href="/fournisseurs">FOURNISSEURS <span class="sr-only">(current)</span></a>
         </li>
-        <li ngbDropdown class="nav-item dropdown">
-          <a ngbDropdownToggle class="nav-link dropdown-toggle "  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            FACTURES
-          </a>
-          <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="navbarDropdown" style="border-radius: 20px;">
-            <li><a class="dropdown-item" href="adminfct3wm">3WM</a></li>
-            <li><a class="dropdown-item" href="adminfctremb">FD remboursement</a></li>
-            <li><a class="dropdown-item" href="adminfctfin">financement</a></li>
-            <li><a class="dropdown-item" href="adminfctfisc">fiscalité</a></li>
-            <li><a class="dropdown-item" href="adminfctltr">lettre credit </a></li>
-            <li><a class="dropdown-item" href="adminfctop">operateur</a></li>
-            <li><a class="dropdown-item" href="adminfctcomdist">VD comdist</a></li>
+       
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> BORDEREAUX </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"
+          style="border-radius: 20px;">
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >3WM</a>
+                 <ul class="dropdown-menu" style="border-radius: 20px;">
+                  <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" > STEG</a>
+                      <ul class="dropdown-menu" style="border-radius: 20px;">
+                      <li><a class="dropdown-item" href="Adminbordstegtnd">TND</a></li>
+                      <li><a class="dropdown-item" href="Adminbordstegdevise">DEVISE</a></li>
+                      </ul></li>
+                      <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >ANCE</a>
+                          <ul class="dropdown-menu" style="border-radius: 20px;">
+                          <li><a class="dropdown-item" href="Adminbordancetnd">TND</a></li>
+                          <li><a class="dropdown-item" href="Adminbordancedevise">DEVISE</a></li>
+                      </ul></li>
+                          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >SOTETEL</a>
+                              <ul class="dropdown-menu" style="border-radius: 20px;">
+                              <li><a class="dropdown-item" href="Adminbordcerttnd">TND</a></li>
+                              <li><a class="dropdown-item" href="Adminbordsotdevise">DEVISE</a></li>
+                          </ul></li>
+                              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >CERT</a>
+                                  <ul class="dropdown-menu" style="border-radius: 20px;">
+                                  <li><a class="dropdown-item" href="Adminbordcerttnd">TND</a></li>
+                                  <li><a class="dropdown-item" href="Adminbordcertdevise">DEVISE</a></li>
+                              </ul></li>
+                                  <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >LETTRE CREDIT</a>
+                                      <ul class="dropdown-menu" style="border-radius: 20px;">
+                                      <li><a class="dropdown-item" href="Adminbordlctnd">TND</a></li>
+                                      <li><a class="dropdown-item" href="Adminbordlcdevise">DEVISE</a></li>
+                                  </ul></li>
+                                  <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >VENTILATION DIRECTE</a>
+                                      <ul class="dropdown-menu" style="border-radius: 20px;">
+                                      <li><a class="dropdown-item" href="Adminbordventtnd">TND</a></li>
+                                      <li><a class="dropdown-item" href="Adminbordventdevise">DEVISE</a></li>
+                                   </ul></li>
 
-          </div>
-        </li>
-        <li ngbDropdown class="nav-item dropdown ">
-          <a ngbDropdownToggle class="nav-link dropdown-toggle "  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            BORDEREAUX
-          </a>
-          <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="navbarDropdown" style="border-radius: 20px;">
-            <li><a class="dropdown-item" href="brd3wm">3WM-TND</a></li>
-            <li><a class="dropdown-item" href="brdventdirect">VENTILATION DIRECTE</a></li>
-            <!-- <li><hr class="dropdown-divider"></li> -->
-          </div>
-        </li>
+                                   <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >CHARGES LOCATIVES</a>
+                                    <ul class="dropdown-menu" style="border-radius: 20px;">
+                                        <li><a class="dropdown-item" href="Adminbordchlocdevise">DEVISE</a></li>
+                                        <li><a class="dropdown-item" href="Adminbordchloctnd">TND</a></li>
+            
+                                    </ul></li>
+                                
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >DOUANE</a>
+                                        <ul class="dropdown-menu" style="border-radius: 20px;">
+                                            <li><a class="dropdown-item" href="Adminborddouanetnd">DEVISE</a></li>
+                                            <li><a class="dropdown-item" href="Adminborddouanetnd">TND</a></li>
+            
+                                        </ul></li>
+                                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >RISTOURNE</a>
+                                            <ul class="dropdown-menu" style="border-radius: 20px;">
+                                                <li><a class="dropdown-item" href="Adminbordristdevise">DEVISE</a></li>
+                                                <li><a class="dropdown-item" href="Adminbordristtnd">TND</a></li>
+            
+                                            </ul></li>
+                                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >OACA</a>
+                                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                                    <li><a class="dropdown-item" href="Adminbordoacadevise">DEVISE</a></li>
+                                                    <li><a class="dropdown-item" href="AdminOaca">TND</a></li>
+            
+                                        </ul></li>
 
-        <li ngbDropdown class="nav-item dropdown ">
-          <a ngbDropdownToggle class="nav-link dropdown-toggle "  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  </ul></li>
+             
+                  
+                  <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >FISCALITÉ</a>
+                    <ul class="dropdown-menu" style="border-radius: 20px;">
+
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >JETON DE PRÉSENCE</a>
+                            <ul class="dropdown-menu" style="border-radius: 20px;">
+                                <li><a class="dropdown-item" href="Adminbordjetpresdevise">DEVISE</a></li>
+                                <li><a class="dropdown-item" href="Adminbordjetprestnd">TND</a></li>
+
+                            </ul></li>
+                        
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >PAIEMENT IMPOTS ET TAXES</a>
+                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                    <li><a class="dropdown-item" href="Adminbordpeadevise">DEVISE</a></li>
+                                    <li><a class="dropdown-item" href="Adminbordpeatnd">TND</a></li>
+
+                                </ul></li>
+
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >RETENUE SUR SALAIRE</a>
+                                    <ul class="dropdown-menu" style="border-radius: 20px;">
+                                        <li><a class="dropdown-item" href="Adminbordretsaldevise">DEVISE</a></li>
+                                        <li><a class="dropdown-item" href="Adminbordretsaltnd">TND</a></li>
+
+                         </ul></li>
+                         
+
+                             <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >CHARGES SOCIALES</a>
+                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                    <li><a class="dropdown-item" href="Adminbordchsocdevise">DEVISE</a></li>
+                                    <li><a class="dropdown-item" href="Adminbordchsoctnd">TND</a></li>
+
+                     </ul></li>
+
+                    
+
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >CHARGES LOCATIVES</a>
+                            <ul class="dropdown-menu" style="border-radius: 20px;">
+                                <li><a class="dropdown-item" href="Adminbordchlocdevise">DEVISE</a></li>
+                                <li><a class="dropdown-item" href="Adminbordchloctnd">TND</a></li>
+
+                            </ul></li>
+                        
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >FISCALITÉ LOCALE</a>
+                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                    <li><a class="dropdown-item" href="Adminbordfiscdevise">DEVISE</a></li>
+                                    <li><a class="dropdown-item" href="Adminbordfisctnd">TND</a></li>
+
+                                </ul></li>
+                                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >PAIEMENT ET AUTRES</a>
+                                    <ul class="dropdown-menu" style="border-radius: 20px;">
+                                        <li><a class="dropdown-item" href="Adminbordpeadevise">DEVISE</a></li>
+                                        <li><a class="dropdown-item" href="Adminbordpeatnd">TND</a></li>
+
+                                    </ul></li>
+                                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >FORMATEURS INTERNES</a>
+                                        <ul class="dropdown-menu" style="border-radius: 20px;">
+                                            <li><a class="dropdown-item" href="Adminbordformintdevise">DEVISE</a></li>
+                                            <li><a class="dropdown-item" href="Adminbordforminttnd">TND</a></li>
+    
+                                </ul></li>
+                    </ul>
+            </li>
+
+
+
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">FINANCEMENT</a>
+                  <ul class="dropdown-menu" style="border-radius: 20px;">
+                      <li><a class="dropdown-item" href="Adminbordfintnd">TND</a></li>
+                      <li><a class="dropdown-item" href="Adminbordfindevise">DEVISE</a></li>
+                  </ul>
+              </li>
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">OPÉRATEUR</a>
+                  <ul class="dropdown-menu" style="border-radius: 20px;">
+                      <li><a class="dropdown-item" href="Adminbordoptnd">TND</a></li>
+                      <li><a class="dropdown-item" href="Adminbordopdevise">DEVISE</a></li>
+                  </ul>
+              </li>
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">FOND DE ROULEMENT</a>
+                  <ul class="dropdown-menu" style="border-radius: 20px;">
+                      <li><a class="dropdown-item" href="Adminbordfdtnd">TND</a></li>
+                      <li><a class="dropdown-item" href="Adminbordfddevise">DEVISE</a></li>
+                  </ul>
+              </li>
+
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >LETTRE CREDIT</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                <li><a class="dropdown-item" href="Adminbordlctnd">TND</a></li>
+                <li><a class="dropdown-item" href="Adminbordlcdevise">DEVISE</a></li>
+            </ul></li>
+
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >VENTILATION DIRECTE</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                <li><a class="dropdown-item" href="Adminbordventtnd">TND</a></li>
+                <li><a class="dropdown-item" href="Adminbordventdevise">DEVISE</a></li>
+             </ul></li>
+
+             <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >REMBOURSEMENT</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                <li><a class="dropdown-item" href="Adminbordremdevise">TND</a></li>
+                <li><a class="dropdown-item" href="Adminbordremtnd">DEVISE</a></li>
+            </ul></li>
+             <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >COMMISSION ET DISTRIBUTION</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                <li><a class="dropdown-item" href="Adminbordcmdtnd">TND</a></li>
+                <li><a class="dropdown-item" href="Adminbordcmddevise">DEVISE</a></li>
+             </ul></li>
+
+                  
+            
+          </ul>
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> FACTURES </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"
+        style="border-radius: 20px;">
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >3WM</a>
+               <ul class="dropdown-menu" style="border-radius: 20px;">
+                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" > STEG</a>
+                    <ul class="dropdown-menu" style="border-radius: 20px;">
+                    <li><a class="dropdown-item" href="Cmp3wmstegtnd">TND</a></li>
+                    <li><a class="dropdown-item" href="Cmp3wmstegdevise">DEVISE</a></li>
+                    </ul></li>
+                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >ANCE</a>
+                        <ul class="dropdown-menu" style="border-radius: 20px;">
+                        <li><a class="dropdown-item" href="Cmp3wmancetnd">TND</a></li>
+                        <li><a class="dropdown-item" href="Cmp3wmancedevise">DEVISE</a></li>
+                    </ul></li>
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >SOTETEL</a>
+                            <ul class="dropdown-menu" style="border-radius: 20px;">
+                            <li><a class="dropdown-item" href="Cmp3wmsottnd">TND</a></li>
+                            <li><a class="dropdown-item" href="Cmp3wmsotdevise">DEVISE</a></li>
+                        </ul></li>
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >CERT</a>
+                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                <li><a class="dropdown-item" href="Cmp3wmcerttnd">TND</a></li>
+                                <li><a class="dropdown-item" href="Cmp3wmcertdevise">DEVISE</a></li>
+                            </ul></li>
+                                
+
+                                 <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >CHARGES LOCATIVES</a>
+                                    <ul class="dropdown-menu" style="border-radius: 20px;">
+                                        <li><a class="dropdown-item" href="Adminchlocdevise">DEVISE</a></li>
+                                        <li><a class="dropdown-item" href="Adminchloctnd">TND</a></li>
+            
+                                    </ul></li>
+                                
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >DOUANE</a>
+                                        <ul class="dropdown-menu" style="border-radius: 20px;">
+                                            <li><a class="dropdown-item" href="Admindouanedevise">DEVISE</a></li>
+                                            <li><a class="dropdown-item" href="Admindouanetnd">TND</a></li>
+            
+                                        </ul></li>
+                                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >RISTOURNE</a>
+                                            <ul class="dropdown-menu" style="border-radius: 20px;">
+                                                <li><a class="dropdown-item" href="Adminrisdevise">DEVISE</a></li>
+                                                <li><a class="dropdown-item" href="Adminristnd">TND</a></li>
+            
+                                            </ul></li>
+                                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >OACA</a>
+                                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                                    <li><a class="dropdown-item" href="Adminoacadevise">DEVISE</a></li>
+                                                    <li><a class="dropdown-item" href="Adminoacatnd">TND</a></li>
+            
+                                        </ul></li>
+
+                </ul></li>
+           
+                
+
+                  
+                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >FISCALITÉ</a>
+                    <ul class="dropdown-menu" style="border-radius: 20px;">
+
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >JETON DE PRÉSENCE</a>
+                            <ul class="dropdown-menu" style="border-radius: 20px;">
+                                <li><a class="dropdown-item" href="Adminjetpresdevice">DEVISE</a></li>
+                                <li><a class="dropdown-item" href="Adminjetprestnd">TND</a></li>
+
+                            </ul></li>
+                        
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >PAIEMENT IMPOTS ET TAXES</a>
+                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                    <li><a class="dropdown-item" href="Adminpitdevise">DEVISE</a></li>
+                                    <li><a class="dropdown-item" href="Adminpittnd">TND</a></li>
+
+                                </ul></li>
+
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >RETENUE SUR SALAIRE</a>
+                                    <ul class="dropdown-menu" style="border-radius: 20px;">
+                                        <li><a class="dropdown-item" href="Adminretsaldevise">DEVISE</a></li>
+                                        <li><a class="dropdown-item" href="Adminretsaltnd">TND</a></li>
+
+                         </ul></li>
+                         <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >LETTRE CREDIT</a>
+                            <ul class="dropdown-menu" style="border-radius: 20px;">
+                            <li><a class="dropdown-item" href="Adminlctnd">TND</a></li>
+                            <li><a class="dropdown-item" href="Adminlcdevise">DEVISE</a></li>
+                        </ul></li>
+
+                             <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >CHARGES SOCIALES</a>
+                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                    <li><a class="dropdown-item" href="Adminchsocdevise">DEVISE</a></li>
+                                    <li><a class="dropdown-item" href="Adminchsoctnd">TND</a></li>
+
+                     </ul></li>
+
+                     <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >VENTILATION DIRECTE</a>
+                        <ul class="dropdown-menu" style="border-radius: 20px;">
+                        <li><a class="dropdown-item" href="Adminfactventtnd">TND</a></li>
+                        <li><a class="dropdown-item" href="Adminfactventdevise">DEVISE</a></li>
+                     </ul></li>
+
+                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >CHARGES LOCATIVES</a>
+                            <ul class="dropdown-menu" style="border-radius: 20px;">
+                                <li><a class="dropdown-item" href="Adminchlocdevise">DEVISE</a></li>
+                                <li><a class="dropdown-item" href="Adminchloctnd">TND</a></li>
+
+                            </ul></li>
+                        
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >FISCALITÉ LOCALE</a>
+                                <ul class="dropdown-menu" style="border-radius: 20px;">
+                                    <li><a class="dropdown-item" href="Adminfisclocdevise">DEVISE</a></li>
+                                    <li><a class="dropdown-item" href="Adminfiscloctnd">TND</a></li>
+
+                                </ul></li>
+                                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >PAIEMENT ET AUTRES</a>
+                                    <ul class="dropdown-menu" style="border-radius: 20px;">
+                                        <li><a class="dropdown-item" href="Adminpitdevise">DEVISE</a></li>
+                                        <li><a class="dropdown-item" href="Adminpittnd">TND</a></li>
+
+                                    </ul></li>
+                                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >FORMATEURS INTERNES</a>
+                                        <ul class="dropdown-menu" style="border-radius: 20px;">
+                                            <li><a class="dropdown-item" href="Adminformintdevise">DEVISE</a></li>
+                                            <li><a class="dropdown-item" href="Adminforminttnd">TND</a></li>
+    
+                                </ul></li>
+                    </ul>
+            </li>
+
+
+
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">FINANCEMENT</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                    <li><a class="dropdown-item" href="adminfctfin">TND</a></li>
+                    <li><a class="dropdown-item" href="Adminfactfindevise">DEVISE</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">OPÉRATEUR</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                    <li><a class="dropdown-item" href="adminfctop">TND</a></li>
+                    <li><a class="dropdown-item" href="Adminfactopdevise">DEVISE</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">FOND DE ROULEMENT</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                    <li><a class="dropdown-item" href="Fondroulement">TND</a></li>
+                    <li><a class="dropdown-item" href="Adminfddevise">DEVISE</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >LETTRE CREDIT</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                <li><a class="dropdown-item" href="Adminlctnd">TND</a></li>
+                <li><a class="dropdown-item" href="Adminlcdevise">DEVISE</a></li>
+            </ul></li>
+            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" >VENTILATION DIRECTE</a>
+                <ul class="dropdown-menu" style="border-radius: 20px;">
+                <li><a class="dropdown-item" href="Adminfactventtnd">TND</a></li>
+                <li><a class="dropdown-item" href="Adminfactventdevise">DEVISE</a></li>
+             </ul></li>
+                
+          
+        </ul>
+    </li> 
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             AUTRES
           </a>
-          <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="navbarDropdown" style="border-radius: 20px;">
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="border-radius: 20px;">
             <li><a class="dropdown-item" data-toggle="modal" data-target="#objectModal" >Objet</a></li>
             <li><a class="dropdown-item" data-toggle="modal" data-target="#pieceModal" >Pièce jointe</a></li>
-          </div>
+          </ul>
         </li>
         
       </ul>

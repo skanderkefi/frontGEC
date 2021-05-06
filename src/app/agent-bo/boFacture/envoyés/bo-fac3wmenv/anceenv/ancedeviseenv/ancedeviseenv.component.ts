@@ -9,7 +9,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-ancedeviseenv',
   templateUrl: './ancedeviseenv.component.html',
-  styleUrls: ['./ancedeviseenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class AncedeviseenvComponent implements OnInit {
 

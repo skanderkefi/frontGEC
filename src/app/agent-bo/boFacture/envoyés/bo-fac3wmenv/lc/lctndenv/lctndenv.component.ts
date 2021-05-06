@@ -8,7 +8,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-lctndenv',
   templateUrl: './lctndenv.component.html',
-  styleUrls: ['./lctndenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class LctndenvComponent implements OnInit {
 

@@ -9,7 +9,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-crcomdisdevise',
   templateUrl: './crcomdisdevise.component.html',
-  styleUrls: ['./crcomdisdevise.component.css']
+  styleUrls: ['../../facture.css']
 })
 export class CrcomdisdeviseComponent implements OnInit {
 

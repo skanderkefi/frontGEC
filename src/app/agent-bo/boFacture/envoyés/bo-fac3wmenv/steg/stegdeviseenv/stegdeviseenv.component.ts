@@ -9,7 +9,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-stegdeviseenv',
   templateUrl: './stegdeviseenv.component.html',
-  styleUrls: ['./stegdeviseenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class StegdeviseenvComponent implements OnInit {
 

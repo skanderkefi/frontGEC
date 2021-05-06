@@ -9,7 +9,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-sottndenv',
   templateUrl: './sottndenv.component.html',
-  styleUrls: ['./sottndenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class SottndenvComponent implements OnInit {
 

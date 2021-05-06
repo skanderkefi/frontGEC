@@ -10,7 +10,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-certdeviseenv',
   templateUrl: './certdeviseenv.component.html',
-  styleUrls: ['./certdeviseenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class CertdeviseenvComponent implements OnInit {
 

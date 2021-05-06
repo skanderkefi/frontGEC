@@ -55,7 +55,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
             <td class="cellules">{{bord.createdBy}}</td>
             <td class="cellules">
                 <button type="button" title="Envoyer" class="btn btn-light pb-modalreglog-submit"   
-                 data-toggle="modal" (clic)="showUser(bord)"  data-target="#apmodal"><img src="../../../assets/images/sendBordereau.png"  
+                 data-toggle="modal" (clic)="showUserModal(bord)"  data-target="#apmodal"><img src="../../../assets/images/sendFacture4.png"  
                  style="border-radius: 10px; border-image-width: 5px;">  </button>
                  
                 <button type="button" title="Effacer" class="btn btn-light"   (click)="deleteBordereau(bord.id)">  <img  src="../../../assets/images/eff.png"
@@ -188,7 +188,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                 <div class="input-group pb-modalreglog-input-group">
                 </div>
                 <div class="modal fade" id="apmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-sm" role="document" style="max-width: 20%;padding-top: 150px;">
+                  <div class="modal-dialog modal-sm" role="document" style="max-width: 35%;padding-top: 150px;">
                       <div class="modal-content">
                           <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -200,13 +200,10 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                             <ngx-bootstrap-multiselect [options]="users" [texts]="myTexts"
                             [settings]="mySettings"  [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
                             <br>
-                            <button class="btn btn-primary" (click)="onChange()">Envoyer</button>
                           </div>
                           <div class="modal-footer">
-                              <div class="tools">
-                            <button (click)="exportData('Facture3wmtndTable')" style="margin-left:-5em;width:1em;display:inline-block;" >
-                                </button>
-                        </div>
+                                <button class="btn btn-primary" (click)="onChange()">Envoyer</button>
+
                           </div>
                       </div>
                   </div>

@@ -16,14 +16,16 @@ export class BoB3wmDeviseComponent implements OnInit {
  
   usersMatriculeAndName:string[];
   Factures3wmTnd:any[]=[];
-
-
+  senttoap:string="";
   firstn:any;
   Bordereaux:any[];
   Bordereaux3wmDevise:any[]=[];
   bordereauToCreate={"createdAt":Date.now(),"createdBy":"4125","folder":"","id":"",
   "nature":"3WM","natureRaff":"DEVISE","reference":"BOF/3WM-DEVISE/","sentAt":"","sentBy":"",
-  "status":"en cours","updatedAt":Date.now()};
+  "status":"en cours","updatedAt":Date.now(),"toAp":""};
+  bordereauToUpdate={"createdAt":Date.now(),"createdBy":"4125","folder":"","id":"",
+  "nature":"3WM","natureRaff":"DEVISE","reference":"BOF/3WM-DEVISE/","sentAt":"","sentBy":"",
+  "status":"en cours","updatedAt":Date.now(),"toAp":""};
   p:number=1;
 
 
@@ -42,15 +44,15 @@ mySettings: IMultiSelectSettings = {
 
 // Text configuration
 myTexts: IMultiSelectTexts = {
-    checkAll: 'Select all',
-    uncheckAll: 'Unselect all',
-    checked: 'item selected',
-    checkedPlural: 'items selected',
-    searchPlaceholder: 'Find',
-    searchEmptyResult: 'Nothing found...',
+    checkAll: 'tous sélectionnés',
+    uncheckAll: 'Tout déselectionner',
+    checked: 'Agent sélectionné',
+    checkedPlural: 'Agents sélectionnés',
+    searchPlaceholder: 'Trouver',
+    searchEmptyResult: 'Rien trouvé...',
     searchNoRenderText: 'Type in search box to see results...',
-    defaultTitle: 'Select',
-    allSelected: 'All selected',
+    defaultTitle: 'Selectionner',
+    allSelected: 'tous sélectionnés',
 };
 
 // Labels / Parents
@@ -64,7 +66,7 @@ myOptions: IMultiSelectOption[]=[];
   }
 
   ngOnInit(): void {
-      this.showUser();
+      this.showUsers();
      this.showBordereaux();
     // this.remplirOPtions();
      
@@ -72,8 +74,23 @@ myOptions: IMultiSelectOption[]=[];
   } 
 
   onChange() {
+    console.log(this.bordereauToUpdate);
+    
+    console.log("option modal:");
     console.log(this.optionsModel);
+    
+    for(let i=0;i<this.optionsModel.length;i++){
+    console.log(this.optionsModel[i]);
+    this.senttoap=this.senttoap+this.optionsModel[i].toString()+",";
+  }
+  this.bordereauToUpdate.toAp=this.senttoap;
+  console.log("to aps :");
+  
+  console.log(this.senttoap);
+  
+  this.dataService.updateBord(this.bordereauToUpdate);
 }
+
 
   showBordereaux(){
     this.dataService.showBordereau3wm().subscribe((data: any[])=>{
@@ -196,8 +213,19 @@ showFacture(){
     
   }
 
+  showUsers(){
+    this.dataService.searchMatAndPwd().subscribe((data: any[])=>{
+      
+      this.users=data;
+      console.log("users");
+      console.log(this.users);
+      
+    })
 
-  showUser(){
+  }
+
+  showUserModal(bord){
+    this.bordereauToCreate=bord;
     this.dataService.searchMatAndPwd().subscribe((data: any[])=>{
       
       this.users=data;
@@ -222,6 +250,7 @@ showFacture(){
       
 
   }
+
 
 
   

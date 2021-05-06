@@ -9,7 +9,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-ancetndenv',
   templateUrl: './ancetndenv.component.html',
-  styleUrls: ['./ancetndenv.component.css']
+  styleUrls: ['../../../../facture.css']
 })
 export class AncetndenvComponent implements OnInit {
   date={"startdate":"","enddate":""}

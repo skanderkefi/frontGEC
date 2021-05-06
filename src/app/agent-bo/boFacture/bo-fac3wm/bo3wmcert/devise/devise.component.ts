@@ -10,7 +10,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-devise',
   templateUrl: './devise.component.html',
-  styleUrls: ['./devise.component.css']
+  styleUrls: ['../../../facture.css']
 })
 export class certcrDeviseComponent implements OnInit {
 

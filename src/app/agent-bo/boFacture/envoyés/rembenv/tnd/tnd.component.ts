@@ -7,7 +7,7 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-tnd',
   templateUrl: './tnd.component.html',
-  styleUrls: ['./tnd.component.css']
+  styleUrls: ['../../../facture.css']
 })
 export class remenvTndComponent implements OnInit {
 

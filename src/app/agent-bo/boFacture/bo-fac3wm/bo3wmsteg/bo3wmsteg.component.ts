@@ -4,7 +4,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
-
+ 
  
 @Component({
   selector: 'app-bo3wmsteg',

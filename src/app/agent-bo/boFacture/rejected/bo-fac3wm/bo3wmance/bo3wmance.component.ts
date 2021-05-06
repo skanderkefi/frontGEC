@@ -8,7 +8,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 @Component({
   selector: 'app-bo3wmance',
   templateUrl: './bo3wmance.component.html',
-  styleUrls: ['./bo3wmance.component.css']
+  styleUrls: ['../../../facture.css']
 })
 export class rjctndBo3wmanceComponent implements OnInit {
 

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.updateUser();
       this.router.navigate(['/boFournisseur']);
       console.log("u r logged in !");
-    }else if (this.user.profil=="comptable"){
+    }else if (this.user.profil=="AP"){
       this.updateUser();
       this.router.navigate(['/cmpt']);
       console.log("u r logged in !");
