@@ -6,7 +6,7 @@ import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
 
 
-
+ 
 @Component({
   selector: 'app-bofacfisctnd',
   templateUrl: './bofacfisctnd.component.html',

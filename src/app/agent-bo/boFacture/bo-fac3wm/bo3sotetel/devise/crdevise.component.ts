@@ -5,7 +5,7 @@ import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
 
-
+ 
 
 @Component({
   selector: 'app-devise',
@@ -32,7 +32,7 @@ export class CrdeviseComponent implements OnInit {
  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":Date.now()
  ,"pieceJointe":"","idfiscale":""};
 
-
+ 
  // Default selection
  optionsModel: number[] = [];
  

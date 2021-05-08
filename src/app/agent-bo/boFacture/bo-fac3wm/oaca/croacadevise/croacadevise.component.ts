@@ -21,13 +21,13 @@ export class CroacadeviseComponent implements OnInit {
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
-  "devise": "TND","direction":"","dossier": "3WM STEG TND" ,"factname":"","fournisseur":"",
+  "devise": "TND","direction":"","dossier": "3WM OACA DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
   "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
   "strucord":"","pieceJointe":""};
 
  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
- "devise": "TND","direction":"","dossier": "3WM STEG TND" ,"factname":"","fournisseur":"",
+ "devise": "TND","direction":"","dossier": "3WM OACA DEVISE" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
  "strucord":"","pieceJointe":""};
@@ -82,7 +82,7 @@ export class CroacadeviseComponent implements OnInit {
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier="3WM STEG TND" )
+        if(data[i].dossier="3WM OACA DEVISE" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){

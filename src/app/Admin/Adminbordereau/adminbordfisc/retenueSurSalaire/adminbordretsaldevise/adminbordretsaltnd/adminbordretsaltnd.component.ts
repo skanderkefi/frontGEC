@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from "../../../../../dataservice/data.service";
+import {DataService} from "../../../../../../dataservice/data.service";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-
+ 
 @Component({
-  selector: 'app-bordretsaltnd',
-  templateUrl: './bordretsaltnd.component.html',
-  styleUrls: ['./bordretsaltnd.component.css']
+  selector: 'app-adminbordretsaltnd',
+  templateUrl: './adminbordretsaltnd.component.html',
+  styleUrls: ['./adminbordretsaltnd.component.css']
 })
-export class BordretsaltndComponent implements OnInit {
+export class AdminbordretsaltndComponent implements OnInit {
 
   Factures3wmTnd:any[]=[];
   firstn:any;
   Bordereaux:any[];
   Bordereaux3wmTnd:any[]=[];
-  bordereauToCreate={"createdAt":Date.now(),"createdBy":"4125","folder":"FISCALITÉ RETENU SALAIRE TND","id":"",
-  "nature":"FISCALITÉ RETENU SALAIRE","natureRaff":"TND","reference":"BOF/FISCALITÉ-RETENU SALAIRE/","sentAt":"","sentBy":"",
+  bordereauToCreate={"createdAt":Date.now(),"createdBy":"4125","folder":"3WM RISTOURNE DEVISE","id":"",
+  "nature":"3WM","natureRaff":"DEVISE","reference":"BOF/3WM-RISTOURNE-DEVISE/","sentAt":"","sentBy":"",
   "status":"en cours","updatedAt":Date.now()};
   p:number=1;
 
-
-
+ 
+ 
 
   constructor(public dataService:DataService) { }
 
@@ -32,7 +32,7 @@ export class BordretsaltndComponent implements OnInit {
     this.dataService.showBordereau3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].folder=="FISCALITÉ RETENU SALAIRE TND" )
+        if(data[i].folder=="3WM RISTOURNE DEVISE" )
         this.Bordereaux3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Bordereaux3wmTnd.length; i++){
@@ -131,10 +131,10 @@ envoyerBordereau(id){
 showFacture(){
   this.dataService.showFacture3wm().subscribe((data: any[])=>{
     console.log(data);
-    for(let i=0; i<data.length; i++){
-      if(data[i].dossier=="3WM TND ANCE" )
+    for(let i=0; i<data.length; i++){ 
+      if(data[i].dossier=="3WM DEVISE ANCE" )
       this.Factures3wmTnd[i]=data[i];
-    }
+    } 
     for(let i=0; i<this.Factures3wmTnd.length; i++){
       if(this.Factures3wmTnd[i]==null)
       this.Factures3wmTnd.splice(i,1)

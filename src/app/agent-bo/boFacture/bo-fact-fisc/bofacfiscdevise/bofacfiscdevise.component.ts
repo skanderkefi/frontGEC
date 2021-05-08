@@ -250,7 +250,7 @@ myTexts: IMultiSelectTexts = {
       this.objects=data;
       console.log(this.objects);
       
-    })
+    }) 
   }
 
   showPieces(){

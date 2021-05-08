@@ -5,7 +5,7 @@ import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
 
-
+ 
 @Component({
   selector: 'app-bo3sotetel',
   templateUrl: './bo3sotetel.component.html',
@@ -32,7 +32,7 @@ export class Bo3sotetelComponent implements OnInit {
  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":Date.now()
  ,"pieceJointe":"","idfiscale":""};
 
-
+ 
  // Default selection
  optionsModel: number[] = [];
  
@@ -82,7 +82,7 @@ export class Bo3sotetelComponent implements OnInit {
       this.Factures3wmTnd=this.Factures3wmTnd.filter(res=>{
         return res.num_po.toLocaleLowerCase().match(this.firstn.toLocaleLowerCase());
       })
-    }
+    } 
   }
 
 
@@ -90,7 +90,7 @@ export class Bo3sotetelComponent implements OnInit {
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="3WM TND SOTETEL" )
+        if(data[i].dossier=="3WM TND SOTETEL" && data[i].status=="sent")
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){

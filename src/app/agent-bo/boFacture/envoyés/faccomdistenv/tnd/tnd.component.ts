@@ -219,18 +219,37 @@ myTexts: IMultiSelectTexts = {
         }
          
       }
-      onSearchChange(searchValue: string): void {  
+     
+      
+      onSearchcreateChange(searchValue: string): void {  
         console.log(searchValue);
         
         this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
           this.factureToCreate.fournisseur=data.name
+          this.factureToCreate.idfiscale=data.idFiscale
           this.fournisseur=data
           console.log(this.fournisseur);
           console.log("=========")
           console.log( this.factureToCreate.fournisseur)
       })
     
+     
     }
+
+    onSearchupdateChange(searchValue: string): void {  
+      console.log(searchValue);
+      
+      this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
+        this.factureToUpdate.fournisseur=data.name
+        this.factureToUpdate.idfiscale=data.idFiscale
+        this.fournisseur=data
+        console.log(this.fournisseur);
+        console.log("=========")
+        console.log( this.factureToCreate.fournisseur)
+    })
+  
+   
+  }
  
     pieces:any[]=[];
     objects:any[]=[]; 

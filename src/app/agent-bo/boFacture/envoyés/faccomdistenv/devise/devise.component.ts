@@ -32,7 +32,7 @@ export class DeviseComponent implements OnInit {
  "pathname":"","structure":"","createdAt":Date.now(),"datereception":"","updatedAt":"",
  "dateOp":"","ordrep":"","num_fact":"","dateop":"","comdis":"","delaip":"","datefct":"","datebc":"",
 "idfiscale":"","pieceJointe":""};
-
+ 
 // Default selection
 optionsModel: number[] = [];
  

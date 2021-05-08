@@ -66,7 +66,7 @@ export class CertdeviseenvComponent implements OnInit {
      this.showObjects();
      this.showPieces();
    }
- 
+  
    Search(){
      if(this.firstn ==""){
        this.ngOnInit();}

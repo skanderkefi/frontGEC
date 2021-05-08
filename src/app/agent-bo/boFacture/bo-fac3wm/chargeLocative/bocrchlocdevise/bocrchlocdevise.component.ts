@@ -21,7 +21,7 @@ export class BocrchlocdeviseComponent implements OnInit {
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
-  "devise": "TND","direction":"","dossier": "3WM STEG TND" ,"factname":"","fournisseur":"",
+  "devise": "TND","direction":"","dossier": "CHARGE LOCATIVE - DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
   "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
   "strucord":"","pieceJointe":""};

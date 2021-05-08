@@ -326,7 +326,7 @@ import { AdminbordpeadeviseComponent } from './Admin/Adminbordereau/adminbordfis
 import { AdminbordpittndComponent } from './Admin/Adminbordereau/adminbordfisc/paiementImpotTaxes/adminbordpittnd/adminbordpittnd.component';
 import { AdminbordpitdeviseComponent } from './Admin/Adminbordereau/adminbordfisc/paiementImpotTaxes/adminbordpitdevise/adminbordpitdevise.component';
 import { AdminbordretsaldeviseComponent } from './Admin/Adminbordereau/adminbordfisc/retenueSurSalaire/adminbordretsaldevise/adminbordretsaldevise.component';
-import { AdminbordretsaltndComponent } from './Admin/Adminbordereau/adminbordfisc/retenueSurSalaire/adminbordretsaltnd/adminbordretsaltnd.component';
+import { AdminbordretsaltndComponent } from './Admin/Adminbordereau/adminbordfisc/retenueSurSalaire/adminbordretsaldevise/adminbordretsaltnd/adminbordretsaltnd.component';
 import { AdminbordfdtndComponent } from './Admin/Adminbordereau/adminbordfondroulement/adminbordfdtnd/adminbordfdtnd.component';
 import { AdminbordfddeviseComponent } from './Admin/Adminbordereau/adminbordfondroulement/adminbordfddevise/adminbordfddevise.component';
 import { AdminbordopdeviseComponent } from './Admin/Adminbordereau/adminbordoperateur/adminbordopdevise/adminbordopdevise.component';

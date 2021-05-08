@@ -14,7 +14,7 @@ export class BordanceComponent implements OnInit {
   firstn:any;
   Bordereaux:any[];
   Bordereaux3wmTnd:any[]=[];
-  bordereauToCreate={"createdAt":Date.now(),"createdBy":"4125","folder":"3WM ANCE","id":"",
+  bordereauToCreate={"createdAt":Date.now(),"createdBy":"4125","folder":"3WM ANCE TND","id":"",
   "nature":"3WM","natureRaff":"TND","reference":"BOF/3WM-ANCE/","sentAt":"","sentBy":"",
   "status":"en cours","updatedAt":Date.now()};
   p:number=1;
@@ -32,7 +32,7 @@ export class BordanceComponent implements OnInit {
     this.dataService.showBordereau3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].folder=="3WM ANCE" )
+        if(data[i].folder=="3WM ANCE TND" )
         this.Bordereaux3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Bordereaux3wmTnd.length; i++){
@@ -46,7 +46,7 @@ export class BordanceComponent implements OnInit {
       console.log(this.Bordereaux3wmTnd);
     })
     
-     
+      
     }
     
     createBordereau(){

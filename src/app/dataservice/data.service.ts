@@ -251,15 +251,17 @@ showPieces(){
                          //BORDEREAU
 //show
    showBordereau3wm(){
-     return this.httpClient.get('http://localhost:8082/BordereauFind/show3wm');
+     return this.httpClient.get('http://localhost:8082/BordereauFind/showall');
          } 
 
  
 
    showBordereauVentDirect(){
-     return this.httpClient.get('http://localhost:8082/BordereauFind/showventd');
+     return this.httpClient.get('http://localhost:8082/BordereauFind/showall');
 
        }
+  
+       
 
        deleteBord(id){
         console.log(id);
