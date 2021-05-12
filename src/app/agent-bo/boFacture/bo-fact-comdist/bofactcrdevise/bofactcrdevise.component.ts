@@ -5,13 +5,12 @@ import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
 
-
 @Component({
-  selector: 'app-crcomdisdevise',
-  templateUrl: './crcomdisdevise.component.html',
-  styleUrls: ['../../facture.css']
+  selector: 'app-bofactcrdevise',
+  templateUrl: './bofactcrdevise.component.html',
+  styleUrls: ['./bofactcrdevise.component.css']
 })
-export class CrcomdisdeviseComponent implements OnInit {
+export class BofactcrdeviseComponent implements OnInit {
 
   selectedFile: File;
   date={"startdate":"","enddate":""}
@@ -20,19 +19,26 @@ export class CrcomdisdeviseComponent implements OnInit {
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","created_by":"4125","id":"",
-  "devise": "", "direction":"","dossier": "COMDIST DEVISE" ,"factname":"","fournisseur":"",
+  "devise": "DEVISE", "direction":"","dossier": "COMDIST DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_po":"","objet":"",
   "pathname":"","structure":"","createdAt":Date.now(),"datereception":"","updatedAt":"",
-  "dateOp":"","ordrep":"","num_fact":"","dateop":"","comdis":"","delaip":"","datefct":"",
-  "idfiscale":"","pieceJointe":""};
+  "dateOp":"","ordrep":"","num_fact":"","dateop":"","comdis":"","delaip":"","datefct":"","datebc":"",
+ "idfiscale":"","pieceJointe":"","dateEnvoieAuAp":"","dateRefusParAp":"","datValidationParAp":"",
+   "dateRefusParTreso":"","dateValidationParTreso":"","raisonRefusAp":"","codeAp":"","toAp":"","beneficiaire":"",
+   "numFacture":""};
   
 
  factureToUpdate={"bordereau":"","created_by":"4125","id":"",
- "devise": "", "direction":"","dossier": "COMDIST DEVISE" ,"factname":"","fournisseur":"",
+ "devise": "DEVISE", "direction":"","dossier": "COMDIST DEVISE" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_po":"","objet":"",
  "pathname":"","structure":"","createdAt":Date.now(),"datereception":"","updatedAt":"",
  "dateOp":"","ordrep":"","num_fact":"","dateop":"","comdis":"","delaip":"","datefct":"","datebc":"",
-"idfiscale":"","pieceJointe":""};
+"idfiscale":"","pieceJointe":"","dateEnvoieAuAp":"","dateRefusParAp":"","datValidationParAp":"",
+  "dateRefusParTreso":"","dateValidationParTreso":"","raisonRefusAp":"","codeAp":"","toAp":"","beneficiaire":"",
+  "numFacture":""};
+
+
+
 
 // Default selection
 optionsModel: number[] = [];
@@ -74,7 +80,7 @@ myTexts: IMultiSelectTexts = {
   }
 
 
-
+ 
   Search(){
     if(this.firstn ==""){
       this.ngOnInit();}
@@ -85,22 +91,25 @@ myTexts: IMultiSelectTexts = {
     }
   }
 
- 
+  
   showFacture(){
-    this.dataService.showFactureOp().subscribe((data: any[])=>{
+    this.dataService.showFactureComdist().subscribe((data: any[])=>{
+      console.log("data:");
       console.log(data);
-      for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="COMDIST DEVISE" )
-        this.Factures3wmTnd[i]=data[i];
-      }
-      for(let i=0; i<this.Factures3wmTnd.length; i++){
-        if(this.Factures3wmTnd[i]==null)
-        this.Factures3wmTnd.splice(i,1)
-      }
-      for(let i=0; i<this.Factures3wmTnd.length; i++){
-        if(this.Factures3wmTnd[i]==null)
-        this.Factures3wmTnd.splice(i,1)
-      }
+      // for(let i=0; i<data.length; i++){
+      //   if(data[i].dossier=="COMDIST DEVISE" )
+      //   this.Factures3wmTnd[i]=data[i];
+      // }
+      // for(let i=0; i<this.Factures3wmTnd.length; i++){
+      //   if(this.Factures3wmTnd[i]==null)
+      //   this.Factures3wmTnd.splice(i,1)
+      // }
+      // for(let i=0; i<this.Factures3wmTnd.length; i++){
+      //   if(this.Factures3wmTnd[i]==null)
+      //   this.Factures3wmTnd.splice(i,1)
+      // }
+      console.log("this.Factures3wmTnd:");
+      
       console.log(this.Factures3wmTnd);
     })
      
@@ -111,10 +120,10 @@ myTexts: IMultiSelectTexts = {
       for(let i=0;i<this.optionsModel.length;i++){
         this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
       }
-         this.dataService.createFactureOP(this.factureToCreate).subscribe((msg: any[])=>{
+         this.dataService.createFacturecmd(this.factureToCreate).subscribe((msg: any[])=>{
         console.log(msg);
       }) 
-       location.reload(); 
+      //  location.reload(); 
 
     }
 
@@ -185,7 +194,7 @@ myTexts: IMultiSelectTexts = {
               console.log("image uploaded not");
         
             }
-            else{ 
+            else{
               console.log("erreur jcp!")
             }
           }
@@ -231,9 +240,9 @@ myTexts: IMultiSelectTexts = {
       })
     
     }
-
+  
     pieces:any[]=[];
-    objects:any[]=[];
+    objects:any[]=[]; 
     showObjects(){
       this.dataService.showObjects().subscribe((data:any[])=>{
   
@@ -251,5 +260,6 @@ myTexts: IMultiSelectTexts = {
         
       })
     }
+
 
 }

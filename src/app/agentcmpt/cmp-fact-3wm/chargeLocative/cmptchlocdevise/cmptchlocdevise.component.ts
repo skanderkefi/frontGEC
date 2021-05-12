@@ -14,48 +14,25 @@ export class CmptchlocdeviseComponent implements OnInit {
   date={"startdate":"","enddate":""}
   fournisseur:any;
   selectedFile: File;
-  Factures3wmdevise:any[]=[];
+  Factures3wmTnd:any[]=[];
   firstn:any; 
   p:number=1;
-  factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
-  "devise": "","direction":"","dossier": "3WM DEVISE SOTETEL" ,"factname":"","fournisseur":"",
-  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
-  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now()
-  ,"pieceJointe":""};
+  factureToValidate={"bordereau":"","createdBy":"","dateFact":"","id":"",
+  "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
+  "status":"","montant":"","num_fact":"","num_po":"","objet":"",
+  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
+  "pieceJointe":"","idfiscale":"","dateEnvoieAuAp":"","dateRefusParAp":"","dateValidationParAp":"",
+  "dateRefusParTreso":"","dateValidationParTreso":"","raison":"","codeAp":""};
 
- factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
- "devise": "","direction":"","dossier": "3WM DEVISE  SOTETEL" ,"factname":"","fournisseur":"",
- "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
- "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":Date.now()
- ,"pieceJointe":"","idfiscale":""};
+ factureToReject={"bordereau":"","createdBy":"","dateFact":"","id":"",
+ "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
+ "status":"","montant":"","num_fact":"","num_po":"","objet":"",
+ "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
+ "pieceJointe":"","idfiscale":"","dateEnvoieAuAp":"","dateRefusParAp":"","dateValidationParAp":"",
+ "dateRefusParTreso":"","dateValidationParTreso":"","raison":"","codeAp":""};
 
  
- // Default selection
- optionsModel: number[] = [];
  
- // Settings configuration
- mySettings: IMultiSelectSettings = {
-     enableSearch: true,
-     checkedStyle: 'fontawesome',
-     buttonClasses: 'btn btn-default btn-block',
-     dynamicTitleMaxItems: 3,
-     displayAllSelectedText: true
- };
- 
- // Text configuration
- myTexts: IMultiSelectTexts = {
-     checkAll: 'Select all',
-     uncheckAll: 'Unselect all',
-     checked: 'item selected',
-     checkedPlural: 'items selected',
-     searchPlaceholder: 'Find',
-     searchEmptyResult: 'Nothing found...',
-     searchNoRenderText: 'Type in search box to see results...',
-     defaultTitle: 'Select',
-     allSelected: 'All selected',
- };
-
-  myOptions: IMultiSelectOption[];
 
 
  
@@ -63,63 +40,49 @@ export class CmptchlocdeviseComponent implements OnInit {
  
   ngOnInit(): void {
     this.showFacture();
-    this.showObjects();
-    this.showPieces();
-   
+    
   }
 
-  onChange() {
-    console.log(this.optionsModel);
-}
 
   Search(){
     if(this.firstn ==""){
       this.ngOnInit();}
     else{
-      this.Factures3wmdevise=this.Factures3wmdevise.filter(res=>{
+      this.Factures3wmTnd=this.Factures3wmTnd.filter(res=>{
         return res.num_po.toLocaleLowerCase().match(this.firstn.toLocaleLowerCase());
       })
-    }
+    } 
   }
 
-
+ 
   showFacture(){
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="CHARGE LOCATIVE - DEVISE" )
-        this.Factures3wmdevise[i]=data[i];
+        if(data[i].dossier=="3WM STEG DEVISE" && data[i].status=="sent")
+        this.Factures3wmTnd[i]=data[i];
       }
-      for(let i=0; i<this.Factures3wmdevise.length; i++){
-        if(this.Factures3wmdevise[i]==null)
-        this.Factures3wmdevise.splice(i,1)
+      for(let i=0; i<this.Factures3wmTnd.length; i++){
+        if(this.Factures3wmTnd[i]==null)
+        this.Factures3wmTnd.splice(i,1)
       }
-      for(let i=0; i<this.Factures3wmdevise.length; i++){
-        if(this.Factures3wmdevise[i]==null)
-        this.Factures3wmdevise.splice(i,1)
+      for(let i=0; i<this.Factures3wmTnd.length; i++){
+        if(this.Factures3wmTnd[i]==null)
+        this.Factures3wmTnd.splice(i,1)
       }
-      console.log(this.Factures3wmdevise);
+      console.log(this.Factures3wmTnd);
     })
     
      
     } 
 
-    createFacture(){
-      
-      for(let i=0;i<this.optionsModel.length;i++){
-        this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
-      }
-         this.dataService.createFacture3wm(this.factureToCreate).subscribe((msg: any[])=>{
-        console.log(msg);
-      }) 
-      //  location.reload();
-    }
+  
 
-    factureCreateModal(factureToCreate){
-      this.factureToCreate= factureToCreate    }
+    factureRejectModal(factureToCreate){
+      this.factureToReject= factureToCreate    }
 
       factureUpdateModal(facture){
-        this.factureToUpdate=facture;
+        this.factureToValidate=facture;
         }
 
 
@@ -143,58 +106,26 @@ export class CmptchlocdeviseComponent implements OnInit {
           this.reverse= !this.reverse;
         }
 
-        updateFacture(){
-          for(let i=0;i<this.optionsModel.length;i++){
-            this.factureToUpdate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
-          }
-          this.dataService.updateFacture3wm(this.factureToUpdate).subscribe((msg: any[])=>{
+        rejectFacture(){
+          this.factureToReject.status="rejected";
+
+          this.factureToReject.dateRefusParAp=this.getToday();
+          this.dataService.updateFacture3wm(this.factureToReject).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
-          location.reload();
+          // location.reload();
         }
 
-        deleteFacture(id){
-          console.log(id);
-          this.dataService.deleteFacture3wm(id).subscribe((msg: any[])=>{
+        validateFacture(){
+          this.factureToValidate.status="validatedFromAp";
+          this.factureToValidate.dateValidationParAp=this.getToday();
+          this.dataService.updateFacture3wm(this.factureToValidate).subscribe((msg: any[])=>{
             console.log(msg);
-          })
-          location.reload(); 
+          }) 
+          // location.reload();
         }
 
-        onUploadToUpdate() {
-        
-          const uploadImageData = new FormData();
-          uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-         
-          
-          this.dataService.upload(uploadImageData).subscribe((response) => {
-            console.log(response);
-            this.factureToUpdate.pathPdf=response.body.toString();
-          }
-          );
-        }
-
-
-      public onFileChanged(event) {
-   
-        //Select File
-        this.selectedFile = event.target.files[0];
       
-       
-      }
-
-      onUploadToCreate() {
-        
-        const uploadImageData = new FormData();
-        uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-       
-        
-        this.dataService.upload(uploadImageData).subscribe((response) => {
-          console.log(response);
-          this.factureToCreate.pathPdf=response.body.toString();
-        }
-        );
-      }
 
       searchPerDate(){
        
@@ -204,10 +135,10 @@ export class CmptchlocdeviseComponent implements OnInit {
           let enddate = formatDate(this.date.enddate,'yyyy-MM-dd','en_US');
 
           
-          for(let i=0; i<this.Factures3wmdevise.length; i++){
+          for(let i=0; i<this.Factures3wmTnd.length; i++){
             
-            if (this.Factures3wmdevise[i].dateFact<=startdate || this.Factures3wmdevise[i].dateFact>=enddate){
-               this.Factures3wmdevise.splice(i,1)
+            if (this.Factures3wmTnd[i].dateFact<=startdate || this.Factures3wmTnd[i].dateFact>=enddate){
+               this.Factures3wmTnd.splice(i,1)
             }
           }
         
@@ -216,59 +147,22 @@ export class CmptchlocdeviseComponent implements OnInit {
         }
          
       }
-      onSearchcreateChange(searchValue: string): void {  
-        console.log(searchValue);
-        
-        this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
-          this.factureToCreate.fournisseur=data.name
-          this.factureToCreate.idfiscale=data.idFiscale
-          this.fournisseur=data
-          console.log(this.fournisseur);
-          console.log("=========")
-          console.log( this.factureToCreate.fournisseur)
-      })
-    
      
-    }
-
-    onSearchupdateChange(searchValue: string): void {  
-      console.log(searchValue);
-      
-      this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
-        this.factureToUpdate.fournisseur=data.name
-        this.factureToUpdate.idfiscale=data.idFiscale
-        this.fournisseur=data
-        console.log(this.fournisseur);
-        console.log("=========")
-        console.log( this.factureToCreate.fournisseur)
-    })
-  
-   
-  }
 
 
-
-  
-  pieces:any[]=[];
-  objects:any[]=[];
-  showObjects(){
-    this.dataService.showObjects().subscribe((data:any[])=>{
-
-      this.objects=data;
-      console.log(this.objects);
-      
-    })
-  }
-
-  showPieces(){
-    this.dataService.showPieces().subscribe((data:any[])=>{
-      this.myOptions=data;
-      console.log("pieces");
-      console.log(this.myOptions);
-      
-    })
-  }
-
+     
+      getToday():string{
+        var d = new Date();
+        var curr_date = d.getDate();
+        var curr_month = d.getMonth();
+        var curr_year = d.getFullYear()
+        var months = new Array("Janvier", "Fevrier", "Mars",
+          "Avril", "Mai", "Juin", "Juilllet", "Aout", "Septembre",
+          "Octobre", "Novembre", "Decembre");  
+    
+        var today = curr_date + "-" + months[curr_month] + "-" + curr_year;
+        return today;
+      }
      
 
 }

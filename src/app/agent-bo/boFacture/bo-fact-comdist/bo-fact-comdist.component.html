@@ -11,7 +11,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
 </button>
 
               
-            
+             
               
              
 <button (click)="convertToPdf()" style="margin-left:8em;display:inline-block;"> <img src="../../../assets/images/pdfDownload.png"></button>
@@ -65,7 +65,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
             <th class="cellules">num facture</th>
             <th class="cellules">num PO</th>              
             <th class="cellules">Actions</th> 
-          </tr>
+          </tr> 
         </thead>
     <tbody>
         <tr *ngFor="let fact of Factures3wmTnd | orderBy: key: reverse |paginate: {itemsPerPage:5,currentPage:p};">

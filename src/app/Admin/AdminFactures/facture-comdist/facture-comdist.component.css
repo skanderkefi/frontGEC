@@ -1,0 +1,151 @@
+.main-timeline{ font-family: 'Poppins', sans-serif; }
+.main-timeline:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.main-timeline:before{
+    content: '';
+    height: 100%;
+    width: 3px;
+    border-left: 3px dashed #555;
+    transform: translateX(-50%);
+    position: absolute;
+    top: 0;
+    left: 50%;
+}
+.main-timeline .timeline{
+    width: 50%;
+    padding: 15px 15px 15px 55px;
+    margin: 0 0 0 5px;
+    float: right;
+    position: relative;
+    z-index: 1;
+}
+.main-timeline .timeline:before{
+    content: '';
+    background-color: #52d648;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    left: -10px;
+    top: 50%;
+}
+.main-timeline .timeline-content{
+    color: #777;
+    background: rgba(255,255,255,0.9);
+    text-align: center;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+    display: block;
+    position: relative; 
+}
+.main-timeline .timeline-content:hover{ text-decoration: none; }
+.main-timeline .timeline-content:before,
+.main-timeline .timeline-content:after{
+    content: "";
+    background: #52d648;
+    width: 35px;
+    height: 35px;
+    transform: translateY(-50%) rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: -33px;
+    z-index: -1;
+}
+.main-timeline .timeline-content:after{
+    background: linear-gradient(to left, transparent, #52d648);
+    height: auto;
+    width: auto;
+    border-radius: 20px;
+    transform: translateY(0);
+    left: -15px;
+    right: -15px;
+    top: -15px;
+    bottom: -15px;
+    z-index: -2;
+}
+.main-timeline .timeline-icon{
+    color: #555;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 35px;
+    margin: 0 0 10px;
+}
+.main-timeline .title{
+    color: #52d648;
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+}
+.main-timeline .description .details{
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 1px;
+    margin: 0;
+}
+.main-timeline .timeline:nth-child(even){
+    padding: 15px 55px 15px 15px;
+    margin: 0 5px 0 0;
+    float: left;
+}
+.main-timeline .timeline:nth-child(even):before{
+    left: auto;
+    right: -10px;
+}
+.main-timeline .timeline:nth-child(even) .timeline-content:before{
+    left: auto;
+    right: -33px;
+}
+.main-timeline .timeline:nth-child(even) .timeline-content:after{ transform: rotate(180deg); }
+.main-timeline .timeline:nth-child(4n+2):before,
+.main-timeline .timeline:nth-child(4n+2) .timeline-content:before{
+    background-color: #37B2DE
+}
+.main-timeline .timeline:nth-child(4n+2) .timeline-content:after{
+    background: linear-gradient(to left, transparent, #37B2DE);
+}
+.main-timeline .timeline:nth-child(4n+2) .title{     color: #37B2DE; }
+.main-timeline .timeline:nth-child(4n+3):before,
+.main-timeline .timeline:nth-child(4n+3) .timeline-content:before{
+    background-color: #F38F31
+}
+.main-timeline .timeline:nth-child(4n+3) .timeline-content:after{
+    background: linear-gradient(to left, transparent, #F38F31);
+}
+.main-timeline .timeline:nth-child(4n+3) .title{ color: #F38F31; }
+.main-timeline .timeline:nth-child(4n+4):before,
+.main-timeline .timeline:nth-child(4n+4) .timeline-content:before{
+    background-color: #E65455
+}
+.main-timeline .timeline:nth-child(4n+4) .timeline-content:after{
+    background: linear-gradient(to left, transparent, #E65455);
+}
+.main-timeline .timeline:nth-child(4n+4) .title{ color: #E65455; }
+@media screen and (max-width:767px){
+    .main-timeline:before{
+        transform: translateX(-50%);
+        left: 18px;
+    }
+    .main-timeline .timeline,
+    .main-timeline .timeline:nth-child(even){
+        width: 100%;
+        padding: 15px 15px 15px 55px;
+        margin: 0 0 30px;
+    }
+    .main-timeline .timeline:before,
+    .main-timeline .timeline:nth-child(even):before{
+        left: -7px;
+    }
+    .main-timeline .timeline-content:before,
+    .main-timeline .timeline:nth-child(even) .timeline-content:before{
+        left: -33px;
+        right: auto;
+    }
+    .main-timeline .timeline:nth-child(even) .timeline-content:after{ transform: rotate(0); }
+    .main-timeline .title{ font-size: 23px; }
+}

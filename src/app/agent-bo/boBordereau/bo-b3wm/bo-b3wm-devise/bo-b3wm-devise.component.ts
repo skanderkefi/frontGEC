@@ -16,16 +16,16 @@ export class BoB3wmDeviseComponent implements OnInit {
  
   usersMatriculeAndName:string[];
   Factures3wmTnd:any[]=[];
-  senttoap:string="";
   firstn:any;
   Bordereaux:any[];
   Bordereaux3wmDevise:any[]=[];
   bordereauToCreate={"createdAt":Date.now(),"createdBy":"4125","folder":"","id":"",
   "nature":"3WM","natureRaff":"DEVISE","reference":"BOF/3WM-DEVISE/","sentAt":"","sentBy":"",
-  "status":"en cours","updatedAt":Date.now(),"toAp":""};
+  "status":"","updatedAt":Date.now(),"toAp":""};
   bordereauToUpdate={"createdAt":Date.now(),"createdBy":"4125","folder":"","id":"",
   "nature":"3WM","natureRaff":"DEVISE","reference":"BOF/3WM-DEVISE/","sentAt":"","sentBy":"",
-  "status":"en cours","updatedAt":Date.now(),"toAp":""};
+  "status":"","updatedAt":Date.now(),"toAp":""};
+
   p:number=1;
 
 
@@ -68,27 +68,18 @@ myOptions: IMultiSelectOption[]=[];
   ngOnInit(): void {
       this.showUsers();
      this.showBordereaux();
-    // this.remplirOPtions();
+     this.showFacture();
      
     
   } 
 
   onChange() {
-    console.log(this.bordereauToUpdate);
     
-    console.log("option modal:");
-    console.log(this.optionsModel);
-    
-    for(let i=0;i<this.optionsModel.length;i++){
-    console.log(this.optionsModel[i]);
-    this.senttoap=this.senttoap+this.optionsModel[i].toString()+",";
-  }
-  this.bordereauToUpdate.toAp=this.senttoap;
-  console.log("to aps :");
-  
-  console.log(this.senttoap);
-  
-  this.dataService.updateBord(this.bordereauToUpdate);
+  //   for(let i=0;i<this.optionsModel.length;i++){
+  //   this.senttoap=this.senttoap+this.optionsModel[i].toString()+",";
+  // }
+  // this.bordereauToUpdate.toAp=this.senttoap;
+  // this.dataService.updateBord(this.bordereauToUpdate);
 }
 
 
@@ -110,7 +101,7 @@ myOptions: IMultiSelectOption[]=[];
     
      
     }
-    
+     
     createBordereau(){
       var d = new Date();
     var curr_date = d.getDate();
@@ -178,16 +169,38 @@ myOptions: IMultiSelectOption[]=[];
     location.reload(); 
 }
 
-envoyerBordereau(id){
-  for(let i=0; i<this.Bordereaux3wmDevise.length; i++){
-    if(this.Bordereaux3wmDevise[i].id==id)
-    this.Bordereaux3wmDevise[i].status="envoyé"
-    this.dataService.updateBord(this.Bordereaux3wmDevise[i]).subscribe((msg: any[])=>{
+envoyerBordereau(){
+
+  // collect the matricule of ap who will be able to see factures
+let sentToAp:string;
+  for(let i=0;i<this.optionsModel.length;i++){
+    sentToAp=sentToAp+this.optionsModel[i].toString()+",";
+  }
+  
+
+  //update bordereau "status" & "toAp" attributes : 
+ 
+  this.bordereauToUpdate.status="sent";
+  this.bordereauToUpdate.toAp=sentToAp.slice(0,-1);
+
+  this.dataService.updateBord(this.bordereauToUpdate).subscribe((msg: any[])=>{
+      console.log(msg);
+    });
+  
+
+    //set factures status to "sent"
+  for (let i=0;i<this.Factures3wmTnd.length;i++){
+    this.Factures3wmTnd[i].status="sent";
+    this.Factures3wmTnd[i].status=sentToAp.slice(0,-1);
+    this.Factures3wmTnd[i].dateEnvoieAuAp=this.getToday();
+
+    this.dataService.updateFacture3wm(this.Factures3wmTnd[i]).subscribe((msg: any[])=>{
       console.log(msg);
     });
   }
-  location.reload();
 
+  
+ 
 }
 
 
@@ -196,7 +209,7 @@ showFacture(){
   this.dataService.showFacture3wm().subscribe((data: any[])=>{
     console.log(data);
     for(let i=0; i<data.length; i++){
-      if(data[i].devise=="DEVISE" )
+      if(data[i].dossier=="3WM DEVISE" )
       this.Factures3wmTnd[i]=data[i];
     }
     for(let i=0; i<this.Factures3wmTnd.length; i++){
@@ -225,7 +238,7 @@ showFacture(){
   }
 
   showUserModal(bord){
-    this.bordereauToCreate=bord;
+    this.bordereauToUpdate=bord;
     this.dataService.searchMatAndPwd().subscribe((data: any[])=>{
       
       this.users=data;
@@ -253,6 +266,18 @@ showFacture(){
 
 
 
+  getToday():string{
+    var d = new Date();
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth();
+    var curr_year = d.getFullYear()
+    var months = new Array("Janvier", "Fevrier", "Mars",
+      "Avril", "Mai", "Juin", "Juilllet", "Aout", "Septembre",
+      "Octobre", "Novembre", "Decembre");  
+
+    var today = curr_date + "-" + months[curr_month] + "-" + curr_year;
+    return today;
+  }
   
 
   

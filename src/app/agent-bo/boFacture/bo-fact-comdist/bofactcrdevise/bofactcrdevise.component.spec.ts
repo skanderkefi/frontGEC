@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrcomdisdeviseComponent } from './crcomdisdevise.component';
+import { BofactcrdeviseComponent } from './bofactcrdevise.component';
 
-describe('CrcomdisdeviseComponent', () => {
-  let component: CrcomdisdeviseComponent;
-  let fixture: ComponentFixture<CrcomdisdeviseComponent>;
+describe('BofactcrdeviseComponent', () => {
+  let component: BofactcrdeviseComponent;
+  let fixture: ComponentFixture<BofactcrdeviseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrcomdisdeviseComponent ]
+      declarations: [ BofactcrdeviseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CrcomdisdeviseComponent);
+    fixture = TestBed.createComponent(BofactcrdeviseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

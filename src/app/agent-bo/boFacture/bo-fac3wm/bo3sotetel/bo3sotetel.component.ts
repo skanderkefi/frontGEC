@@ -88,20 +88,24 @@ export class Bo3sotetelComponent implements OnInit {
 
   showFacture(){
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
+      console.log("data:")
       console.log(data);
-      for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="3WM TND SOTETEL" && data[i].status=="sent")
-        this.Factures3wmTnd[i]=data[i];
-      }
-      for(let i=0; i<this.Factures3wmTnd.length; i++){
-        if(this.Factures3wmTnd[i]==null)
-        this.Factures3wmTnd.splice(i,1)
-      }
-      for(let i=0; i<this.Factures3wmTnd.length; i++){
-        if(this.Factures3wmTnd[i]==null)
-        this.Factures3wmTnd.splice(i,1)
-      }
+      console.log("facts:");
+      this.Factures3wmTnd=data;
       console.log(this.Factures3wmTnd);
+      
+      // for(let i=0; i<data.length; i++){
+      //   if(data[i].dossier=="3WM TND SOTETEL" && data[i].status=="sent")
+      //   this.Factures3wmTnd[i]=data[i];
+      // }
+      // for(let i=0; i<this.Factures3wmTnd.length; i++){
+      //   if(this.Factures3wmTnd[i]==null)
+      //   this.Factures3wmTnd.splice(i,1)
+      // }
+      // for(let i=0; i<this.Factures3wmTnd.length; i++){
+      //   if(this.Factures3wmTnd[i]==null)
+      //   this.Factures3wmTnd.splice(i,1)
+      // }
     })
     
      

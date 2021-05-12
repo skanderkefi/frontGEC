@@ -7,7 +7,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 
 
 
-@Component({
+@Component({ 
   selector: 'app-bofacrembdevise',
   templateUrl: './bofacrembdevise.component.html',
   styleUrls: ['../../facture.css']

@@ -80,7 +80,7 @@ export class DeviseComponent implements OnInit {
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].devise=="DEVISE" )
+        if(data[i].dossier=="3WM DEVISE" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){

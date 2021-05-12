@@ -80,7 +80,7 @@ export class AdminfactcomddeviseComponent implements OnInit {
       this.Factures3wmdevise=this.Factures3wmdevise.filter(res=>{
         return res.num_po.toLocaleLowerCase().match(this.firstn.toLocaleLowerCase());
       })
-    }
+    } 
   }
 
 
@@ -88,7 +88,7 @@ export class AdminfactcomddeviseComponent implements OnInit {
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="3WM DEVISE SOTETEL" )
+        if(data[i].dossier=="COMDIST DEVISE" )
         this.Factures3wmdevise[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmdevise.length; i++){

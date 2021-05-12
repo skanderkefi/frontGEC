@@ -11,11 +11,30 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
   styleUrls: ['./facture-comdist.component.css']
 })
 export class FactureComdistComponent implements OnInit {
-  
+   
+  // workflow tools:
+  envoieApNotNull:boolean=false;
+  refusApNotNull:boolean=true;
+  validationApNotNull:boolean=true;
+  envoietrésoNotNull:boolean=true;
+  refustresoNotNull:boolean=true;
+  validationtresoNotNull:boolean=true;
+
+
+  datereception="1/1/2020";
+  dateenvoieAp="2/1/2020";
+  daterefusAP="3/1/2020";
+  datevalidationAp="4//1/2020";
+  dateenvoietreso="5/1/2020";
+  daterefustréso="6/1/2020";
+  datevalidationtréso="7/1/2020";
+  factureWfDetails:any
+
+
   date={"startdate":"","enddate":""}
   fournisseur:any;
   selectedFile: File;
-  Factures3wmdevise:any[]=[];
+  Factures3wmdevise:any[];
   firstn:any; 
   p:number=1;
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
@@ -29,7 +48,7 @@ export class FactureComdistComponent implements OnInit {
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":Date.now()
  ,"pieceJointe":"","idfiscale":""};
-
+ 
 
  // Default selection
  optionsModel: number[] = [];
@@ -85,24 +104,12 @@ export class FactureComdistComponent implements OnInit {
 
 
   showFacture(){
-    this.dataService.showFacture3wm().subscribe((data: any[])=>{
+    this.dataService.showFactureComdist().subscribe((data: any[])=>{
       console.log(data);
-      for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="3WM DEVISE SOTETEL" )
-        this.Factures3wmdevise[i]=data[i];
-      }
-      for(let i=0; i<this.Factures3wmdevise.length; i++){
-        if(this.Factures3wmdevise[i]==null)
-        this.Factures3wmdevise.splice(i,1)
-      }
-      for(let i=0; i<this.Factures3wmdevise.length; i++){
-        if(this.Factures3wmdevise[i]==null)
-        this.Factures3wmdevise.splice(i,1)
-      }
+      this.Factures3wmdevise=data;
       console.log(this.Factures3wmdevise);
     })
     
-     
     } 
 
     createFacture(){
@@ -268,6 +275,11 @@ export class FactureComdistComponent implements OnInit {
       console.log(this.myOptions);
       
     })
+  }
+
+
+  factureWorkflow(fact){
+    this.factureWfDetails=fact;
   }
 
      

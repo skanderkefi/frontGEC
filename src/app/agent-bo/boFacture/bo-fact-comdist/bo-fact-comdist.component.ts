@@ -16,7 +16,7 @@ export class BoFactComdistComponent implements OnInit {
   selectedFile: File;
   date={"startdate":"","enddate":""}
   fournisseur:any;
-  Factures3wmTnd:any[]=[];
+  Factures3wmTnd:any[];
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","created_by":"4125","id":"",
@@ -85,23 +85,29 @@ myTexts: IMultiSelectTexts = {
     }
   }
 
- 
+  
   showFacture(){
-    this.dataService.showFactureOp().subscribe((data: any[])=>{
+    this.dataService.showFactureComdist().subscribe((data: any[])=>{
+      console.log("data:");
       console.log(data);
-      for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="COMDIST TND" )
-        this.Factures3wmTnd[i]=data[i];
-      }
-      for(let i=0; i<this.Factures3wmTnd.length; i++){
-        if(this.Factures3wmTnd[i]==null)
-        this.Factures3wmTnd.splice(i,1)
-      }
-      for(let i=0; i<this.Factures3wmTnd.length; i++){
-        if(this.Factures3wmTnd[i]==null)
-        this.Factures3wmTnd.splice(i,1)
-      }
+      
+      // for(let i=0; i<data.length; i++){
+      //   if(data[i].dossier=="COMDIST TND" )
+      //   this.Factures3wmTnd[i]=data[i];
+      // }
+      // for(let i=0; i<this.Factures3wmTnd.length; i++){
+      //   if(this.Factures3wmTnd[i]==null)
+      //   this.Factures3wmTnd.splice(i,1)
+      // } 
+      // for(let i=0; i<this.Factures3wmTnd.length; i++){
+      //   if(this.Factures3wmTnd[i]==null)
+      //   this.Factures3wmTnd.splice(i,1)
+      // }
+      this.Factures3wmTnd=data;
+      console.log("facts");
       console.log(this.Factures3wmTnd);
+      
+       
     })
      
      
@@ -111,10 +117,10 @@ myTexts: IMultiSelectTexts = {
       for(let i=0;i<this.optionsModel.length;i++){
         this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
       }
-         this.dataService.createFactureOP(this.factureToCreate).subscribe((msg: any[])=>{
+         this.dataService.createFacturecmd(this.factureToCreate).subscribe((msg: any[])=>{
         console.log(msg);
       }) 
-       location.reload(); 
+      //  location.reload(); 
 
     }
 
@@ -231,7 +237,7 @@ myTexts: IMultiSelectTexts = {
       })
     
     }
- 
+  
     pieces:any[]=[];
     objects:any[]=[]; 
     showObjects(){

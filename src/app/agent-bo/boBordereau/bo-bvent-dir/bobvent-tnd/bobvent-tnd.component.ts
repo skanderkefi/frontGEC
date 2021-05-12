@@ -29,7 +29,7 @@ export class BobventTndComponent implements OnInit {
   }
 
   showBordereaux(){
-    this.dataService.showBordereauVentDirect().subscribe((data: any[])=>{
+    this.dataService.showBordereau3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
         if(data[i].folder=="VENTILATION DIRECTE TND" )

@@ -251,15 +251,18 @@ showPieces(){
                          //BORDEREAU
 //show
    showBordereau3wm(){
-     return this.httpClient.get('http://localhost:8082/BordereauFind/showall');
+     return this.httpClient.get('http://localhost:8082/BordereauFind/show3wm');
          } 
 
  
 
-   showBordereauVentDirect(){
-     return this.httpClient.get('http://localhost:8082/BordereauFind/showall');
+  //  showBordereauVentDirect(){
+  //    return this.httpClient.get('http://localhost:8082/BordereauFind/showall');
 
-       }
+  //      }
+
+  
+                
   
        
 

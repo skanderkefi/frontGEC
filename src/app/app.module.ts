@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+ 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Admin/login/login.component';
@@ -54,9 +54,8 @@ import { Bo3wmstegComponent } from './agent-bo/boFacture/bo-fac3wm/bo3wmsteg/bo3
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';  
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BoFactComdistComponent } from './agent-bo/boFacture/bo-fact-comdist/bo-fact-comdist.component';
-import { CrcomdisdeviseComponent } from './agent-bo/boFacture/bo-fact-comdist/crcomdisdevise/crcomdisdevise.component';
-
-import { ComdistComponent } from './agent-bo/boBordereau/comdist/comdist.component';
+ 
+import { boBordComdistTndComponent } from './agent-bo/boBordereau/comdist/boBordComdistTnd.component';
 import { OperateurComponent } from './agent-bo/boBordereau/operateur/operateur.component';
 import { FiscaliteComponent } from './agent-bo/boBordereau/fiscalite/fiscalite.component';
 import { BordlcComponent } from './agent-bo/boBordereau/bo-b3wm/bordlc/bordlc.component';
@@ -369,10 +368,15 @@ import { CmppeatndComponent } from './agentcmpt/cmp-fact-fisc/paieEtAutres/cmppe
 import { CmptpitdeviseComponent } from './agentcmpt/cmp-fact-fisc/paiementImpotTaxes/cmptpitdevise/cmptpitdevise.component';
 import { CmptpittndComponent } from './agentcmpt/cmp-fact-fisc/paiementImpotTaxes/cmptpittnd/cmptpittnd.component';
 import { CmptretsaldeviseComponent } from './agentcmpt/cmp-fact-fisc/retenueSurSalaire/cmptretsaldevise/cmptretsaldevise.component';
-import { CmptretsaltndComponent } from './agentcmpt/cmp-fact-fisc/retenueSurSalaire/cmptretsaltnd/cmptretsaltnd.component'
+import { CmptretsaltndComponent } from './agentcmpt/cmp-fact-fisc/retenueSurSalaire/cmptretsaltnd/cmptretsaltnd.component';
+import { BofactcrdeviseComponent } from './agent-bo/boFacture/bo-fact-comdist/bofactcrdevise/bofactcrdevise.component'
 
 
+FactureComdistComponent
 const appRoute : Routes = [
+  {path:'FactureComdist', component:FactureComdistComponent},
+  {path:'Bofactcrdevise', component:BofactcrdeviseComponent},
+  {path:'boBordComdistTnd', component:boBordComdistTndComponent},
   {path:'Cmptchlocdevise', component:CmptchlocdeviseComponent},
   {path:'Cmptchloctnd', component:CmptchloctndComponent},
   {path:'Cmptdouanedevise', component:CmptdouanedeviseComponent},
@@ -400,8 +404,6 @@ const appRoute : Routes = [
   {path:'ComdistComponent', component:DevisecomdisrjcComponent},
   {path:'Devisecomdisrjc', component:DevisecomdisrjcComponent},
   {path:'remenvTnd', component:remenvTndComponent},
-  {path:'remenvDeviseComponent', component:CrcomdisdeviseComponent},
-  {path:'Crcomdisdevise', component:CrcomdisdeviseComponent},
   {path:'Adminfddevise', component:AdminfddeviseComponent},
   {path:'Adminfactcomddevise', component:AdminfactcomddeviseComponent},
   {path:'Adminfactfindevise', component:AdminfactfindeviseComponent},
@@ -856,7 +858,7 @@ const appRoute : Routes = [
     Bo3sotetelComponent,
     Bo3wmstegComponent,
     BoFactComdistComponent,
-    ComdistComponent,
+    boBordComdistTndComponent,
     OperateurComponent,
     FiscaliteComponent,
     BordlcComponent,
@@ -1081,7 +1083,8 @@ const appRoute : Routes = [
     CmptpitdeviseComponent,
     CmptpittndComponent,
     CmptretsaldeviseComponent,
-    CmptretsaltndComponent
+    CmptretsaltndComponent,
+    BofactcrdeviseComponent
   ],
   imports: [
     NgxBootstrapMultiselectModule,

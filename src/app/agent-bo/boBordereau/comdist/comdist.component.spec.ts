@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComdistComponent } from './comdist.component';
+import { boBordComdistTndComponent } from './boBordComdistTnd.component';
 
-describe('ComdistComponent', () => {
-  let component: ComdistComponent;
-  let fixture: ComponentFixture<ComdistComponent>;
+describe('boBordComdistTndComponent', () => {
+  let component: boBordComdistTndComponent;
+  let fixture: ComponentFixture<boBordComdistTndComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComdistComponent ]
+      declarations: [ boBordComdistTndComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComdistComponent);
+    fixture = TestBed.createComponent(boBordComdistTndComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
