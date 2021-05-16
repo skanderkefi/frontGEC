@@ -23,13 +23,15 @@ export class BofacfindeviseComponent implements OnInit {
   "devise": "", "direction":"","dossier": "FINANCEMENT DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
   "pathname":"","periode_conso":"","structure":"","createdAt":Date.now(),"credit":"","destinataire":""
-   ,"datereception":"","echeance":"","pathPdf":"","typeFin":"","updatedAt":"","pieceJointe":"","idfiscale":""};
+   ,"datereception":"","echeance":"","pathPdf":"","typeFin":"","updatedAt":"","pieceJointe":"","idfiscale":"",
+  "dateOp":""};
 
  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
  "devise": "", "direction":"","dossier": "FINANCEMENT DEVISE" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
  "pathname":"","periode_conso":"","structure":"","createdAt":Date.now(),"credit":"","destinataire":""
-  ,"datereception":"","echeance":"","pathPdf":"","typeFin":"","updatedAt":"","pieceJointe":"","idfiscale":""};
+  ,"datereception":"","echeance":"","pathPdf":"","typeFin":"","updatedAt":"","pieceJointe":"","idfiscale":"",
+"dateOp":""};
 
 
   // Default selection
@@ -263,5 +265,5 @@ export class BofacfindeviseComponent implements OnInit {
   }
 
      
- 
+  
 }

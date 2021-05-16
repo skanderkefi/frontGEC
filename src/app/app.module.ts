@@ -10,7 +10,7 @@ import { AgentcmptComponent } from './agentcmpt/agentcmpt.component';
 import { LoginnavbarComponent } from './Admin/loginnavbar/loginnavbar.component';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import { HttpClientModule , HttpClient} from '@angular/common/http';
+import { HttpClientModule , HttpClient} from '@angular/common/http'; 
 import { MatToolbarModule } from  '@angular/material/toolbar';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {OrderModule} from 'ngx-order-pipe';
@@ -372,7 +372,6 @@ import { CmptretsaltndComponent } from './agentcmpt/cmp-fact-fisc/retenueSurSala
 import { BofactcrdeviseComponent } from './agent-bo/boFacture/bo-fact-comdist/bofactcrdevise/bofactcrdevise.component'
 
 
-FactureComdistComponent
 const appRoute : Routes = [
   {path:'FactureComdist', component:FactureComdistComponent},
   {path:'Bofactcrdevise', component:BofactcrdeviseComponent},
@@ -735,7 +734,7 @@ const appRoute : Routes = [
   {path:'Bofacrembtnd', component:BofacrembtndComponent},
   {path:'Bofacrembdevise', component:BofacrembdeviseComponent}
 
-
+ 
 
 
 ];

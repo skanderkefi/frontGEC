@@ -22,13 +22,17 @@ export class CrfddvComponent implements OnInit {
   "devise": "","direction":"","dossier": "FOND DE ROULEMENT DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
 "pathname":"","periode_conso":"","structure":"","pieceJointe":"","idfiscale":"",
-"pathpdf":""};
+"pathpdf":"","benefice":"","codeAp":"","created_by":"","datValidationParAp":"","dateOrdreP":"",
+ "datereception":""};
 
 factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
 "devise": "","direction":"","dossier": "FOND DE ROULEMENT DEVISE" ,"factname":"","fournisseur":"",
 "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
 "pathname":"","periode_conso":"","structure":"","pieceJointe":"","idfiscale":"",
-"pathpdf":""};
+"pathpdf":"","benefice":"","codeAp":"","created_by":"","datValidationParAp":"","dateOrdreP":"",
+"datereception":""};
+
+
 
 // Default selection
 optionsModel: number[] = [];
@@ -79,21 +83,10 @@ myTexts: IMultiSelectTexts = {
 
  
   showFacture(){
-    this.dataService.showFactureComdist().subscribe((data: any[])=>{
+    this.dataService.showFacturefd().subscribe((data: any[])=>{
       console.log(data);
-      for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="FOND DE ROULEMENT DEVISE" )
-        this.Factures3wmTnd[i]=data[i];
-      }
-      for(let i=0; i<this.Factures3wmTnd.length; i++){
-        if(this.Factures3wmTnd[i]==null)
-        this.Factures3wmTnd.splice(i,1)
-      }
-      for(let i=0; i<this.Factures3wmTnd.length; i++){
-        if(this.Factures3wmTnd[i]==null)
-        this.Factures3wmTnd.splice(i,1)
-      }
-      console.log(this.Factures3wmTnd);
+       this.Factures3wmTnd=data;
+
     })
     
     }
@@ -102,11 +95,13 @@ myTexts: IMultiSelectTexts = {
       for(let i=0;i<this.optionsModel.length;i++){
         this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
       }
-         this.dataService.createFacturecmd(this.factureToCreate).subscribe((msg: any[])=>{
+         this.dataService.createFd(this.factureToCreate).subscribe((msg: any[])=>{
         console.log(msg);
       }) 
       
     }
+
+
 
     factureCreateModal(factureToCreate){
       this.factureToCreate= factureToCreate    }
@@ -140,7 +135,7 @@ myTexts: IMultiSelectTexts = {
           for(let i=0;i<this.optionsModel.length;i++){
             this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
           }
-          this.dataService.updateFacturecmd(this.factureToUpdate).subscribe((msg: any[])=>{
+          this.dataService.updateFacturefd(this.factureToUpdate).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
           location.reload();
@@ -148,7 +143,7 @@ myTexts: IMultiSelectTexts = {
 
         deleteFacture(id){
           console.log(id);
-          this.dataService.deleteFactureCmd(id).subscribe((msg: any[])=>{
+          this.dataService.deleteFacturefd(id).subscribe((msg: any[])=>{
             console.log(msg);
           })
           location.reload(); 
@@ -261,6 +256,6 @@ myTexts: IMultiSelectTexts = {
     })
   }
 
- 
+  
 }
  

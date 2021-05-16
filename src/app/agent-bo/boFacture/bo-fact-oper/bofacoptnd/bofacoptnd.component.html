@@ -139,19 +139,22 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                 </div></div>
                                 <div class="col">
                                     <div class="form-outline">
-                                    <label for="montant">Montant</label>
+                                    <label for="devise">Devise</label>
                                     <div class="input-group pb-modalreglog-input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToCreate.montant' >
-                                    </div>
+                                        <input type="text" class="form-control" id="devise" placeholder="Devise" name="devise" [(ngModel)]='factureToCreate.devise' >
+                                    </div> 
                                 </div></div></div>
                                 <div class="row mb-4">
                                     <div class="col">
                                      <div class="form-outline">
                                    
                                           <label for="devise">Devise</label>
-                                          <input type="text" class="form-control" id="devise" placeholder="Devise" name="devise" [(ngModel)]='factureToCreate.devise' readonly>
-
+                                          <select class="custom-select" id="devise" name="dvs" 
+                                          [(ngModel)]='factureToCreate.devise' required>
+                                             <option >Euro</option>
+                                             <option >Dollar</option>
+                                           </select>
                                 </div></div>
                                 <div class="col">
                                     <div class="form-outline">
@@ -252,15 +255,17 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                             <div class="input-group pb-modalreglog-input-group">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                                 <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToUpdate.montant' >
-                                            </div>
+                                            </div> 
                                         </div></div></div>
                                         <div class="row mb-4">
                                             <div class="col">
-                                             <div class="form-outline">
+                                                <div class="form-outline">
                                                 <label for="devise">Devise</label>
-                                                <input type="text" class="form-control" id="devise" placeholder="Devise" name="devise" [(ngModel)]='factureToUpdate.devise' readonly>
-
-                                      </div></div>
+                                                <div class="input-group pb-modalreglog-input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    <input type="text" class="form-control" id="devise" placeholder="Devise" name="devise" [(ngModel)]='factureToUpdate.devise' >
+                                                </div> 
+                                            </div></div>
                                       <div class="col">
                                           <div class="form-outline">
                                               <label for="Objet">Objet</label>

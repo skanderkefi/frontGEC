@@ -6,10 +6,10 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                style="border-radius: 10px; border-image-width: 5px;">  </button>
 
          
-<button (click)="exportData('FacturefiscdeviseTable')" style="margin-left:-65em;width:1em;display:inline-block;" >
+<button (click)="exportData('Facture3wmtndTable')" style="margin-left:-65em;width:1em;display:inline-block;" >
                     <img src="../../../assets/images/excel.png">
 </button>
-
+ 
               
              
              
@@ -20,11 +20,8 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                <hr>
 <br>
 
-
-
     <nav class="navbar">
         <input class="form-control" type="text" name="searching" [(ngModel)]="firstn" (ngModelChange)="Search()" placeholder="Rechercher par num Po" style="width: 260px;border-radius: 20px;">
-    
         <form (ngSubmit)="searchPerDate()">
             <div class="row" >    
                   
@@ -53,9 +50,9 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
             <div class="col-sm-3 form-group">    
                 <button type="submit" class="btn btn-success" >Chercher</button>   
             </div>  
-          </div> </form>
+          </div> </form> 
     </nav><br>
-    <table id="FacturefiscdeviseTable" class="table table-bordered table-light table-hover " style="width: 100%;">
+    <table id="Facture3wmtndTable" class="table table-bordered table-light table-hover " style="width: 100%;">
         <thead>
           <tr>
             <th  (click)="sort('id')" class="cellules" style="width: 15px;">Id&nbsp;<i class="fa fa-sort" ></i></th>
@@ -117,14 +114,15 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                  
                                   <div class="row mb-4">
                                     <div class="col">
-                                     <div class="form-outline"> 
-                                        <label for="numPo">Num po</label>
-                                        <div class="input-group pb-modalreglog-input-group">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                            <input type="text" class="form-control" id="numPo" placeholder="num po"
-                                            (input)="onSearchcreateChange($event.target.value)" name="numPo" [(ngModel)]='factureToCreate.num_po' >
-                                        </div>
-                                  </div></div>
+                                        <div class="form-outline"> 
+                                         <label for="devise">Devise</label>
+                                         <select class="custom-select" id="devise" name="dv" 
+                                          [(ngModel)]='factureToCreate.devise' required>
+                                          <option>Euro</option>
+                                          <option>Dollar</option>
+
+                                         </select>
+                                     </div></div>
                                   <div class="col">
                                     <div class="form-outline">
                                       <label for="dossier">Dossier</label>
@@ -139,7 +137,9 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                     <label for="fournisseur">Fournisseur</label>
                                     <div class="input-group pb-modalreglog-input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" id="fournisseur" placeholder="Fournisseur" name="fournisseur" [(ngModel)]='factureToCreate.fournisseur' >
+                                        <input type="text" class="form-control" id="fournisseur" placeholder="Fournisseur" name="fournisseur" [(ngModel)]='factureToCreate.fournisseur' #fourn="ngModel" required>
+                                        <div class="error" *ngIf="fourn.errors?.required && fourn.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
                                     </div>
                                 </div></div>
                                 <div class="col">
@@ -147,38 +147,94 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                     <label for="montant">Montant</label>
                                     <div class="input-group pb-modalreglog-input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToCreate.montant' >
+                                        <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToCreate.montant' #mnt="ngModel" required>
+                                        <div class="error" *ngIf="mnt.errors?.required && mnt.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
                                     </div>
                                 </div></div></div>
                                 <div class="row mb-4">
                                     <div class="col">
                                      <div class="form-outline">
-
-                                        <label for="dvs">Devise</label>
-                                        <input type="text" class="form-control" id="dvs" placeholder="Devise" name="devise" [(ngModel)]='factureToCreate.devise' >
-
-                                   
+                                    <label for="numPo">Num po</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="numPo" placeholder="num po" name="numPo"
+                                        (input)="onSearchcreateChange($event.target.value)" [(ngModel)]='factureToCreate.num_po' #nmp="ngModel" required>
+                                        <div class="error" *ngIf="nmp.errors?.required && nmp.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
+                                    </div> 
                                 </div></div>
                                 <div class="col">
                                     <div class="form-outline">
-                                        <label for="Objet">Objet</label>
-                                        <select class="custom-select" id="Objet" name="Objet" 
-                                        [(ngModel)]='factureToCreate.objet' required>
-                                           <option *ngFor="let object of objects" selected>{{object.nom}}</option>
-                                         </select>
+                                    <label for="Objet">Objet</label>
+                                    <select class="custom-select" id="Objet" name="Objet" 
+                                    [(ngModel)]='factureToCreate.objet' required>
+                                       <option *ngFor="let object of objects" selected>{{object.nom}}</option>
+                                     </select>
                                 </div></div></div>
-
                                 <div class="row mb-4">
                                     <div class="col">
                                      <div class="form-outline">
-                                        <label for="pj">Pièce jointe</label><br>
-                                        <ngx-bootstrap-multiselect [options]="myOptions" [texts]="myTexts" [settings]="mySettings"
-                                       [(ngModel)]="optionsModel" name="optionModel"></ngx-bootstrap-multiselect>
-                                        
+                                    <label for="dp">Délai de paiement</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="dp" placeholder="Délai de paiement" name="dp" [(ngModel)]='factureToCreate.delai' bsDatepicker #dl="ngModel" required>
+                                        <div class="error" *ngIf="dl.errors?.required && dl.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
                                 </div></div>
                                 <div class="col">
                                     <div class="form-outline">
+                                    <label for="ifd">Id fiscale</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="idf" placeholder="Id fiscale" name="idf" [(ngModel)]='factureToCreate.idfiscale' #idfs="ngModel" required>
+                                        <div class="error" *ngIf="idfs.errors?.required && idfs.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
                                 </div></div></div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                     <div class="form-outline">
+                                    <label for="numf">Numéro facture</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="numf" placeholder="Numéro facture" name="numf" [(ngModel)]='factureToCreate.num_fact' #nmfc="ngModel" required>
+                                        <div class="error" *ngIf="nmfc.errors?.required && nmfc.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
+                                </div></div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <label for="strucord">Structure ordinatrice</label>
+                                        <div class="input-group pb-modalreglog-input-group">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                            <input type="text" class="form-control" id="strucord" placeholder="Structure ordinatrice" name="strucord" [(ngModel)]='factureToCreate.strucord' #struc="ngModel" required>
+                                            <div class="error" *ngIf="struc.errors?.required && struc.touched" 
+                                            style="color:firebrick;" >Obligatoire !</div>
+                                        </div>
+                                       </div></div></div>
+
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                             <div class="form-outline">
+                                          
+                                                <label for="pj">Pièce jointe</label><br>
+                                                <ngx-bootstrap-multiselect [options]="myOptions" [texts]="myTexts" [settings]="mySettings"
+                                               [(ngModel)]="optionsModel" name="optionModel"></ngx-bootstrap-multiselect>
+                                        </div></div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <div class="input-group pb-modalreglog-input-group">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                            <input type="file" class="form-control" id="image" placeholder="Image" (change)="onFileChanged($event)">
+                                            <input  type="button" (click)="onUploadToUpdate()" value="upload">
+        
+                                        </div>
+                                               </div></div>
+                                               </div>
+                                 
+                                   
                               </form>
                           </div>
                           <div class="modal-footer">
@@ -187,8 +243,8 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                           </div>
                       </div>
                   </div>
-              </div>
-              
+              </div> 
+             
 
 
               <!-- update modal -->
@@ -205,89 +261,132 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                               <div class="modal-content">
                                   <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                           <span aria-hidden="true">&times;</span>
-                                       </button>
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
                                   </div>
                                   <div class="modal-body">
-                                      <form class="pb-modalreglog-form-reg">
-                                          <div class="form-group">
-                                              <div id="pb-modalreglog-progressbar"></div>
-                                          </div>
-                                         
-                                          <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline"> 
-                                              <label for="id">Id</label>
-                                              <div class="input-group pb-modalreglog-input-group">
-                                                  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                  <input type="text" class="form-control" id="id" placeholder="Id" name="id" [(ngModel)]='factureToUpdate.id' readonly>
-                                              </div>
-                                          </div></div>
-                                          </div>
-                                          
-                                          <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline"> 
-                                                <label for="numPo">Num po</label>
+                                    <form class="pb-modalreglog-form-reg">
+                                        <div class="form-group">
+                                            <div id="pb-modalreglog-progressbar"></div>
+                                        </div>
+                                       
+                                        <div class="row mb-4">
+                                            <label for="devise">Devise</label>
                                             <div class="input-group pb-modalreglog-input-group">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                <input type="text" class="form-control" id="numPo" placeholder="num po" name="numPo" [(ngModel)]='factureToUpdate.num_po' >
+                                                <input type="text" class="form-control" id="devise" placeholder="Devise" name="devise" [(ngModel)]='factureToUpdate.devise' readonly>
                                             </div>
-                                          </div></div>
+                                        <div class="col">
+                                          <div class="form-outline">
+                                            <label for="dossier">Dossier</label>
+                                            <div class="input-group pb-modalreglog-input-group">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                <input type="text" class="form-control" id="dossier" placeholder="Dossier" name="dossier" [(ngModel)]='factureToUpdate.dossier' readonly>
+                                            </div>
+                                        </div></div></div>
+                                        <div class="row mb-4">
                                           <div class="col">
-                                            <div class="form-outline">
-                                              <label for="dossier">Dossier</label>
+                                           <div class="form-outline">
+                                          <label for="fournisseur">Fournisseur</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" id="fournisseur" placeholder="Fournisseur" name="fournisseur" [(ngModel)]='factureToUpdate.fournisseur' #fournup="ngModel" required>
+                                              <div class="error" *ngIf="fournup.errors?.required && fournup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div>
+                                      <div class="col">
+                                          <div class="form-outline">
+                                          <label for="montant">Montant</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToUpdate.montant' #mntup="ngModel" required>
+                                              <div class="error" *ngIf="mntup.errors?.required && mntup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div></div>
+                                      <div class="row mb-4">
+                                          <div class="col">
+                                           <div class="form-outline">
+                                          <label for="numPo">Num po</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" id="numPo" placeholder="num po" name="numPo"
+                                               (input)="onSearchupdateChange($event.target.value)" [(ngModel)]='factureToUpdate.num_po' #nmpup="ngModel" required>
+                                              <div class="error" *ngIf="nmpup.errors?.required && nmpup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div>
+                                      <div class="col">
+                                        <div class="form-outline">
+                                        <label for="Objet">Objet</label>
+                                        <select class="custom-select" id="Objet" name="Objet" 
+                                        [(ngModel)]='factureToUpdate.objet' required>
+                                           <option *ngFor="let object of objects" selected>{{object.nom}}</option>
+                                         </select>
+                                    </div></div></div>
+                                      <div class="row mb-4">
+                                          <div class="col">
+                                           <div class="form-outline">
+                                          <label for="dp">Délai de paiement</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" id="dp" placeholder="Délai de paiement" name="dp" [(ngModel)]='factureToUpdate.delai' bsDatepicker #dlup="ngModel" required>
+                                              <div class="error" *ngIf="dlup.errors?.required && dlup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div>
+                                      <div class="col">
+                                          <div class="form-outline">
+                                          <label for="ifd">Id fiscale</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" id="idf" placeholder="Id fiscale" name="idf" [(ngModel)]='factureToUpdate.idfiscale' #idfsup="ngModel" required>
+                                              <div class="error" *ngIf="idfsup.errors?.required && idfsup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div></div>
+                                      <div class="row mb-4">
+                                          <div class="col">
+                                           <div class="form-outline">
+                                          <label for="numf">Numéro facture</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" id="numf" placeholder="Numéro facture" name="numf" [(ngModel)]='factureToUpdate.num_fact' #nmfcup="ngModel" required>
+                                              <div class="error" *ngIf="nmfcup.errors?.required && nmfcup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div>
+                                      <div class="col">
+                                          <div class="form-outline">
                                               <div class="input-group pb-modalreglog-input-group">
                                                   <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                  <input type="text" class="form-control" id="dossier" placeholder="Dossier" name="dossier" [(ngModel)]='factureToUpdate.dossier' readonly>
-                                              </div>
-                                          </div></div></div>
-                                          <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline">
-                                            <label for="fournisseur">Fournisseur</label>
-                                            <div class="input-group pb-modalreglog-input-group">
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                <input type="text" class="form-control" id="fournisseur" placeholder="Fournisseur" name="fournisseur" [(ngModel)]='factureToUpdate.fournisseur' >
-                                            </div>
-                                        </div></div>
-                                        <div class="col">
-                                            <div class="form-outline">
-                                            <label for="montant">Montant</label>
-                                            <div class="input-group pb-modalreglog-input-group">
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToUpdate.montant' >
-                                            </div>
-                                        </div></div></div>
-                                        <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline">
-                                                <label for="dvs">Devise</label>
-                                                <input type="text" class="form-control" id="dvs" placeholder="Devise" name="devise" [(ngModel)]='factureToUpdate.devise' >
-
-                                           
-                                        </div></div>
-                                        <div class="col">
-                                            <div class="form-outline">
-                                                <label for="Objet">Objet</label>
-                                                <select class="custom-select" id="Objet" name="Objet" 
-                                                [(ngModel)]='factureToUpdate.objet' required>
-                                                   <option *ngFor="let object of objects" selected>{{object.nom}}</option>
-                                                 </select>
-                                        </div></div></div>
-        
-                                        <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline">
-                                                <label for="pj">Pièce jointe</label><br>
-                                                <ngx-bootstrap-multiselect [options]="myOptions" [texts]="myTexts" [settings]="mySettings"
-                                               [(ngModel)]="optionsModel" name="optionModel"></ngx-bootstrap-multiselect>
-                                                
-                                        </div></div>
-                                        <div class="col">
-                                            <div class="form-outline">
-                                        </div></div></div>
-                                      </form>
+                                                  <input type="file" class="form-control" id="image" placeholder="Image" (change)="onFileChanged($event)">
+                                                  <input  type="button" (click)="onUploadToUpdate()" value="upload">
+              
+                                              </div></div></div></div>
+      
+                                              <div class="row mb-4">
+                                                  <div class="col">
+                                                   <div class="form-outline">
+                                                  <label for="strucord">Structure ordinatrice</label>
+                                                  <div class="input-group pb-modalreglog-input-group">
+                                                      <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                      <input type="text" class="form-control" id="strucord" placeholder="Structure ordinatrice" name="strucord" [(ngModel)]='factureToUpdate.strucord' #strucup="ngModel" required>
+                                                      <div class="error" *ngIf="strucup.errors?.required && strucup.touched" 
+                                                      style="color:firebrick;" >Obligatoire !</div>
+                                                  </div>
+                                              </div></div>
+                                              <div class="col">
+                                                  <div class="form-outline">
+                                                         <label for="pj">Pièce jointe</label><br>
+                                                         <ngx-bootstrap-multiselect [options]="myOptions" [texts]="myTexts" [settings]="mySettings"
+                                                         [(ngModel)]="optionsModel" name="optionModel"></ngx-bootstrap-multiselect>
+                                                     </div></div>
+                                                     </div>
+                                       
+                                         
+                                    </form>
                                   </div>
                                   <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -298,3 +397,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                       </div>
                      
         
+                      <br>
+                      <br>
+        
+                    

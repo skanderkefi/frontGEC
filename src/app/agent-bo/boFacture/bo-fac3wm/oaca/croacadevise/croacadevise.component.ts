@@ -21,17 +21,17 @@ export class CroacadeviseComponent implements OnInit {
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
-  "devise": "TND","direction":"","dossier": "3WM OACA DEVISE" ,"factname":"","fournisseur":"",
+  "devise": "","direction":"","dossier": "3WM OACA DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
   "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
   "strucord":"","pieceJointe":""};
 
  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
- "devise": "TND","direction":"","dossier": "3WM OACA DEVISE" ,"factname":"","fournisseur":"",
+ "devise": "","direction":"","dossier": "3WM OACA DEVISE" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
  "strucord":"","pieceJointe":""};
-
+ 
  // Default selection
  optionsModel: number[] = [];
  
@@ -216,6 +216,8 @@ export class CroacadeviseComponent implements OnInit {
         
         this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
           this.factureToCreate.fournisseur=data.name
+          this.factureToUpdate.idfiscale=data.idFiscale
+
           this.fournisseur=data
           
       })
@@ -228,6 +230,8 @@ export class CroacadeviseComponent implements OnInit {
       
       this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
         this.factureToUpdate.fournisseur=data.name
+        this.factureToUpdate.idfiscale=data.idFiscale
+
         this.fournisseur=data
        
     })

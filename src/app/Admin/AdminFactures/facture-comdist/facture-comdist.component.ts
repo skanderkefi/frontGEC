@@ -16,10 +16,10 @@ export class FactureComdistComponent implements OnInit {
   envoieApNotNull:boolean=false;
   refusApNotNull:boolean=true;
   validationApNotNull:boolean=true;
-  envoietrésoNotNull:boolean=true;
+  envoietrésoNotNull:boolean=true; 
   refustresoNotNull:boolean=true;
   validationtresoNotNull:boolean=true;
-
+ 
 
   datereception="1/1/2020";
   dateenvoieAp="2/1/2020";
@@ -76,7 +76,7 @@ export class FactureComdistComponent implements OnInit {
  };
 
   myOptions: IMultiSelectOption[];
-
+  
 
  
   constructor(public dataService:DataService) { }
@@ -276,7 +276,7 @@ export class FactureComdistComponent implements OnInit {
       
     })
   }
-
+ 
 
   factureWorkflow(fact){
     this.factureWfDetails=fact;

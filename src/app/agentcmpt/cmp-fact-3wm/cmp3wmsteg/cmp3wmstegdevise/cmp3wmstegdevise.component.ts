@@ -22,18 +22,18 @@ export class Cmp3wmstegdeviseComponent implements OnInit {
   "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
   "status":"","montant":"","num_fact":"","num_po":"","objet":"",
   "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
-  "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+  "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":""};
 
  factureToReject={"bordereau":"","createdBy":"","dateFact":"","id":"",
  "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
  "status":"","montant":"","num_fact":"","num_po":"","objet":"",
  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
- "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+ "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":""};
 
  
  
 
-
+ 
  
   constructor(public dataService:DataService) { }
  
@@ -80,7 +80,7 @@ export class Cmp3wmstegdeviseComponent implements OnInit {
     factureRejectModal(factureToCreate){
       this.factureToReject= factureToCreate    }
 
-      factureUpdateModal(facture){
+    factureValidateModal(facture){
         this.factureToValidate=facture;
         }
 
@@ -106,15 +106,20 @@ export class Cmp3wmstegdeviseComponent implements OnInit {
         }
 
         rejectFacture(){
+          
           this.factureToReject.status="rejected";
+          console.log(this.factureToReject);
+
           this.dataService.updateFacture3wm(this.factureToReject).subscribe((msg: any[])=>{
             console.log(msg);
+            
           }) 
           // location.reload();
         }
 
         validateFacture(){
           this.factureToValidate.status="validatedFromAp";
+          console.log(this.factureToValidate);
           this.dataService.updateFacture3wm(this.factureToValidate).subscribe((msg: any[])=>{
             console.log(msg);
           }) 

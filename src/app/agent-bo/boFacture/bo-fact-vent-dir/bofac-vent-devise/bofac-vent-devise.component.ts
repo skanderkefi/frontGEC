@@ -81,7 +81,7 @@ myTexts: IMultiSelectTexts = {
 
  
   showFacture(){
-    this.dataService.showFactureComdist().subscribe((data: any[])=>{
+    this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
         if(data[i].dossier=="VENTILATION DIRECTE DEVISE" )
@@ -104,7 +104,7 @@ myTexts: IMultiSelectTexts = {
       for(let i=0;i<this.optionsModel.length;i++){
         this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
       }
-         this.dataService.createFacturecmd(this.factureToCreate).subscribe((msg: any[])=>{
+         this.dataService.createFacture3wm(this.factureToCreate).subscribe((msg: any[])=>{
         console.log(msg);
       }) 
       
@@ -142,7 +142,7 @@ myTexts: IMultiSelectTexts = {
           for(let i=0;i<this.optionsModel.length;i++){
             this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
           }
-          this.dataService.updateFacturecmd(this.factureToUpdate).subscribe((msg: any[])=>{
+          this.dataService.updateFacture3wm(this.factureToUpdate).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
           location.reload();
@@ -150,7 +150,7 @@ myTexts: IMultiSelectTexts = {
 
         deleteFacture(id){
           console.log(id);
-          this.dataService.deleteFactureCmd(id).subscribe((msg: any[])=>{
+          this.dataService.deleteFacture3wm(id).subscribe((msg: any[])=>{
             console.log(msg);
           })
           location.reload(); 

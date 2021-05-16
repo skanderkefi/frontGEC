@@ -13,7 +13,7 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 })
 export class Bo3sotetelComponent implements OnInit {
 
-  
+   
   date={"startdate":"","enddate":""}
   fournisseur:any;
   selectedFile: File;
@@ -45,7 +45,7 @@ export class Bo3sotetelComponent implements OnInit {
      displayAllSelectedText: true
  };
  
- // Text configuration
+ // Text configuration 
  myTexts: IMultiSelectTexts = {
      checkAll: 'Select all',
      uncheckAll: 'Unselect all',

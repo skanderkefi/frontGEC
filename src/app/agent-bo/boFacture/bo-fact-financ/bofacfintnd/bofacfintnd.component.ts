@@ -15,7 +15,6 @@ export class BofacfintndComponent implements OnInit {
 
   selectedFile: File;
   date={"startdate":"","enddate":""}
-
   Factures3wmTnd:any[]=[];
   firstn:any;
   p:number=1;
@@ -23,18 +22,20 @@ export class BofacfintndComponent implements OnInit {
   "devise": "TND", "direction":"","dossier": "FINANCEMENT TND" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
   "pathname":"","periode_conso":"","structure":"","createdAt":Date.now(),"credit":"","destinataire":""
-   ,"datereception":"","echeance":"","pathPdf":"","typeFin":"","updatedAt":"","pieceJointe":"","idfiscale":""};
+   ,"datereception":"","echeance":"","pathPdf":"","typeFin":"","updatedAt":"","pieceJointe":"","idfiscale":"",
+  "dateOp":""};
 
  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
- "devise": "DEVISE", "direction":"","dossier": "3WM DEVISE" ,"factname":"","fournisseur":"",
+ "devise": "TND", "direction":"","dossier": "FINANCEMENT TND" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
  "pathname":"","periode_conso":"","structure":"","createdAt":Date.now(),"credit":"","destinataire":""
-  ,"datereception":"","echeance":"","pathPdf":"","typeFin":"","updatedAt":"","pieceJointe":"","idfiscale":""};
+  ,"datereception":"","echeance":"","pathPdf":"","typeFin":"","updatedAt":"","pieceJointe":"","idfiscale":"",
+"dateOp":""};
 
 
   // Default selection
  optionsModel: number[] = [];
-  
+ 
  // Settings configuration
  mySettings: IMultiSelectSettings = {
      enableSearch: true,
@@ -59,12 +60,13 @@ export class BofacfintndComponent implements OnInit {
 
   myOptions: IMultiSelectOption[];
 
+
   constructor(public dataService:DataService) { }
 
   ngOnInit(): void {
     this.showFacture();
-    this.showObjects();
     this.showPieces();
+    this.showObjects();
   }
 
   Search(){
@@ -82,7 +84,7 @@ export class BofacfintndComponent implements OnInit {
     this.dataService.showFactureFin().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].devise=="TND" )
+        if(data[i].dossier=="FINANCEMENT TND" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
@@ -100,6 +102,9 @@ export class BofacfintndComponent implements OnInit {
     }
 
     createFacture(){
+      for(let i=0;i<this.optionsModel.length;i++){
+        this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
+      }
          this.dataService.createFactureFin(this.factureToCreate).subscribe((msg: any[])=>{
         console.log(msg);
       }) 
@@ -136,6 +141,9 @@ export class BofacfintndComponent implements OnInit {
         }
 
         updateFacture(){
+          for(let i=0;i<this.optionsModel.length;i++){
+            this.factureToUpdate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
+          }
           this.dataService.updateFactureFin(this.factureToUpdate).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
@@ -152,108 +160,109 @@ export class BofacfintndComponent implements OnInit {
         }
 
 
-        searchPerDate(){
-       
+
+        onUploadToUpdate() {
         
-          try{
-            let startdate = formatDate(this.date.startdate,'yyyy-MM-dd','en_US');
-            let enddate = formatDate(this.date.enddate,'yyyy-MM-dd','en_US');
-  
-            
-            for(let i=0; i<this.Factures3wmTnd.length; i++){
-              
-              if (this.Factures3wmTnd[i].dateFact<=startdate || this.Factures3wmTnd[i].dateFact>=enddate){
-                 this.Factures3wmTnd.splice(i,1)
-              }
-            }
+          const uploadImageData = new FormData();
+          uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+         
           
-          }catch{
-            console.log("no date found !!!!")
+          this.dataService.upload(uploadImageData).subscribe((response) => {
+            console.log(response);
+            this.factureToUpdate.pathPdf=response.body.toString();
           }
-           
+          );
         }
-        onSearchcreateChange(searchValue: string): void {  
-          console.log(searchValue);
-          
-          this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
-            this.factureToCreate.fournisseur=data.name
-            this.factureToCreate.idfiscale=data.idFiscale
-        })
+
+
+      public onFileChanged(event) {
+   
+        //Select File
+        this.selectedFile = event.target.files[0];
       
        
       }
-  
-      onSearchupdateChange(searchValue: string): void {  
+
+      onUploadToCreate() {
+        
+        const uploadImageData = new FormData();
+        uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+       
+        
+        this.dataService.upload(uploadImageData).subscribe((response) => {
+          console.log(response);
+          this.factureToCreate.pathPdf=response.body.toString();
+        }
+        );
+      }
+
+      searchPerDate(){
+       
+        
+        try{
+          let startdate = formatDate(this.date.startdate,'yyyy-MM-dd','en_US');
+          let enddate = formatDate(this.date.enddate,'yyyy-MM-dd','en_US');
+
+          
+          for(let i=0; i<this.Factures3wmTnd.length; i++){
+            
+            if (this.Factures3wmTnd[i].dateFact<=startdate || this.Factures3wmTnd[i].dateFact>=enddate){
+               this.Factures3wmTnd.splice(i,1)
+            }
+          }
+        
+        }catch{
+          console.log("no date found !!!!")
+        }
+         
+      }
+      onSearchcreateChange(searchValue: string): void {  
         console.log(searchValue);
         
         this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
-          this.factureToUpdate.fournisseur=data.name
-          this.factureToUpdate.idfiscale=data.idFiscale
+          this.factureToCreate.fournisseur=data.name
+          this.factureToCreate.idfiscale=data.idFiscale
+          
       })
     
      
     }
-  
-  
-  
-    
-    pieces:any[]=[];
-    objects:any[]=[];
-    showObjects(){
-      this.dataService.showObjects().subscribe((data:any[])=>{
-  
-        this.objects=data;
-        console.log(this.objects);
-        
-      })
-    }
-  
-    showPieces(){
-      this.dataService.showPieces().subscribe((data:any[])=>{
-        this.myOptions=data;
-        console.log("pieces");
-        console.log(this.myOptions);
-        
-      })
-    }
 
-
-    onUploadToUpdate() {
-        
-      const uploadImageData = new FormData();
-      uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-     
+    onSearchupdateChange(searchValue: string): void {  
+      console.log(searchValue);
       
-      this.dataService.upload(uploadImageData).subscribe((response) => {
-        console.log(response);
-        this.factureToUpdate.pathPdf=response.body.toString();
-      }
-      );
-    }
-
-
-  public onFileChanged(event) {
-
-    //Select File
-    this.selectedFile = event.target.files[0];
-  
-   
-  }
-
-  onUploadToCreate() {
-    
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-   
-    
-    this.dataService.upload(uploadImageData).subscribe((response) => {
-      console.log(response);
-      this.factureToCreate.pathPdf=response.body.toString();
-    }
-    );
-  }
-
-  
+      this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
+        this.factureToUpdate.fournisseur=data.name
+        this.factureToUpdate.idfiscale=data.idFiscale
        
+    })
+  
+   
+  }
 
+
+
+  
+  pieces:any[]=[];
+  objects:any[]=[];
+  showObjects(){
+    this.dataService.showObjects().subscribe((data:any[])=>{
+
+      this.objects=data;
+      console.log(this.objects);
+      
+    })
+  }
+
+  showPieces(){
+    this.dataService.showPieces().subscribe((data:any[])=>{
+      this.myOptions=data;
+      console.log("pieces");
+      console.log(this.myOptions);
+      
+    })
+  }
+
+     
+  
 }

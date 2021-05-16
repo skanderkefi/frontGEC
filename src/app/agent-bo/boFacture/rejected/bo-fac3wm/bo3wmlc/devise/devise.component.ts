@@ -85,7 +85,7 @@ export class lcrjcDeviseComponent implements OnInit {
     this.dataService.showFactureLettre().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="LETTRE DE CRÉDIT TND" )
+        if(data[i].dossier=="LETTRE DE CRÉDIT TND" && data[i].status=="rejected")
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){

@@ -24,16 +24,16 @@ export class BofacrembdeviseComponent implements OnInit {
   "devise": "", "direction":"","dossier": "REMBOURSEMENT DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_po":"","objet":"",
   "structure":"","datereception":"","beneficiaire":"","datepo":"","pathPdf":""
-  ,"pieceJointe":"","idfiscale":""};
+  ,"pieceJointe":"","idfiscale":"","ordrep":""};
 
  factureToUpdate={"bordereau":"","created_by":"4125","id":"",
  "devise": "", "direction":"","dossier": "REMBOURSEMENT DEVISE" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_po":"","objet":"",
  "structure":"","datereception":"","beneficiaire":"","datepo":"","pathPdf":""
- ,"pieceJointe":"","idfiscale":""};
+ ,"pieceJointe":"","idfiscale":"","ordrep":""};
 
 
-// Default selection
+// Default selection 
 optionsModel: number[] = [];
  
 // Settings configuration

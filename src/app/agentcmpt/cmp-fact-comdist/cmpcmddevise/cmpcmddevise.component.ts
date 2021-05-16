@@ -22,13 +22,13 @@ export class CmpcmddeviseComponent implements OnInit {
   "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
   "status":"","montant":"","num_fact":"","num_po":"","objet":"",
   "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
-  "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+  "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":"","dateRefusParAp":"","datValidationParAp":""};
 
  factureToReject={"bordereau":"","createdBy":"","dateFact":"","id":"",
  "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
  "status":"","montant":"","num_fact":"","num_po":"","objet":"",
  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
- "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+ "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":"","dateRefusParAp":"","datValidationParAp":""};
 
  
  
@@ -55,11 +55,13 @@ export class CmpcmddeviseComponent implements OnInit {
 
  
   showFacture(){
-    this.dataService.showFacture3wm().subscribe((data: any[])=>{
+    this.dataService.showFactureComdist().subscribe((data: any[])=>{
       console.log(data);
+      let j=0;
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="3WM STEG DEVISE" && data[i].status=="sent")
-        this.Factures3wmTnd[i]=data[i];
+        if(data[i].dossier=="COMDIST DEVISE" && data[i].status=="sent")
+        this.Factures3wmTnd[j]=data[i];
+        j++
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
         if(this.Factures3wmTnd[i]==null)
@@ -74,13 +76,13 @@ export class CmpcmddeviseComponent implements OnInit {
     
      
     } 
-
+ 
   
 
     factureRejectModal(factureToCreate){
       this.factureToReject= factureToCreate    }
 
-      factureUpdateModal(facture){
+    factureValidateModal(facture){
         this.factureToValidate=facture;
         }
 

@@ -89,7 +89,7 @@ myTexts: IMultiSelectTexts = {
     this.dataService.showFactureOp().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="COMDIST DEVISE" && data[i].status=="sent")
+        if(data[i].dossier=="COMDIST DEVISE" && data[i].status=="rejected")
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){

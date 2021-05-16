@@ -430,19 +430,23 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                                                 <a href="#" class="timeline-content">
                                                                     <div class="timeline-icon"><i class="fa fa-globe"></i></div>
                                                                     <h3 class="title">Agent trésorerie</h3>
-                                                                    <p class="description">
-                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer males uada tellus lorem, et condimentum neque commodo Integer males uada tellus lorem, et condimentum neque commodo
-                                                                    </p>
+                                                                    <ul>
+                                                                        <li *ngIf="factureWfDetails.dateValidationParTreso!=null" style="text-align: left;">Validé par l'agent trésorerie le: {{factureWfDetails.dateValidationParTreso}}</li>
+
+                                                                    </ul>
                                                                 </a>
                                                             </div>
                                                             <div class="timeline">
                                                                 <a href="#" class="timeline-content">
                                                                     <div class="timeline-icon"><i class="fa fa-rocket"></i></div>
                                                                     <h3 class="title">Agent AP</h3>
-                                                                    <p class="description">
-                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer males uada tellus lorem, et condimentum neque commodo Integer males uada tellus lorem, et condimentum neque commodo
-                                                                    </p>
-                                                                </a>
+                                                                    <ul>
+                                                                        <li *ngIf="factureWfDetails.datValidationParAp!=null" style="text-align: left;">Envoyée au l'agent trésorerie le: {{factureWfDetails.datValidationParAp}}</li>
+                                                                        <li *ngIf="factureWfDetails.dateRefusParTreso!=null" style="text-align: left;">Refus par l'agent trésorerie le: {{factureWfDetails.dateRefusParTreso}}</li>
+
+                                                                    </ul>
+                
+                                                                </a> 
                                                             </div>
                                                             <div class="timeline">
                                                                 <a href="#" class="timeline-content">
@@ -451,7 +455,9 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                                                    
                                                                         <ul>
                                                                             <li style="text-align: left;">Reçue le: {{factureWfDetails.datereception}}</li>
-                                                                            <li *ngIf="envoieApNotNull" style="text-align: left;">Envoyée au AP le: {{factureWfDetails.dateEnvoieAuAp}}</li>
+                                                                            <li *ngIf="factureWfDetails.dateEnvoieAuAp!=null" style="text-align: left;">Envoyée au l'agent AP le: {{factureWfDetails.dateEnvoieAuAp}}</li>
+                                                                            <li *ngIf="factureWfDetails.dateRefusParAp!=null" style="text-align: left;">Refus par l'agent AP le: {{factureWfDetails.dateRefusParAp}}</li>
+
                                                                         </ul>
                     
                                                                    

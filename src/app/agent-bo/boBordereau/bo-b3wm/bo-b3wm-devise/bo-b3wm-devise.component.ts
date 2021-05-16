@@ -205,26 +205,24 @@ let sentToAp:string;
 
 
    
-showFacture(){
-  this.dataService.showFacture3wm().subscribe((data: any[])=>{
-    console.log(data);
-    for(let i=0; i<data.length; i++){
-      if(data[i].dossier=="3WM DEVISE" )
-      this.Factures3wmTnd[i]=data[i];
-    }
-    for(let i=0; i<this.Factures3wmTnd.length; i++){
-      if(this.Factures3wmTnd[i]==null)
-      this.Factures3wmTnd.splice(i,1)
-    }
-    for(let i=0; i<this.Factures3wmTnd.length; i++){
-      if(this.Factures3wmTnd[i]==null)
-      this.Factures3wmTnd.splice(i,1)
-    }
-    console.log(this.Factures3wmTnd);
-  })
+  showFacture(){
+    this.dataService.showFacture3wm().subscribe((data: any[])=>{
+      console.log(data);
+      let j=0;
+      for(let i=0; i<data.length; i++){
   
+        if(data[i].dossier=="3WM DEVISE"){
+  
+          this.Factures3wmTnd[j]=data[i];
+  
+        j++;
+      }}
+      console.log("fact3wm");
+      
+      console.log(this.Factures3wmTnd);
+    })
     
-  }
+}
 
   showUsers(){
     this.dataService.searchMatAndPwd().subscribe((data: any[])=>{

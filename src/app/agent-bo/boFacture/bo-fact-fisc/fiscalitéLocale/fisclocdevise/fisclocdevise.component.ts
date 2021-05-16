@@ -15,7 +15,7 @@ export class FisclocdeviseComponent implements OnInit {
 
   selectedFile: File;
   date={"startdate":"","enddate":""}
-  Factures3wmTnd:any[]=[];
+  Factures3wmTnd:any[]=[]; 
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","id":"",
@@ -32,7 +32,7 @@ export class FisclocdeviseComponent implements OnInit {
 
  
 // Default selection
-optionsModel: number[] = [];
+optionsModel: number[] = []; 
  
 // Settings configuration
 mySettings: IMultiSelectSettings = {
@@ -247,7 +247,7 @@ myTexts: IMultiSelectTexts = {
     this.dataService.showObjects().subscribe((data:any[])=>{
 
       this.objects=data;
-      console.log(this.objects);
+      console.log(this.objects); 
       
     }) 
   }

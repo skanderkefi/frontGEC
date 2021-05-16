@@ -3,6 +3,7 @@ import {DataService} from "../../../../dataservice/data.service";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
+import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
 
 
 @Component({
@@ -15,29 +16,60 @@ export class BofacrembtndComponent implements OnInit {
   selectedFile: File;
   date={"startdate":"","enddate":""}
   fournisseur:any;
-  Factures3wmTnd:any[]=[];
+  Factures3wmTnd:any[]=[]; 
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","created_by":"4125","id":"",
   "devise": "TND", "direction":"","dossier": "REMBOURSEMENT TND" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_po":"","objet":"",
-  "structure":"","datereception":"","beneficiaire":"","datepo":"","pathPdf":""};
+  "structure":"","datereception":"","beneficiaire":"","datepo":"","pathPdf":""
+  ,"pieceJointe":"","idfiscale":"","ordrep":""};
 
  factureToUpdate={"bordereau":"","created_by":"4125","id":"",
- "devise": "TND", "direction":"","dossier": "REMBOURSEMENT DEVISE" ,"factname":"","fournisseur":"",
+ "devise": "TND", "direction":"","dossier": "REMBOURSEMENT TND" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_po":"","objet":"",
- "structure":"","datereception":"","beneficiaire":"","datepo":"","pathPdf":""};
+ "structure":"","datereception":"","beneficiaire":"","datepo":"","pathPdf":""
+ ,"pieceJointe":"","idfiscale":"","ordrep":""};
 
  
 
  
+// Default selection
+optionsModel: number[] = [];
+ 
+// Settings configuration
+mySettings: IMultiSelectSettings = {
+    enableSearch: true,
+    checkedStyle: 'fontawesome',
+    buttonClasses: 'btn btn-default btn-block',
+    dynamicTitleMaxItems: 3,
+    displayAllSelectedText: true
+};
+
+// Text configuration
+myTexts: IMultiSelectTexts = {
+    checkAll: 'Select all',
+    uncheckAll: 'Unselect all',
+    checked: 'item selected',
+    checkedPlural: 'items selected',
+    searchPlaceholder: 'Find',
+    searchEmptyResult: 'Nothing found...',
+    searchNoRenderText: 'Type in search box to see results...',
+    defaultTitle: 'Select',
+    allSelected: 'All selected',
+};
+
+ myOptions: IMultiSelectOption[];
+
 
   constructor(public dataService:DataService) { }
 
   ngOnInit(): void {
     this.showFacture();
+    this.showObjects();
+    this.showPieces();
   }
-
+ 
   Search(){
     if(this.firstn ==""){
       this.ngOnInit();}
@@ -48,12 +80,12 @@ export class BofacrembtndComponent implements OnInit {
     }
   }
 
- 
+
   showFacture(){
     this.dataService.showFactureFdRemp().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="REMBOURSEMENT TND" ) 
+        if(data[i].dossier=="REMBOURSEMENT TND" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
@@ -66,22 +98,25 @@ export class BofacrembtndComponent implements OnInit {
       }
       console.log(this.Factures3wmTnd);
     })
-     
-     
+    
+      
     }
 
     createFacture(){
+      for(let i=0;i<this.optionsModel.length;i++){
+        this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
+      }
          this.dataService.createFactureFdRemp(this.factureToCreate).subscribe((msg: any[])=>{
         console.log(msg);
       }) 
-       location.reload(); 
-
+      location.reload();
     }
 
     factureCreateModal(factureToCreate){
       this.factureToCreate= factureToCreate    }
 
-      factureUpdateModal(facture){
+      
+    factureUpdateModal(facture){
         this.factureToUpdate=facture;
         }
 
@@ -94,7 +129,7 @@ export class BofacrembtndComponent implements OnInit {
   
         const doc = new jsPDF()
         
-        autoTable(doc, { html: '#Facture3wmtndTable' })
+        autoTable(doc, { html: '#FacturefiscdeviseTable' })
         doc.save('tableFacture.pdf')
         
         }
@@ -102,16 +137,18 @@ export class BofacrembtndComponent implements OnInit {
         key: string='id';
         reverse: boolean=false;
         sort(key){
-          this.key=key;
+          this.key=key; 
           this.reverse= !this.reverse;
         }
 
         updateFacture(){
+          for(let i=0;i<this.optionsModel.length;i++){
+            this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
+          }
           this.dataService.updateFactureFdRemp(this.factureToUpdate).subscribe((msg: any[])=>{
+           
             console.log(msg);
           }) 
-           location.reload(); 
-
         }
 
         deleteFacture(id){
@@ -121,43 +158,110 @@ export class BofacrembtndComponent implements OnInit {
           })
           location.reload(); 
         }
+ 
 
-        searchPerDate(){
+        onUploadToUpdate() {
+        
+          const uploadImageData = new FormData();
+          uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
          
           
-          try{
-            let startdate = formatDate(this.date.startdate,'yyyy-MM-dd','en_US');
-            let enddate = formatDate(this.date.enddate,'yyyy-MM-dd','en_US');
-  
-            
-            for(let i=0; i<this.Factures3wmTnd.length; i++){
-              
-              if (this.Factures3wmTnd[i].dateFact<=startdate || this.Factures3wmTnd[i].dateFact>=enddate){
-                 this.Factures3wmTnd.splice(i,1)
-              }
-            }
-          
-          }catch{
-            console.log("no date found !!!!")
+          this.dataService.upload(uploadImageData).subscribe((response) => {
+            console.log(response);
+            this.factureToUpdate.pathPdf=response.body.toString();
           }
-           
+          );
         }
-        onSearchChange(searchValue: string): void {  
-          console.log(searchValue);
-          
-          this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
-            this.factureToCreate.fournisseur=data.name
-            this.fournisseur=data
-            console.log(this.fournisseur);
-            console.log("=========")
-            console.log( this.factureToCreate.fournisseur)
-        })
+
+
+      public onFileChanged(event) {
+   
+        //Select File
+        this.selectedFile = event.target.files[0];
       
        
       }
- 
+
+      onUploadToCreate() {
+        
+        const uploadImageData = new FormData();
+        uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+       
+        
+        this.dataService.upload(uploadImageData).subscribe((response) => {
+          console.log(response);
+          this.factureToCreate.pathPdf=response.body.toString();
+        }
+        );
+      }
+
+      searchPerDate(){
+       
+        
+        try{
+          let startdate = formatDate(this.date.startdate,'yyyy-MM-dd','en_US');
+          let enddate = formatDate(this.date.enddate,'yyyy-MM-dd','en_US');
+
+          
+          for(let i=0; i<this.Factures3wmTnd.length; i++){
+            
+            if (this.Factures3wmTnd[i].dateFact<=startdate || this.Factures3wmTnd[i].dateFact>=enddate){
+               this.Factures3wmTnd.splice(i,1)
+            }
+          }
+        
+        }catch{
+          console.log("no date found !!!!")
+        }
+         
+      }
+      onSearchcreateChange(searchValue: string): void {  
+        console.log(searchValue);
+        
+        this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
+          this.factureToCreate.fournisseur=data.name
+          this.factureToCreate.idfiscale=data.idFiscale
+         
+      })
+    
+     
+    }
+
+    onSearchupdateChange(searchValue: string): void {  
+      console.log(searchValue);
+      
+      this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
+        this.factureToUpdate.fournisseur=data.name
+        this.factureToUpdate.idfiscale=data.idFiscale
+       
+    })
+  
+   
+  }
 
 
 
+  
+  pieces:any[]=[];
+  objects:any[]=[];
+  showObjects(){
+    this.dataService.showObjects().subscribe((data:any[])=>{
+
+      this.objects=data;
+      console.log(this.objects);
+      
+    })
+  }
+
+  showPieces(){
+    this.dataService.showPieces().subscribe((data:any[])=>{
+      this.myOptions=data;
+      console.log("pieces");
+      console.log(this.myOptions);
+      
+    })
+  }
+
+     
 
 }

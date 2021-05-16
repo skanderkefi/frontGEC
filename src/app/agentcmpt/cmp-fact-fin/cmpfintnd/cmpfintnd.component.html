@@ -74,12 +74,12 @@ style="margin-left:-65em;width:1em;display:inline-block;" >
             <td class="cellules">{{fact.num_po}}</td>
             <td class="cellules" style="text-align: center;">
                 <button type="button" title="Valider" class="btn btn-light pb-modalreglog-submit"   
-                data-toggle="modal" data-target="#myModalvalidate">
+                data-toggle="modal" data-target="#myModalvalidate" (click)="factureValidateModal(fact)">
                <img src="../../../assets/images/validate.png"  
                 style="border-radius: 10px; border-image-width: 5px;">  </button>
                 
                <button type="button" title="Refuser" class="btn btn-light" 
-                data-toggle="modal" data-target="#rjctModal" >  <img  src="../../../assets/images/reject.png"
+                data-toggle="modal" data-target="#rjctModal" (click)="factureRejectModal(fact)">  <img  src="../../../assets/images/reject.png"
                      style="border-radius: 10px; border-image-width: 5px;"></button>
                
                 </td>
@@ -111,7 +111,7 @@ style="margin-left:-65em;width:1em;display:inline-block;" >
                           </div>
                           <div class="modal-body">
                             <div class="form-group">
-                                <textarea class="form-control" id="raison" placeholder="Donnez une Raison pour la refus.." name="raisonrejection" [(ngModel)]='factureToReject.Rejectraison' 
+                                <textarea class="form-control" id="raison" placeholder="Donnez une Raison pour la refus.." name="raisonrejection" [(ngModel)]='factureToReject.raisonRefusAp' 
                                   #rsn="ngModel" required></textarea>
                               </div>
                           </div>
@@ -147,7 +147,7 @@ style="margin-left:-65em;width:1em;display:inline-block;" >
                                     <label for="codeAp">Code</label>
                                     <div class="input-group pb-modalreglog-input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" id="codeAp" placeholder="Code AP" name="codeap" [(ngModel)]='factureToValidate.apCode'   #cdap="ngModel" required>
+                                        <input type="text" class="form-control" id="codeAp" placeholder="Code AP" name="codeap" [(ngModel)]='factureToValidate.codeAp'   #cdap="ngModel" required>
                                         <div class="error" *ngIf="cdap.errors?.required && cdap.touched" 
                                         style="color:firebrick;" >Obligatoire !</div>
                                     </div>

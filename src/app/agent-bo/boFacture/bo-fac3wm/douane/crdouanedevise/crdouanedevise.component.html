@@ -167,12 +167,10 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                 <div class="col">
                                     <div class="form-outline">
                                     <label for="Objet">Objet</label>
-                                    <div class="input-group pb-modalreglog-input-group">
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" id="Objet" placeholder="Objet" name="Objet" [(ngModel)]='factureToCreate.objet' #obj="ngModel" required>
-                                        <div class="error" *ngIf="obj.errors?.required && obj.touched" 
-                                        style="color:firebrick;" >Obligatoire !</div>
-                                    </div>
+                                    <select class="custom-select" id="Objet" name="Objet" 
+                                    [(ngModel)]='factureToCreate.objet' required>
+                                       <option *ngFor="let object of objects" selected>{{object.nom}}</option>
+                                     </select>
                                 </div></div></div>
                                 <div class="row mb-4">
                                     <div class="col">
@@ -325,15 +323,13 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                           </div>
                                       </div></div>
                                       <div class="col">
-                                          <div class="form-outline">
-                                          <label for="Objet">Objet</label>
-                                          <div class="input-group pb-modalreglog-input-group">
-                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                              <input type="text" class="form-control" id="Objet" placeholder="Objet" name="Objet" [(ngModel)]='factureToUpdate.objet' #objup="ngModel" required>
-                                              <div class="error" *ngIf="objup.errors?.required && objup.touched" 
-                                              style="color:firebrick;" >Obligatoire !</div>
-                                          </div>
-                                      </div></div></div>
+                                        <div class="form-outline">
+                                        <label for="Objet">Objet</label>
+                                        <select class="custom-select" id="Objet" name="Objet" 
+                                        [(ngModel)]='factureToUpdate.objet' required>
+                                           <option *ngFor="let object of objects" selected>{{object.nom}}</option>
+                                         </select>
+                                    </div></div></div>
                                       <div class="row mb-4">
                                           <div class="col">
                                            <div class="form-outline">

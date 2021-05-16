@@ -94,16 +94,18 @@ searchMatAndPwd(){
 
 }
 
-createObject(objet){
-  return this.httpClient.post('http://localhost:9009/CreateFactures/objet',objet);
 
-}
 
 createPiece(piece){
   return this.httpClient.post('http://localhost:9009/CreateFactures/piece',piece);
 
 }
 
+
+createObject(objet){
+  return this.httpClient.post('http://localhost:9009/CreateFactures/objet',objet);
+
+}
 
 showObjects(){
   return this.httpClient.get('http://localhost:9009/FacturesDisplay/objects');
@@ -113,6 +115,27 @@ showPieces(){
   return this.httpClient.get('http://localhost:9009/FacturesDisplay/pieces');
 }
 
+//fd
+createFd(piece){
+  return this.httpClient.post('http://localhost:9009/CreateFactures/fondroulement',piece);
+
+}
+
+updateFacturefd(facture){
+  return this.httpClient.put('http://localhost:9009/updateFacture/fd',facture);
+
+}
+
+deleteFacturefd(id){
+  console.log(id);
+  return this.httpClient.delete('http://localhost:9009/DeleteFactures/fd/'+id);
+}
+
+
+
+showFacturefd(){
+  return this.httpClient.get('http://localhost:9009/FacturesDisplay/showfd');
+}
 
 
 

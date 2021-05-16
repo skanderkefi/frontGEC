@@ -22,13 +22,13 @@ export class CmpcmdtndComponent implements OnInit {
   "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
   "status":"","montant":"","num_fact":"","num_po":"","objet":"",
   "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
-  "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+  "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":"","dateRefusParAp":"","datValidationParAp":""};
 
  factureToReject={"bordereau":"","createdBy":"","dateFact":"","id":"",
  "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
  "status":"","montant":"","num_fact":"","num_po":"","objet":"",
  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
- "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+ "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":"","dateRefusParAp":"","datValidationParAp":""};
 
  
  
@@ -51,15 +51,17 @@ export class CmpcmdtndComponent implements OnInit {
         return res.num_po.toLocaleLowerCase().match(this.firstn.toLocaleLowerCase());
       })
     } 
-  }
+  } 
 
  
   showFacture(){
-    this.dataService.showFacture3wm().subscribe((data: any[])=>{
+    this.dataService.showFactureComdist().subscribe((data: any[])=>{
       console.log(data);
+      let j=0;
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="3WM STEG DEVISE" && data[i].status=="sent")
-        this.Factures3wmTnd[i]=data[i];
+        if(data[i].dossier=="COMDIST TND" && data[i].status=="sent")
+        this.Factures3wmTnd[j]=data[i];
+        j++
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
         if(this.Factures3wmTnd[i]==null)
@@ -80,7 +82,7 @@ export class CmpcmdtndComponent implements OnInit {
     factureRejectModal(factureToCreate){
       this.factureToReject= factureToCreate    }
 
-      factureUpdateModal(facture){
+    factureValidateModal(facture){
         this.factureToValidate=facture;
         }
 
@@ -107,15 +109,17 @@ export class CmpcmdtndComponent implements OnInit {
 
         rejectFacture(){
           this.factureToReject.status="rejected";
-          this.dataService.updateFacture3wm(this.factureToReject).subscribe((msg: any[])=>{
+          this.factureToReject.dateRefusParAp=this.getToday();
+          this.dataService.updateFacturecmd(this.factureToReject).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
-          // location.reload();
+          // location.reload(); 
         }
 
         validateFacture(){
           this.factureToValidate.status="validatedFromAp";
-          this.dataService.updateFacture3wm(this.factureToValidate).subscribe((msg: any[])=>{
+          this.factureToValidate.datValidationParAp=this.getToday();
+          this.dataService.updateFacturecmd(this.factureToValidate).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
           // location.reload();
@@ -147,6 +151,17 @@ export class CmpcmdtndComponent implements OnInit {
 
 
      
-     
+      getToday():string{
+        var d = new Date();
+        var curr_date = d.getDate();
+        var curr_month = d.getMonth();
+        var curr_year = d.getFullYear()
+        var months = new Array("Janvier", "Fevrier", "Mars",
+          "Avril", "Mai", "Juin", "Juilllet", "Aout", "Septembre",
+          "Octobre", "Novembre", "Decembre");  
+    
+        var today = curr_date + "-" + months[curr_month] + "-" + curr_year;
+        return today;
+      }
      
 }

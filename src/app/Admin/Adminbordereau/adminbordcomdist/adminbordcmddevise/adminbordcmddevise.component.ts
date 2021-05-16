@@ -9,7 +9,7 @@ import autoTable from 'jspdf-autotable';
   styleUrls: ['./adminbordcmddevise.component.css']
 })
 export class AdminbordcmddeviseComponent implements OnInit {
-
+ 
   Factures3wmTnd:any[]=[];
   firstn:any;
   Bordereaux:any[];

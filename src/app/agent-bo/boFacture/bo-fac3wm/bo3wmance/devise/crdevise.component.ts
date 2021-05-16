@@ -35,7 +35,7 @@ export class CrancedeviseComponent implements OnInit {
  
  users: any[]=[];
  // Default selection
- optionsModel: number[];
+ optionsModel: number[] = [];
  
  // Settings configuration
  mySettings: IMultiSelectSettings = {

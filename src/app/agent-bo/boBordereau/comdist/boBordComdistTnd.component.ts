@@ -24,7 +24,7 @@ export class boBordComdistTndComponent implements OnInit {
   "nature":"COMMISSION & DISTRIBUTION","natureRaff":"TND","reference":"BOF/COMDIST-DEVISE/","sentAt":"","sentBy":"",
   "status":"","updatedAt":Date.now(),"toAp":""};
 
-  p:number=1;
+  p:number=1; 
 
 
   users: any[]=[];
@@ -91,10 +91,10 @@ myOptions: IMultiSelectOption[]=[];
       let j=0;
       for(let i=0; i<data.length; i++){
 
-        if(data[i].nature=="COMMISSION & DISTRIBUTION" ){
+        if(data[i].nature=="COMMISSION & DISTRIBUTION" && data[i].natureRaff=="TND" ){
 
         this.Bordereaux3wmDevise[j]=data[i];
-        j++;
+        j++; 
       }}
       console.log("bords:");
       console.log(this.Bordereaux3wmDevise);

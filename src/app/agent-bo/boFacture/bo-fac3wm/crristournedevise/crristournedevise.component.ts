@@ -83,7 +83,7 @@ export class CrristournedeviseComponent implements OnInit {
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier="3WM RISTOURNE DEVISE" )
+        if(data[i].dossier=="3WM RISTOURNE DEVISE" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
@@ -217,6 +217,8 @@ export class CrristournedeviseComponent implements OnInit {
         
         this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
           this.factureToCreate.fournisseur=data.name
+          this.factureToCreate.idfiscale=data.idFiscale
+
           this.fournisseur=data
           
       })
@@ -229,6 +231,8 @@ export class CrristournedeviseComponent implements OnInit {
       
       this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
         this.factureToUpdate.fournisseur=data.name
+        this.factureToUpdate.idfiscale=data.idFiscale
+
         this.fournisseur=data
        
     })

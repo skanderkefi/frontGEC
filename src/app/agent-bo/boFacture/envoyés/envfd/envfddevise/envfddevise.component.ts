@@ -80,7 +80,7 @@ myTexts: IMultiSelectTexts = {
 
  
   showFacture(){
-    this.dataService.showFactureComdist().subscribe((data: any[])=>{
+    this.dataService.showFacturefd().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
         if(data[i].dossier=="FOND DE ROULEMENT DEVISE" && data[i].status=="sent")

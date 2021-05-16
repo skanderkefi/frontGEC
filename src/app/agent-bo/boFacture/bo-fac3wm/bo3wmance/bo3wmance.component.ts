@@ -15,7 +15,7 @@ export class Bo3wmanceComponent implements OnInit {
 
   date={"startdate":"","enddate":""}
   fournisseur:any;
-  selectedFile: File;
+  selectedFile: File; 
   Factures3wmTnd:any[]=[];
   firstn:any;
   p:number=1;
@@ -35,7 +35,7 @@ export class Bo3wmanceComponent implements OnInit {
 
  users: any[]=[];
  // Default selection
- optionsModel: number[];
+ optionsModel: number[] = [];
  
  // Settings configuration
  mySettings: IMultiSelectSettings = {
@@ -72,7 +72,7 @@ export class Bo3wmanceComponent implements OnInit {
  
   Search(){
     if(this.firstn ==""){
-      this.ngOnInit();}
+      this.ngOnInit();} 
     else{
       this.Factures3wmTnd=this.Factures3wmTnd.filter(res=>{
         return res.num_po.toLocaleLowerCase().match(this.firstn.toLocaleLowerCase());

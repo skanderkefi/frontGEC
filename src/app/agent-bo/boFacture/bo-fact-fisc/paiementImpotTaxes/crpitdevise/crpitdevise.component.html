@@ -122,7 +122,9 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                         <div class="input-group pb-modalreglog-input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                             <input type="text" class="form-control" id="numPo" placeholder="num po"
-                                            (input)="onSearchcreateChange($event.target.value)" name="numPo" [(ngModel)]='factureToCreate.num_po' >
+                                            (input)="onSearchcreateChange($event.target.value)" name="numPo" [(ngModel)]='factureToCreate.num_po'   #nump="ngModel" required>
+                                            <div class="error" *ngIf="nump.errors?.required && nump.touched" 
+                                            style="color:firebrick;" >Obligatoire !</div>
                                         </div>
                                   </div></div>
                                   <div class="col">
@@ -136,10 +138,12 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                   <div class="row mb-4">
                                     <div class="col">
                                      <div class="form-outline">
-                                    <label for="fournisseur">Fournisseur</label>
+                                    <label for="dateop">Date OP</label>
                                     <div class="input-group pb-modalreglog-input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" id="fournisseur" placeholder="Fournisseur" name="fournisseur" [(ngModel)]='factureToCreate.fournisseur' >
+                                        <input type="text" class="form-control" bsDatepicker id="dateop" placeholder="Date ordre de paiement" name="dateordrep" [(ngModel)]='factureToCreate.dateOp'  #datep="ngModel" required>
+                                        <div class="error" *ngIf="datep.errors?.required && datep.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
                                     </div>
                                 </div></div>
                                 <div class="col">
@@ -147,7 +151,30 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                     <label for="montant">Montant</label>
                                     <div class="input-group pb-modalreglog-input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToCreate.montant' >
+                                        <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToCreate.montant'  #mnt="ngModel" required>
+                                        <div class="error" *ngIf="mnt.errors?.required && mnt.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
+                                </div></div></div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                     <div class="form-outline">
+                                    <label for="datereception">Bénéficiaire</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="datereception" placeholder="Date de récéption" name="datereception" [(ngModel)]='factureToCreate.datereception'  #ben="ngModel" required>
+                                        <div class="error" *ngIf="ben.errors?.required && ben.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
+                                </div></div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                    <label for="montant">Date de récéption</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" bsDatepicker id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToCreate.datereception'  #daterec="ngModel" required>
+                                        <div class="error" *ngIf="daterec.errors?.required && daterec.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
                                     </div>
                                 </div></div></div>
                                 <div class="row mb-4">
@@ -170,7 +197,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                         [(ngModel)]='factureToCreate.objet' required>
                                            <option *ngFor="let object of objects" selected>{{object.nom}}</option>
                                          </select>
-                                </div></div></div>
+                                </div></div></div> 
 
                                 <div class="row mb-4">
                                     <div class="col">
@@ -186,7 +213,9 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                               </form>
                           </div>
                           <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                              <button type="button" *ngIf="!nump.errors?.required && !datep.errors?.required && 
+                              !mnt.errors?.required && !ben.errors?.required && 
+                              !daterec.errors?.required  " class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                               <button type="button" class="btn btn-primary" (click)="createFacture()">Créer</button>
                           </div>
                       </div>
@@ -213,92 +242,113 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                        </button>
                                   </div>
                                   <div class="modal-body">
-                                      <form class="pb-modalreglog-form-reg">
-                                          <div class="form-group">
-                                              <div id="pb-modalreglog-progressbar"></div>
-                                          </div>
-                                         
-                                          <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline"> 
-                                              <label for="id">Id</label>
-                                              <div class="input-group pb-modalreglog-input-group">
-                                                  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                  <input type="text" class="form-control" id="id" placeholder="Id" name="id" [(ngModel)]='factureToUpdate.id' readonly>
-                                              </div>
-                                          </div></div>
-                                          </div>
-                                          
-                                          <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline"> 
-                                                <label for="numPo">Num po</label>
-                                            <div class="input-group pb-modalreglog-input-group">
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                <input type="text" class="form-control" id="numPo" placeholder="num po" name="numPo" [(ngModel)]='factureToUpdate.num_po' >
-                                            </div>
-                                          </div></div>
+                                    <form class="pb-modalreglog-form-reg">
+                                        <div class="form-group">
+                                            <div id="pb-modalreglog-progressbar"></div>
+                                        </div>
+                                       
+                                        <div class="row mb-4">
                                           <div class="col">
-                                            <div class="form-outline">
-                                              <label for="dossier">Dossier</label>
+                                           <div class="form-outline"> 
+                                              <label for="numPo">Num po</label>
                                               <div class="input-group pb-modalreglog-input-group">
                                                   <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                  <input type="text" class="form-control" id="dossier" placeholder="Dossier" name="dossier" [(ngModel)]='factureToUpdate.dossier' readonly>
+                                                  <input type="text" class="form-control" id="numPo" placeholder="num po"
+                                                  (input)="onSearchcreateChange($event.target.value)" name="numPo" [(ngModel)]='factureToUpdate.num_po'   #numpup="ngModel" required>
+                                                  <div class="error" *ngIf="numpup.errors?.required && numpup.touched" 
+                                                  style="color:firebrick;" >Obligatoire !</div>
                                               </div>
-                                          </div></div></div>
-                                          <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline">
-                                            <label for="fournisseur">Fournisseur</label>
-                                            <div class="input-group pb-modalreglog-input-group">
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                <input type="text" class="form-control" id="fournisseur" placeholder="Fournisseur" name="fournisseur" [(ngModel)]='factureToUpdate.fournisseur' >
-                                            </div>
                                         </div></div>
                                         <div class="col">
-                                            <div class="form-outline">
-                                            <label for="montant">Montant</label>
+                                          <div class="form-outline">
+                                            <label for="dossier">Dossier</label>
                                             <div class="input-group pb-modalreglog-input-group">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                                <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToUpdate.montant' >
+                                                <input type="text" class="form-control" id="dossier" placeholder="Dossier" name="dossier" [(ngModel)]='factureToUpdate.dossier' readonly>
                                             </div>
                                         </div></div></div>
                                         <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline">
-                                                <label for="dvs">Devise</label>
-                                                <select class="custom-select" id="dvs" name="devise" 
-                                                [(ngModel)]='factureToUpdate.devise' required>
-                                                   <option >Euro</option>
-                                                   <option >Dollar</option>
-        
-                                                 </select>
-                                           
-                                        </div></div>
-                                        <div class="col">
-                                            <div class="form-outline">
-                                                <label for="Objet">Objet</label>
-                                                <select class="custom-select" id="Objet" name="Objet" 
-                                                [(ngModel)]='factureToUpdate.objet' required>
-                                                   <option *ngFor="let object of objects" selected>{{object.nom}}</option>
-                                                 </select>
-                                        </div></div></div>
-        
-                                        <div class="row mb-4">
-                                            <div class="col">
-                                             <div class="form-outline">
-                                                <label for="pj">Pièce jointe</label><br>
-                                                <ngx-bootstrap-multiselect [options]="myOptions" [texts]="myTexts" [settings]="mySettings"
-                                               [(ngModel)]="optionsModel" name="optionModel"></ngx-bootstrap-multiselect>
-                                                
-                                        </div></div>
-                                        <div class="col">
-                                            <div class="form-outline">
-                                        </div></div></div>
-                                      </form>
+                                          <div class="col">
+                                           <div class="form-outline">
+                                          <label for="dateop">Date OP</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" bsDatepicker id="dateop" placeholder="Date ordre de paiement" name="dateordrep" [(ngModel)]='factureToUpdate.dateOp'  #datepup="ngModel" required>
+                                              <div class="error" *ngIf="datepup.errors?.required && datepup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div>
+                                      <div class="col">
+                                          <div class="form-outline">
+                                          <label for="montant">Montant</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToUpdate.montant'  #mntup="ngModel" required>
+                                              <div class="error" *ngIf="mntup.errors?.required && mntup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div></div>
+                                      <div class="row mb-4">
+                                          <div class="col">
+                                           <div class="form-outline">
+                                          <label for="datereception">Bénéficiaire</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" id="datereception" placeholder="Date de récéption" name="datereception" [(ngModel)]='factureToUpdate.datereception'  #benup="ngModel" required>
+                                              <div class="error" *ngIf="benup.errors?.required && benup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div>
+                                      <div class="col">
+                                          <div class="form-outline">
+                                          <label for="montant">Date de récéption</label>
+                                          <div class="input-group pb-modalreglog-input-group">
+                                              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                              <input type="text" class="form-control" bsDatepicker id="montant" placeholder="Montant" name="montant" [(ngModel)]='factureToUpdate.datereception'  #daterecup="ngModel" required>
+                                              <div class="error" *ngIf="daterecup.errors?.required && daterecup.touched" 
+                                              style="color:firebrick;" >Obligatoire !</div>
+                                          </div>
+                                      </div></div></div>
+                                      <div class="row mb-4">
+                                          <div class="col">
+                                           <div class="form-outline">
+      
+                                              <label for="dvs">Devise</label>
+                                              <select class="custom-select" id="dvs" name="devise" 
+                                              [(ngModel)]='factureToCreate.devise' required>
+                                                 <option >Euro</option>
+                                                 <option >Dollar</option>
+      
+                                               </select>
+                                         
+                                      </div></div>
+                                      <div class="col">
+                                          <div class="form-outline">
+                                              <label for="Objet">Objet</label>
+                                              <select class="custom-select" id="Objet" name="Objet" 
+                                              [(ngModel)]='factureToCreate.objet' required>
+                                                 <option *ngFor="let object of objects" selected>{{object.nom}}</option>
+                                               </select>
+                                      </div></div></div> 
+      
+                                      <div class="row mb-4">
+                                          <div class="col">
+                                           <div class="form-outline">
+                                              <label for="pj">Pièce jointe</label><br>
+                                              <ngx-bootstrap-multiselect [options]="myOptions" [texts]="myTexts" [settings]="mySettings"
+                                             [(ngModel)]="optionsModel" name="optionModel"></ngx-bootstrap-multiselect>
+                                              
+                                      </div></div>
+                                      <div class="col">
+                                          <div class="form-outline">
+                                      </div></div></div>
+                                    </form>
                                   </div>
                                   <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                      <button type="button" class="btn btn-secondary" 
+                                      *ngIf="!numpup.errors?.required && !datepup.errors?.required && 
+                              !mntup.errors?.required && !benup.errors?.required && 
+                              !daterecup.errors?.required  " data-dismiss="modal">Fermer</button>
                                       <button type="button" class="btn btn-primary" (click)="updateFacture()">Modifier</button>
                                   </div>
                               </div>

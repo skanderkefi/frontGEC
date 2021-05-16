@@ -4,68 +4,71 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
-
+ 
 @Component({
   selector: 'app-bocrchloctnd',
   templateUrl: './bocrchloctnd.component.html',
   styleUrls: ['./bocrchloctnd.component.css']
 })
 export class BocrchloctndComponent implements OnInit {
-
-  selectedFile: File;
+  pieces:any[]=[];
+  objects:any[]=[];
   date={"startdate":"","enddate":""}
+  fournisseur:any;
+  selectedFile: File;
   Factures3wmTnd:any[]=[];
   firstn:any;
   p:number=1;
-  factureToCreate={"bordereau":"","id":"",
-  "devise": "TND", "dossier": "CHARGE LOCATIVE - TND" ,"factname":"","fournisseur":"",
-  "montant":"","num_po":"","objet":"",
-  "pathPdf":"","beneficiaire":"","created_at":""
-,"created_by":"4125","dateOp":"","datereception":"","updated_at":"","pieceJointe":"","idfiscale":""};
+  factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
+  "devise": "TND","direction":"","dossier": "CHARGE LOCATIVE - TND" ,"factname":"","fournisseur":"",
+  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
+  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+  "strucord":"","pieceJointe":""};
 
- factureToUpdate={"bordereau":"","id":"",
- "devise": "TND", "dossier": "CHARGE LOCATIVE - TND" ,"factname":"","fournisseur":"",
- "montant":"","num_po":"","objet":"",
- "pathPdf":"","beneficiaire":"","created_at":""
-,"created_by":"4125","dateOp":"","datereception":"","updated_at":"","pieceJointe":"","idfiscale":""};
 
+  
+
+ factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
+ "devise": "TND","direction":"","dossier": "CHARGE LOCATIVE - TND" ,"factname":"","fournisseur":"",
+ "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
+ "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+ "strucord":"","pieceJointe":""};
+
+ // Default selection
+ optionsModel: number[] = [];
  
-// Default selection
-optionsModel: number[] = [];
+ // Settings configuration
+ mySettings: IMultiSelectSettings = {
+     enableSearch: true,
+     checkedStyle: 'fontawesome',
+     buttonClasses: 'btn btn-default btn-block',
+     dynamicTitleMaxItems: 3,
+     displayAllSelectedText: true
+ };
  
-// Settings configuration
-mySettings: IMultiSelectSettings = {
-    enableSearch: true,
-    checkedStyle: 'fontawesome',
-    buttonClasses: 'btn btn-default btn-block',
-    dynamicTitleMaxItems: 3,
-    displayAllSelectedText: true
-};
+ // Text configuration
+ myTexts: IMultiSelectTexts = {
+     checkAll: 'Select all',
+     uncheckAll: 'Unselect all',
+     checked: 'item selected',
+     checkedPlural: 'items selected',
+     searchPlaceholder: 'Find',
+     searchEmptyResult: 'Nothing found...',
+     searchNoRenderText: 'Type in search box to see results...',
+     defaultTitle: 'Select',
+     allSelected: 'All selected',
+ };
 
-// Text configuration
-myTexts: IMultiSelectTexts = {
-    checkAll: 'Select all',
-    uncheckAll: 'Unselect all',
-    checked: 'item selected',
-    checkedPlural: 'items selected',
-    searchPlaceholder: 'Find',
-    searchEmptyResult: 'Nothing found...',
-    searchNoRenderText: 'Type in search box to see results...',
-    defaultTitle: 'Select',
-    allSelected: 'All selected',
-};
-
- myOptions: IMultiSelectOption[];
-
+  myOptions: IMultiSelectOption[];
 
   constructor(public dataService:DataService) { }
-
-  ngOnInit(): void {
-    this.showFacture();
-    this.showObjects();
-    this.showPieces();
-  }
  
+  ngOnInit(): void {
+    this.showObjects();
+     this.showFacture();
+     this.showPieces();
+  }
+
   Search(){
     if(this.firstn ==""){
       this.ngOnInit();}
@@ -81,7 +84,7 @@ myTexts: IMultiSelectTexts = {
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="CHARGE LOCATIVE - TND" )
+        if(data[i].dossier="CHARGE LOCATIVE - TND" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
@@ -92,11 +95,11 @@ myTexts: IMultiSelectTexts = {
         if(this.Factures3wmTnd[i]==null)
         this.Factures3wmTnd.splice(i,1)
       }
-      console.log(this.Factures3wmTnd); 
+      console.log(this.Factures3wmTnd);
     })
     
-      
-    }
+     
+    } 
 
     createFacture(){
       for(let i=0;i<this.optionsModel.length;i++){
@@ -105,14 +108,15 @@ myTexts: IMultiSelectTexts = {
          this.dataService.createFacture3wm(this.factureToCreate).subscribe((msg: any[])=>{
         console.log(msg);
       }) 
-      location.reload();
+      console.log(this.factureToCreate.objet);
+      
+      // location.reload();
     }
 
     factureCreateModal(factureToCreate){
       this.factureToCreate= factureToCreate    }
 
-      
-    factureUpdateModal(facture){
+      factureUpdateModal(facture){
         this.factureToUpdate=facture;
         }
 
@@ -125,7 +129,7 @@ myTexts: IMultiSelectTexts = {
   
         const doc = new jsPDF()
         
-        autoTable(doc, { html: '#FacturefiscdeviseTable' })
+        autoTable(doc, { html: '#Facture3wmtndTable' })
         doc.save('tableFacture.pdf')
         
         }
@@ -133,18 +137,18 @@ myTexts: IMultiSelectTexts = {
         key: string='id';
         reverse: boolean=false;
         sort(key){
-          this.key=key; 
+          this.key=key;
           this.reverse= !this.reverse;
         }
 
         updateFacture(){
           for(let i=0;i<this.optionsModel.length;i++){
-            this.factureToCreate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
+            this.factureToUpdate.pieceJointe=this.optionsModel[i].toString()+","+this.factureToCreate.pieceJointe;
           }
           this.dataService.updateFacture3wm(this.factureToUpdate).subscribe((msg: any[])=>{
-           
             console.log(msg);
           }) 
+          location.reload();
         }
 
         deleteFacture(id){
@@ -154,7 +158,6 @@ myTexts: IMultiSelectTexts = {
           })
           location.reload(); 
         }
- 
 
         onUploadToUpdate() {
         
@@ -168,6 +171,18 @@ myTexts: IMultiSelectTexts = {
           }
           );
         }
+        onUploadToCreate() {
+        
+          const uploadImageData = new FormData();
+          uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+         
+          
+          this.dataService.upload(uploadImageData).subscribe((response) => {
+            console.log(response);
+            this.factureToCreate.pathPdf=response.body.toString();
+          }
+          );
+        }
 
 
       public onFileChanged(event) {
@@ -177,20 +192,7 @@ myTexts: IMultiSelectTexts = {
       
        
       }
-
-      onUploadToCreate() {
-        
-        const uploadImageData = new FormData();
-        uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-       
-        
-        this.dataService.upload(uploadImageData).subscribe((response) => {
-          console.log(response);
-          this.factureToCreate.pathPdf=response.body.toString();
-        }
-        );
-      }
-
+ 
       searchPerDate(){
        
         
@@ -217,7 +219,8 @@ myTexts: IMultiSelectTexts = {
         this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
           this.factureToCreate.fournisseur=data.name
           this.factureToCreate.idfiscale=data.idFiscale
-         
+          this.fournisseur=data
+          
       })
     
      
@@ -229,17 +232,15 @@ myTexts: IMultiSelectTexts = {
       this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
         this.factureToUpdate.fournisseur=data.name
         this.factureToUpdate.idfiscale=data.idFiscale
+        this.fournisseur=data
        
     })
   
    
   }
 
+     
 
-
-  
-  pieces:any[]=[];
-  objects:any[]=[];
   showObjects(){
     this.dataService.showObjects().subscribe((data:any[])=>{
 
@@ -253,12 +254,12 @@ myTexts: IMultiSelectTexts = {
     this.dataService.showPieces().subscribe((data:any[])=>{
       this.myOptions=data;
       console.log("pieces");
-      console.log(this.myOptions);
+      console.log(this.pieces);
       
     })
   }
 
-     
  
+  
 
 }

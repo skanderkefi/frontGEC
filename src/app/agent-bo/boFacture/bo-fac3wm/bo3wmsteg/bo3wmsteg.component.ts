@@ -5,7 +5,7 @@ import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
  
- 
+  
 @Component({
   selector: 'app-bo3wmsteg',
   templateUrl: './bo3wmsteg.component.html',
@@ -83,7 +83,7 @@ export class Bo3wmstegComponent implements OnInit {
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier="3WM STEG TND" )
+        if(data[i].dossier=="3WM STEG TND" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
@@ -217,6 +217,7 @@ export class Bo3wmstegComponent implements OnInit {
         
         this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
           this.factureToCreate.fournisseur=data.name
+          this.factureToCreate.idfiscale=data.idFiscale
           this.fournisseur=data
           
       })
@@ -229,6 +230,7 @@ export class Bo3wmstegComponent implements OnInit {
       
       this.dataService.getFournisseur(searchValue).subscribe((data: any)=>{
         this.factureToUpdate.fournisseur=data.name
+        this.factureToUpdate.idfiscale=data.idFiscale
         this.fournisseur=data
        
     })

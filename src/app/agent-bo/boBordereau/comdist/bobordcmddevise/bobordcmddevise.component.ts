@@ -12,15 +12,15 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 export class BobordcmddeviseComponent implements OnInit {
 
   usersMatriculeAndName:string[];
-  Factures3wmTnd:any[]=[];
+  Factures3wmTnd:any[];
   firstn:any;
   Bordereaux:any[];
   Bordereaux3wmDevise:any[]=[];
   bordereauToCreate={"createdAt":Date.now(),"createdBy":"4125","folder":"","id":"",
-  "nature":"COMMISSION & DISTRIBUTION","natureRaff":"TND","reference":"BOF/COMDIST-DEVISE/","sentAt":"","sentBy":"",
+  "nature":"COMMISSION & DISTRIBUTION","natureRaff":"DEVISE","reference":"BOF/COMDIST-DEVISE/","sentAt":"","sentBy":"",
   "status":"","updatedAt":Date.now(),"toAp":""};
   bordereauToUpdate={"createdAt":Date.now(),"createdBy":"4125","folder":"","id":"",
-  "nature":"COMMISSION & DISTRIBUTION","natureRaff":"TND","reference":"BOF/COMDIST-DEVISE/","sentAt":"","sentBy":"",
+  "nature":"COMMISSION & DISTRIBUTION","natureRaff":"DEVISE","reference":"BOF/COMDIST-DEVISE/","sentAt":"","sentBy":"",
   "status":"","updatedAt":Date.now(),"toAp":""};
 
   p:number=1;
@@ -70,14 +70,7 @@ myOptions: IMultiSelectOption[]=[];
     
   } 
 
-  onChange() {
-    
-  //   for(let i=0;i<this.optionsModel.length;i++){
-  //   this.senttoap=this.senttoap+this.optionsModel[i].toString()+",";
-  // }
-  // this.bordereauToUpdate.toAp=this.senttoap;
-  // this.dataService.updateBord(this.bordereauToUpdate);
-}
+
 
 
   showBordereaux(){
@@ -88,19 +81,13 @@ myOptions: IMultiSelectOption[]=[];
       let j=0;
       for(let i=0; i<data.length; i++){
 
-        if(data[i].nature=="COMMISSION & DISTRIBUTION" ){
+        if(data[i].nature=="COMMISSION & DISTRIBUTION" && data[i].natureRaff=="DEVISE"){
 
         this.Bordereaux3wmDevise[j]=data[i];
         j++;
       }}
       console.log("bords"); 
       console.log(this.Bordereaux3wmDevise);
-      // console.log("data");
-      // console.log(data);
-
-      // console.log("bord");
-      // console.log(this.Bordereaux3wmDevise);
-
       // for(let i=0; i<this.Bordereaux3wmDevise.length; i++){
       //   if(this.Bordereaux3wmDevise[i]==null)
       //   this.Bordereaux3wmDevise.splice(i,1)
@@ -111,8 +98,28 @@ myOptions: IMultiSelectOption[]=[];
       // }
     })
     
-     
     }
+
+       
+showFacture(){
+  this.dataService.showFactureComdist().subscribe((data: any[])=>{
+    console.log(data);
+    // for(let i=0; i<this.Factures3wmTnd.length; i++){
+    //   if(this.Factures3wmTnd[i]==null)
+    //   this.Factures3wmTnd.splice(i,1)
+    // }
+    // for(let i=0; i<this.Factures3wmTnd.length; i++){
+    //   if(this.Factures3wmTnd[i]==null)
+    //   this.Factures3wmTnd.splice(i,1)
+    // }
+    this.Factures3wmTnd=data;
+    console.log("fact3wm");
+    
+    console.log(this.Factures3wmTnd);
+  })
+  
+    
+  }
      
     createBordereau(){
       var d = new Date();
@@ -214,33 +221,9 @@ let sentToAp:string;
   
  
 }
+ 
 
 
-   
-showFacture(){
-  this.dataService.showFactureComdist().subscribe((data: any[])=>{
-    console.log(data);
-    // for(let i=0; i<data.length; i++){
-    //   if(data[i].dossier=="COMDIST DEVISE" ){
-    //   this.Factures3wmTnd[j]=data[i];
-    //   j++
-    // }}
-    // for(let i=0; i<this.Factures3wmTnd.length; i++){
-    //   if(this.Factures3wmTnd[i]==null)
-    //   this.Factures3wmTnd.splice(i,1)
-    // }
-    // for(let i=0; i<this.Factures3wmTnd.length; i++){
-    //   if(this.Factures3wmTnd[i]==null)
-    //   this.Factures3wmTnd.splice(i,1)
-    // }
-    this.Factures3wmTnd=data;
-    console.log("fact3wm");
-    
-    console.log(this.Factures3wmTnd);
-  })
-  
-    
-  }
 
   showUsers(){
     this.dataService.searchMatAndPwd().subscribe((data: any[])=>{
@@ -280,7 +263,7 @@ showFacture(){
 
   }
 
-
+ 
 
   getToday():string{
     var d = new Date();

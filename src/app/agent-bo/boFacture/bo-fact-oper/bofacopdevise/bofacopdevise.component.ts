@@ -221,9 +221,7 @@ export class BofacopdeviseComponent implements OnInit {
           this.factureToCreate.fournisseur=data.name
           this.factureToCreate.idfiscale=data.idFiscale
           this.fournisseur=data
-          console.log(this.fournisseur);
-          console.log("=========")
-          console.log( this.factureToCreate.fournisseur)
+         
       })
     
      

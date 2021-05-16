@@ -7,28 +7,28 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 
 @Component({
   selector: 'app-croacatnd',
-  templateUrl: './croacatnd.component.html',
+  templateUrl: './croacatnd.component.html', 
   styleUrls: ['./croacatnd.component.css']
 })
 export class CroacatndComponent implements OnInit {
 
   selectedFile: File;
-  date={"startdate":"","enddate":""}
+  date={"startdate":"","enddate":""} 
   Factures3wmTnd:any[]=[];
   firstn:any;
   p:number=1;
-  factureToCreate={"bordereau":"","id":"",
-  "devise": "TND", "dossier": "OACA TND" ,"factname":"","fournisseur":"",
-  "montant":"","num_po":"","objet":"",
-  "pathPdf":"","beneficiaire":"","created_at":""
-,"created_by":"4125","dateOp":"","datereception":"","updated_at":"","pieceJointe":"","idfiscale":""};
+  factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
+  "devise": "TND","direction":"","dossier": "3WM OACA TND" ,"factname":"","fournisseur":"",
+  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
+  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+  "strucord":"","pieceJointe":""};
 
- factureToUpdate={"bordereau":"","id":"",
- "devise": "TND", "dossier": "OACA TND" ,"factname":"","fournisseur":"",
- "montant":"","num_po":"","objet":"",
- "pathPdf":"","beneficiaire":"","created_at":""
-,"created_by":"4125","dateOp":"","datereception":"","updated_at":"","pieceJointe":"","idfiscale":""};
-
+ factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
+ "devise": "TND","direction":"","dossier": "3WM OACA TND" ,"factname":"","fournisseur":"",
+ "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
+ "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+ "strucord":"","pieceJointe":""};
+ 
  
 // Default selection
 optionsModel: number[] = [];
@@ -81,7 +81,7 @@ myTexts: IMultiSelectTexts = {
     this.dataService.showFactureFisc().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="OACA TND" )
+        if(data[i].dossier=="3WM OACA TND" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){

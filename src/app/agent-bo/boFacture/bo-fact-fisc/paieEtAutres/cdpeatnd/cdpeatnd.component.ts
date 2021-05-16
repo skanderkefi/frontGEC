@@ -11,10 +11,10 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
   styleUrls: ['./cdpeatnd.component.css']
 })
 export class CdpeatndComponent implements OnInit {
-
+ 
   selectedFile: File;
   date={"startdate":"","enddate":""}
-  Factures3wmTnd:any[]=[];
+  Factures3wmTnd:any[]=[]; 
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","id":"",

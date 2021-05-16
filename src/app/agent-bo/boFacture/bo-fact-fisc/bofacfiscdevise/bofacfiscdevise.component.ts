@@ -20,13 +20,13 @@ export class BofacfiscdeviseComponent implements OnInit {
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","id":"",
-  "devise": "", "dossier": "FISCALITÉ DEVISE" ,"factname":"","fournisseur":"",
+  "devise": "", "dossier": "FISCALITÉ LOCALE DEVISE" ,"factname":"","fournisseur":"",
   "montant":"","num_po":"","objet":"",
   "pathPdf":"","beneficiaire":"","created_at":""
 ,"created_by":"4125","dateOp":"","datereception":"","updated_at":"","pieceJointe":"","idfiscale":""};
 
  factureToUpdate={"bordereau":"","id":"",
- "devise": "", "dossier": "FISCALITÉ DEVISE" ,"factname":"","fournisseur":"",
+ "devise": "", "dossier": "FISCALITÉ LOCALE DEVISE" ,"factname":"","fournisseur":"",
  "montant":"","num_po":"","objet":"",
  "pathPdf":"","beneficiaire":"","created_at":""
 ,"created_by":"4125","dateOp":"","datereception":"","updated_at":"","pieceJointe":"","idfiscale":""};
@@ -84,7 +84,7 @@ myTexts: IMultiSelectTexts = {
     this.dataService.showFactureFisc().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="FISCALITÉ DEVISE" )
+        if(data[i].dossier=="FISCALITÉ LOCALE DEVISE" )
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){

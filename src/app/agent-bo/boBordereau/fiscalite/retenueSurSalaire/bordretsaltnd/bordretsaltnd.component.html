@@ -10,8 +10,12 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                     <img src="../../../assets/images/excel.png">
 </button>
 
-               
-             
+
+
+
+
+
+            
               
              
 <button (click)="convert()" style="margin-left:8em;display:inline-block;"> <img src="../../../assets/images/pdfDownload.png"></button>
@@ -32,38 +36,38 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
 
             <th class="cellules">Status</th> 
             <th class="cellules">Créé le</th> 
-            <th class="cellules">Mis à jour le</th>
             <th class="cellules">Créé par</th>              
             <th class="cellules">Actions</th> 
 
 
 
- 
+  
  
           </tr>
         </thead>
     <tbody>
-        <tr *ngFor="let bord of Bordereaux3wmTnd | orderBy: key: reverse |paginate: {itemsPerPage:5,currentPage:p};">
+        <tr *ngFor="let bord of Bordereaux3wmDevise | orderBy: key: reverse |paginate: {itemsPerPage:5,currentPage:p};">
             <td class="cellules">{{bord.id}}</td>
             <td class="cellules">{{bord.nature}} {{bord.natureRaff}}</td>
             <td class="cellules">{{bord.reference}}</td>
             <td class="cellules">{{bord.status}}</td>
             <td class="cellules">{{bord.createdAt}}</td>
-            <td class="cellules">{{bord.updatedAt}}</td>
             <td class="cellules">{{bord.createdBy}}</td>
             <td class="cellules">
                 <button type="button" title="Envoyer" class="btn btn-light pb-modalreglog-submit"   
-                (click)="envoyerBordereau(bord.id)"><img src="../../../assets/images/sendBordereau.png"  
+                 data-toggle="modal" (clic)="showUserModal(bord)"  data-target="#apmodal"><img src="../../../assets/images/sendFacture4.png"  
                  style="border-radius: 10px; border-image-width: 5px;">  </button>
                  
                 <button type="button" title="Effacer" class="btn btn-light"   (click)="deleteBordereau(bord.id)">  <img  src="../../../assets/images/eff.png"
                       style="border-radius: 10px; border-image-width: 5px;"></button>
-                <button type="button" title="Factures" class="btn btn-light pb-modalreglog-submit"   
+
+               <button type="button" title="Factures" class="btn btn-light pb-modalreglog-submit"   
                       (click)="showFacture()" data-toggle="modal" data-target="#myModalFactures"><img src="../../../assets/images/show factures.png"  
                        style="border-radius: 10px; border-image-width: 5px;">  </button>
+                       
                 </td>
 
-            
+              
 
         </tr>
     </tbody>
@@ -72,7 +76,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
     </table>
 
 
-
+<!--create bordereau-->
 
     <div class="container pb-modalreglog-container">
         <div class="row">
@@ -99,7 +103,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                           <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                           <input type="text" class="form-control" id="ref" placeholder="Référence" name="ref" [(ngModel)]='bordereauToCreate.reference' readonly>
                                       </div>
-                                  </div>
+                                   </div>
                                   <div class="form-group">
                                       <label for="nature">Nature</label>
                                       <div class="input-group pb-modalreglog-input-group">
@@ -116,11 +120,10 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                       </div>
                   </div>
               </div>
-             
+              
+              <!--show factures-->
 
-      <!--show factures-->
-
-      <div class="container pb-modalreglog-container">
+    <div class="container pb-modalreglog-container">
         <div class="row">
             <div class="col-xs-12 col-md-4 col-md-offset-4">
                 <div class="input-group pb-modalreglog-input-group">
@@ -158,7 +161,7 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                                     <td class="cellules">{{fact.num_fact}}</td>
                                     <td class="cellules">{{fact.num_po}}</td>
                                    
-                        
+                         
                                 </tr>
                             </tbody>
                             <br> 
@@ -175,6 +178,43 @@ style="margin-left:70em;width:1em;display:inline-block;"  ><img src="../../../as
                       </div>
                   </div>
               </div>
-             
 
+
+
+
+               <div class="container pb-modalreglog-container">
+        <div class="row"> 
+            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <div class="input-group pb-modalreglog-input-group">
+                </div>
+                <div class="modal fade" id="apmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm" role="document" style="max-width: 35%;padding-top: 150px;">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body" >
  
+                            <ngx-bootstrap-multiselect [options]="users" [texts]="myTexts"
+                            [settings]="mySettings"  [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+                            <br>
+                          </div>
+                          <div class="modal-footer">
+                                <button class="btn btn-primary" (click)="envoyerBordereau()">Envoyer</button>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+             
+             </div></div></div>
+
+             <br><br>
+            
+           
+
+<br><br>
+
+

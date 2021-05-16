@@ -21,16 +21,18 @@ export class CrfdtndComponent implements OnInit {
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
-  "devise": "TND","direction":"","dossier": "FON DE ROULEMENT" ,
-  "factname":"","fournisseur":"", "status":"en cours","montant":"","num_fact":"",
-  "num_po":"","objet":"", "pathname":"","periode_conso":"","structure":""
-  ,"pieceJointe":"","idfiscale":"","pathpdf":""};
+  "devise": "TND","direction":"","dossier": "FOND DE ROULEMENT DEVISE" ,"factname":"","fournisseur":"",
+  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
+"pathname":"","periode_conso":"","structure":"","pieceJointe":"","idfiscale":"",
+"pathpdf":"","benefice":"","codeAp":"","created_by":"","datValidationParAp":"","dateOrdreP":"",
+ "datereception":""};
 
-  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
-  "devise": "TND","direction":"","dossier": "FOND DE ROULEMENT" ,
-  "factname":"","fournisseur":"", "status":"en cours","montant":"","num_fact":"",
-  "num_po":"","objet":"", "pathname":"","periode_conso":"","structure":""
-  ,"pieceJointe":"","idfiscale":"","pathpdf":""};
+factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
+"devise": "TND","direction":"","dossier": "FOND DE ROULEMENT DEVISE" ,"factname":"","fournisseur":"",
+"status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
+"pathname":"","periode_conso":"","structure":"","pieceJointe":"","idfiscale":"",
+"pathpdf":"","benefice":"","codeAp":"","created_by":"","datValidationParAp":"","dateOrdreP":"",
+"datereception":""};
 
   // Default selection
  optionsModel: number[] = [];
@@ -79,7 +81,7 @@ export class CrfdtndComponent implements OnInit {
 
 
   showFacture(){
-    this.dataService.showFactureComdist().subscribe((data: any[])=>{
+    this.dataService.showFacturefd().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
         if(data[i].dossier=="FOND DE ROULEMENT" )
@@ -100,7 +102,7 @@ export class CrfdtndComponent implements OnInit {
     }
 
     createFacture(){
-         this.dataService.createFacturecmd(this.factureToCreate).subscribe((msg: any[])=>{
+         this.dataService.createFd(this.factureToCreate).subscribe((msg: any[])=>{
         console.log(msg);
       }) 
     }
@@ -134,14 +136,14 @@ export class CrfdtndComponent implements OnInit {
         }
 
         updateFacture(){
-          this.dataService.updateFacturecmd(this.factureToUpdate).subscribe((msg: any[])=>{
+          this.dataService.updateFacturefd(this.factureToUpdate).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
         }
 
         deleteFacture(id){
           console.log(id);
-          this.dataService.deleteFactureCmd(id).subscribe((msg: any[])=>{
+          this.dataService.deleteFacturefd(id).subscribe((msg: any[])=>{
             console.log(msg);
           })
           location.reload(); 

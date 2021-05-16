@@ -22,13 +22,6 @@ export class BoB3wmtndComponent implements OnInit {
   p:number=1;
 
 
-
-
-
-
-
-
-
   constructor(public dataService:DataService) { }
 
   ngOnInit(): void {
@@ -141,23 +134,21 @@ envoyerBordereau(id){
 showFacture(){
   this.dataService.showFacture3wm().subscribe((data: any[])=>{
     console.log(data);
+    let j=0;
     for(let i=0; i<data.length; i++){
-      if(data[i].dossier=="3WM TND" )
-      this.Factures3wmTnd[i]=data[i];
-    }
-    for(let i=0; i<this.Factures3wmTnd.length; i++){
-      if(this.Factures3wmTnd[i]==null)
-      this.Factures3wmTnd.splice(i,1)
-    }
-    for(let i=0; i<this.Factures3wmTnd.length; i++){
-      if(this.Factures3wmTnd[i]==null)
-      this.Factures3wmTnd.splice(i,1)
-    }
+
+      if(data[i].dossier=="3WM TND"){
+
+        this.Factures3wmTnd[j]=data[i];
+
+      j++;
+    }}
+    console.log("fact3wm");
+    
     console.log(this.Factures3wmTnd);
   })
   
-    
-  }
+}
     
 
 }

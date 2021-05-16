@@ -96,18 +96,18 @@ myTexts: IMultiSelectTexts = {
     this.dataService.showFactureComdist().subscribe((data: any[])=>{
       console.log("data:");
       console.log(data);
-      // for(let i=0; i<data.length; i++){
-      //   if(data[i].dossier=="COMDIST DEVISE" )
-      //   this.Factures3wmTnd[i]=data[i];
-      // }
-      // for(let i=0; i<this.Factures3wmTnd.length; i++){
-      //   if(this.Factures3wmTnd[i]==null)
-      //   this.Factures3wmTnd.splice(i,1)
-      // }
-      // for(let i=0; i<this.Factures3wmTnd.length; i++){
-      //   if(this.Factures3wmTnd[i]==null)
-      //   this.Factures3wmTnd.splice(i,1)
-      // }
+      for(let i=0; i<data.length; i++){
+        if(data[i].dossier=="COMDIST DEVISE" )
+        this.Factures3wmTnd[i]=data[i];
+      }
+      for(let i=0; i<this.Factures3wmTnd.length; i++){
+        if(this.Factures3wmTnd[i]==null)
+        this.Factures3wmTnd.splice(i,1)
+      }
+      for(let i=0; i<this.Factures3wmTnd.length; i++){
+        if(this.Factures3wmTnd[i]==null)
+        this.Factures3wmTnd.splice(i,1)
+      }
       console.log("this.Factures3wmTnd:");
       
       console.log(this.Factures3wmTnd);

@@ -21,7 +21,7 @@ export class AdminbordancedeviseComponent implements OnInit {
 
  
 
-
+ 
   constructor(public dataService:DataService) { }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class AdminbordancedeviseComponent implements OnInit {
     this.dataService.showBordereau3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].folder=="3WM ANCE DEVISE" )
+        if(data[i].nature=="ANCE" && data[i].natureRaff=="DEVISE"  )
         this.Bordereaux3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Bordereaux3wmTnd.length; i++){

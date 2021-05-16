@@ -22,13 +22,13 @@ export class Cmp3wmcertdeviseComponent implements OnInit {
   "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
   "status":"","montant":"","num_fact":"","num_po":"","objet":"",
   "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
-  "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+  "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":""};
 
  factureToReject={"bordereau":"","createdBy":"","dateFact":"","id":"",
  "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
  "status":"","montant":"","num_fact":"","num_po":"","objet":"",
  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
- "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+ "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":""};
 
  
  
@@ -58,7 +58,7 @@ export class Cmp3wmcertdeviseComponent implements OnInit {
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="3WM STEG DEVISE" && data[i].status=="sent")
+        if(data[i].dossier=="3WM DEVISE CERT" && data[i].status=="sent")
         this.Factures3wmTnd[i]=data[i];
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
@@ -80,10 +80,10 @@ export class Cmp3wmcertdeviseComponent implements OnInit {
     factureRejectModal(factureToCreate){
       this.factureToReject= factureToCreate    }
 
-      factureUpdateModal(facture){
+    factureValidateModal(facture){
         this.factureToValidate=facture;
         }
-
+ 
 
       exportData(tableId: string) {
         this.dataService.exportToFile("facture", tableId);

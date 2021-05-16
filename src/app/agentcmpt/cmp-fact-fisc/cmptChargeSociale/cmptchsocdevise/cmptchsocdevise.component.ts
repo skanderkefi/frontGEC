@@ -21,13 +21,13 @@ export class CmptchsocdeviseComponent implements OnInit {
   "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
   "status":"","montant":"","num_fact":"","num_po":"","objet":"",
   "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
-  "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+  "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":""};
 
  factureToReject={"bordereau":"","createdBy":"","dateFact":"","id":"",
  "devise": "","direction":"","dossier": "" ,"factname":"","fournisseur":"",
  "status":"","montant":"","num_fact":"","num_po":"","objet":"",
  "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":"",
- "pieceJointe":"","idfiscale":"","Rejectraison":"","apCode":""};
+ "pieceJointe":"","idfiscale":"","raisonRefusAp":"","codeAp":""};
 
  
  
@@ -79,7 +79,7 @@ export class CmptchsocdeviseComponent implements OnInit {
     factureRejectModal(factureToCreate){
       this.factureToReject= factureToCreate    }
 
-      factureUpdateModal(facture){
+    factureValidateModal(facture){
         this.factureToValidate=facture;
         }
 

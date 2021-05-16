@@ -15,17 +15,17 @@ export class FiscloctndComponent implements OnInit {
 
   selectedFile: File;
   date={"startdate":"","enddate":""}
-  Factures3wmTnd:any[]=[];
+  Factures3wmTnd:any[]=[]; 
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","id":"",
-  "devise": "TND", "dossier": "FISCALITÉ LOCALE TND" ,"factname":"","fournisseur":"",
+  "devise": "", "dossier": "FISCALITÉ LOCALE TND" ,"factname":"","fournisseur":"",
   "montant":"","num_po":"","objet":"",
   "pathPdf":"","beneficiaire":"","created_at":""
 ,"created_by":"4125","dateOp":"","datereception":"","updated_at":"","pieceJointe":"","idfiscale":""};
 
  factureToUpdate={"bordereau":"","id":"",
- "devise": "TND", "dossier": "FISCALITÉ LOCALE TND" ,"factname":"","fournisseur":"",
+ "devise": "", "dossier": "FISCALITÉ LOCALE TND" ,"factname":"","fournisseur":"",
  "montant":"","num_po":"","objet":"",
  "pathPdf":"","beneficiaire":"","created_at":""
 ,"created_by":"4125","dateOp":"","datereception":"","updated_at":"","pieceJointe":"","idfiscale":""};
@@ -59,6 +59,7 @@ myTexts: IMultiSelectTexts = {
  myOptions: IMultiSelectOption[];
 
 
+
   constructor(public dataService:DataService) { }
 
   ngOnInit(): void {
@@ -66,7 +67,7 @@ myTexts: IMultiSelectTexts = {
     this.showObjects();
     this.showPieces();
   }
- 
+
   Search(){
     if(this.firstn ==""){
       this.ngOnInit();}
@@ -155,7 +156,8 @@ myTexts: IMultiSelectTexts = {
           })
           location.reload(); 
         }
- 
+
+
 
         onUploadToUpdate() {
         
@@ -247,7 +249,7 @@ myTexts: IMultiSelectTexts = {
       this.objects=data;
       console.log(this.objects);
       
-    })
+    }) 
   }
 
   showPieces(){
@@ -259,6 +261,5 @@ myTexts: IMultiSelectTexts = {
     })
   }
 
-     
 
 }
