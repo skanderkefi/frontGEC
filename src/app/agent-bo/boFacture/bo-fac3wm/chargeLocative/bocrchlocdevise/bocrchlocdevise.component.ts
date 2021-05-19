@@ -23,7 +23,7 @@ export class BocrchlocdeviseComponent implements OnInit {
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
   "devise": "DEVISE","direction":"","dossier": "CHARGE LOCATIVE - DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
-  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":"",
   "strucord":"","pieceJointe":""};
 
 
@@ -32,7 +32,7 @@ export class BocrchlocdeviseComponent implements OnInit {
  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
  "devise": "DEVISE","direction":"","dossier": "CHARGE LOCATIVE - DEVISE" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
- "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+ "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":"",
  "strucord":"","pieceJointe":""};
 
  // Default selection
@@ -115,6 +115,7 @@ export class BocrchlocdeviseComponent implements OnInit {
     }
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       factureUpdateModal(facture){

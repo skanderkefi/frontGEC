@@ -39,6 +39,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/cmpt']);
       console.log("u r logged in !");
     }
+    else if (this.user.profil=="TRESO"){
+      this.updateUser();
+      this.router.navigate(['/Tresostegtnd']);
+      console.log("u r logged in !");
+    }
   }) .catch((err)=>{
     this.router.navigate(['/']);
     console.log("u r not logged in ! ");

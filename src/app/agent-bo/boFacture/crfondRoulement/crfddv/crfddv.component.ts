@@ -81,14 +81,27 @@ myTexts: IMultiSelectTexts = {
     }
   }  
 
- 
   showFacture(){
     this.dataService.showFacturefd().subscribe((data: any[])=>{
       console.log(data);
-       this.Factures3wmTnd=data;
-
+      for(let i=0; i<data.length; i++){
+        let j=0;
+        if(data[i].dossier=="FOND DE ROULEMENT DEVISE" )
+        this.Factures3wmTnd[j]=data[i];
+        j++;
+      }
+      for(let i=0; i<this.Factures3wmTnd.length; i++){
+        if(this.Factures3wmTnd[i]==null)
+        this.Factures3wmTnd.splice(i,1)
+      }
+      for(let i=0; i<this.Factures3wmTnd.length; i++){
+        if(this.Factures3wmTnd[i]==null)
+        this.Factures3wmTnd.splice(i,1)
+      }
+      console.log(this.Factures3wmTnd);
     })
-    
+     
+     
     }
 
     createFacture(){
@@ -104,6 +117,7 @@ myTexts: IMultiSelectTexts = {
 
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       factureUpdateModal(facture){

@@ -20,13 +20,13 @@ export class CroacatndComponent implements OnInit {
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
   "devise": "TND","direction":"","dossier": "3WM OACA TND" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
-  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":"",
   "strucord":"","pieceJointe":""};
 
  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
  "devise": "TND","direction":"","dossier": "3WM OACA TND" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
- "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+ "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":"",
  "strucord":"","pieceJointe":""};
  
  
@@ -109,6 +109,7 @@ myTexts: IMultiSelectTexts = {
     }
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       

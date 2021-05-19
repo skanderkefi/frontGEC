@@ -12,14 +12,8 @@ import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-
 })
 export class FactureComdistComponent implements OnInit {
    
-  // workflow tools:
-  envoieApNotNull:boolean=false;
-  refusApNotNull:boolean=true;
-  validationApNotNull:boolean=true;
-  envoietrésoNotNull:boolean=true; 
-  refustresoNotNull:boolean=true;
-  validationtresoNotNull:boolean=true;
  
+
 
   datereception="1/1/2020";
   dateenvoieAp="2/1/2020";
@@ -28,7 +22,6 @@ export class FactureComdistComponent implements OnInit {
   dateenvoietreso="5/1/2020";
   daterefustréso="6/1/2020";
   datevalidationtréso="7/1/2020";
-  factureWfDetails:any
 
 
   date={"startdate":"","enddate":""}
@@ -78,7 +71,7 @@ export class FactureComdistComponent implements OnInit {
   myOptions: IMultiSelectOption[];
   
 
- 
+  
   constructor(public dataService:DataService) { }
  
   ngOnInit(): void {
@@ -167,6 +160,7 @@ export class FactureComdistComponent implements OnInit {
             console.log(msg);
           })
           location.reload(); 
+          
         }
 
         onUploadToUpdate() {
@@ -277,8 +271,30 @@ export class FactureComdistComponent implements OnInit {
     })
   }
  
-
+ // workflow tools:
+ envoieAp:boolean=false;
+ refusAp:boolean=false;
+ validationAp:boolean=false;
+ refustreso:boolean=false;
+ validationtreso:boolean=false;
+ factureWfDetails:any
+ 
   factureWorkflow(fact){
+    if (fact.dateEnvoieAuAp!="" && fact.dateEnvoieAuAp!=null){
+      this.envoieAp=true;
+    }
+    if (fact.dateRefusParAp!="" && fact.dateRefusParAp!=null){
+      this.refusAp=true;
+    }
+    if (fact.datValidationParAp!="" && fact.datValidationParAp!=null){
+      this.validationAp=true;
+    }
+    if (fact.dateRefusParTreso!="" && fact.dateRefusParTreso!=null){
+      this.refustreso=true;
+    }
+    if (fact.dateValidationParTreso!="" && fact.dateValidationParTreso!=null){
+      this.validationtreso=true;
+    }
     this.factureWfDetails=fact;
   }
 

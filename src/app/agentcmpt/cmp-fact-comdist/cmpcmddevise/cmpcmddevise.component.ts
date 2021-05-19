@@ -109,7 +109,7 @@ export class CmpcmddeviseComponent implements OnInit {
 
         rejectFacture(){
           this.factureToReject.status="rejected";
-          this.dataService.updateFacture3wm(this.factureToReject).subscribe((msg: any[])=>{
+          this.dataService.updateFacturecmd(this.factureToReject).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
           // location.reload();
@@ -117,7 +117,7 @@ export class CmpcmddeviseComponent implements OnInit {
 
         validateFacture(){
           this.factureToValidate.status="validatedFromAp";
-          this.dataService.updateFacture3wm(this.factureToValidate).subscribe((msg: any[])=>{
+          this.dataService.updateFacturecmd(this.factureToValidate).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
           // location.reload();

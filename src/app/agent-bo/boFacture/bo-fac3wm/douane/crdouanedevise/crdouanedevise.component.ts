@@ -23,13 +23,13 @@ export class CrdouanedeviseComponent implements OnInit {
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
   "devise": "","direction":"","dossier": "3WM DOUANE DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
-  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":"",
   "strucord":"","pieceJointe":""};
 
  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
  "devise": "","direction":"","dossier": "3WM DOUANE DEVISE" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
- "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+ "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":"",
  "strucord":"","pieceJointe":""};
 
  // Default selection
@@ -112,6 +112,7 @@ export class CrdouanedeviseComponent implements OnInit {
     }
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       factureUpdateModal(facture){

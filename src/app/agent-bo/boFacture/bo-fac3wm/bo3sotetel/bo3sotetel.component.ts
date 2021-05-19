@@ -4,7 +4,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
-
+ 
  
 @Component({
   selector: 'app-bo3sotetel',
@@ -23,13 +23,13 @@ export class Bo3sotetelComponent implements OnInit {
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
   "devise": "TND","direction":"","dossier": "3WM TND SOTETEL" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
-  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now()
+  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":""
   ,"pieceJointe":""};
 
  factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
  "devise": "TND","direction":"","dossier": "3WM TND" ,"factname":"","fournisseur":"",
  "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
- "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":Date.now()
+ "pathPdf":"","periode_conso":"","structure":"","delai":"","datereception":""
  ,"pieceJointe":"","idfiscale":""};
 
  
@@ -123,6 +123,7 @@ export class Bo3sotetelComponent implements OnInit {
     }
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       factureUpdateModal(facture){
@@ -278,5 +279,33 @@ export class Bo3sotetelComponent implements OnInit {
 
      
  
+
+
+  // workflow tools:
+ envoieAp:boolean=false;
+ refusAp:boolean=false;
+ validationAp:boolean=false;
+ refustreso:boolean=false;
+ validationtreso:boolean=false;
+ factureWfDetails:any
+ 
+  factureWorkflow(fact){
+    if (fact.dateEnvoieAuAp!="" && fact.dateEnvoieAuAp!=null){
+      this.envoieAp=true;
+    }
+    if (fact.dateRefusParAp!="" && fact.dateRefusParAp!=null){
+      this.refusAp=true;
+    }
+    if (fact.datValidationParAp!="" && fact.datValidationParAp!=null){
+      this.validationAp=true;
+    }
+    if (fact.dateRefusParTreso!="" && fact.dateRefusParTreso!=null){
+      this.refustreso=true;
+    }
+    if (fact.dateValidationParTreso!="" && fact.dateValidationParTreso!=null){
+      this.validationtreso=true;
+    }
+    this.factureWfDetails=fact;
+  }
 
 }

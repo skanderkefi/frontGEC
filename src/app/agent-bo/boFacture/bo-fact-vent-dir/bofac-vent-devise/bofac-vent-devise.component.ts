@@ -24,13 +24,13 @@ export class BofacVentDeviseComponent implements OnInit {
   "devise": "","direction":"","dossier": "VENTILATION DIRECTE DEVISE" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
 "pathname":"","periode_conso":"","structure":"","pieceJointe":"","idfiscale":"",
-"pathpdf":""};
+"pathpdf":"","datereception":""};
 
 factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
 "devise": "","direction":"","dossier": "VENTILATION DIRECTE DEVISE" ,"factname":"","fournisseur":"",
 "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
 "pathname":"","periode_conso":"","structure":"","pieceJointe":"","idfiscale":"",
-"pathpdf":""};
+"pathpdf":"","datereception":""};
 
 // Default selection
 optionsModel: number[] = [];
@@ -111,6 +111,7 @@ myTexts: IMultiSelectTexts = {
     }
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       factureUpdateModal(facture){

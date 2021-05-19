@@ -84,10 +84,11 @@ export class lcrjcDeviseComponent implements OnInit {
   showFacture(){
     this.dataService.showFactureLettre().subscribe((data: any[])=>{
       console.log(data);
+      let j=0;
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="LETTRE DE CRÉDIT TND" && data[i].status=="rejected")
-        this.Factures3wmTnd[i]=data[i];
-      }
+        if(data[i].dossier=="LETTRE DE CRÉDIT DEVISE" && data[i].status=="rejected")
+        this.Factures3wmTnd[j]=data[i];
+        j++      }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
         if(this.Factures3wmTnd[i]==null)
         this.Factures3wmTnd.splice(i,1)

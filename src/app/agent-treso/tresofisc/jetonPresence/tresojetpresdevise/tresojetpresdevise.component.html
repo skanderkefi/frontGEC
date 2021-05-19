@@ -1,0 +1,166 @@
+<app-treso></app-treso>
+
+<br>
+<div class="tools">
+
+         
+<button (click)="exportData('Facture3wmtndTable')" 
+style="margin-left:-65em;width:1em;display:inline-block;" >
+                    <img src="../../../assets/images/excel.png">
+</button>
+ 
+           
+<button (click)="convertToPdf()" style="margin-left:8em;display:inline-block;">
+     <img src="../../../assets/images/pdfDownload.png"></button>
+            </div>  
+              <br>
+               <hr>
+<br>
+
+    <nav class="navbar">
+        <input class="form-control" type="text" name="searching" [(ngModel)]="firstn"
+         (ngModelChange)="Search()" placeholder="Rechercher par num Po"
+          style="width: 260px;border-radius: 20px;">
+    
+        <form (ngSubmit)="searchPerDate()">
+            <div class="row" >    
+                  
+            <div class="col-sm-3 form-group" >  
+                    
+                <input  
+                type="text"   
+                [(ngModel)]="date.startdate" 
+                name="start" 
+                id="start" 
+                placeholder="De"  
+                bsDatepicker
+                 class="form-control" /> 
+                 
+            </div>  
+            <div class="col-sm-3 form-group">  
+                <input type="text"   
+                [(ngModel)]="date.enddate"
+                name="end"  
+                id="end" 
+                placeholder="Au"  
+                 
+                bsDatepicker  
+                [bsConfig]="{ isAnimated: true }"  class="form-control"/>  
+            </div>    
+            <div class="col-sm-3 form-group">    
+                <button type="submit" class="btn btn-success" >Chercher</button>   
+            </div>  
+          </div> </form> 
+    </nav><br>
+    <table id="Facture3wmtndTable" class="table table-bordered table-light table-hover " style="width: 100%;">
+        <thead>
+          <tr>
+            <th  (click)="sort('id')" class="cellules" style="width: 15px;">Id&nbsp;<i class="fa fa-sort" ></i></th>
+            <th class="cellules">fournisseur</th>
+            <th class="cellules">montant</th> 
+            <th class="cellules">num facture</th>
+            <th class="cellules">num PO</th>              
+            <th class="cellules" style="text-align: center;">Actions</th> 
+            <th class="cellules">Télécharger</th> 
+
+          </tr>
+        </thead>
+    <tbody>
+        <tr *ngFor="let fact of Factures3wmTnd | orderBy: key: reverse |paginate: {itemsPerPage:5,currentPage:p};">
+
+            <td class="cellules">{{fact.id}}</td>
+            <td class="cellules">{{fact.fournisseur}}</td>
+            <td class="cellules">{{fact.montant}}</td>
+            <td class="cellules">{{fact.num_fact}}</td>
+            <td class="cellules">{{fact.num_po}}</td>
+            <td class="cellules" style="text-align: center;">
+                <button type="button" title="Valider" class="btn btn-light pb-modalreglog-submit"   
+                data-toggle="modal" data-target="#myModalvalidate" (click)="factureValidateModal(fact)">
+               <img src="../../../assets/images/validate.png"  
+                style="border-radius: 10px; border-image-width: 5px;">  </button>
+                
+               <button type="button" title="Refuser" class="btn btn-light" 
+                data-toggle="modal" data-target="#rjctModal" (click)="factureRejectModal(fact)"
+                >  <img  src="../../../assets/images/reject.png"
+                     style="border-radius: 10px; border-image-width: 5px;"></button>
+               
+                </td>
+
+        </tr>
+    </tbody>
+    <br> 
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+
+
+
+   
+
+<!--reject modal-->
+
+    <div class="container pb-modalreglog-container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <div class="input-group pb-modalreglog-input-group">
+                </div>
+                <div class="modal fade" id="rjctModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm" role="document" style="max-width: 30%;">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                                <textarea class="form-control" id="raison" placeholder="Donnez une Raison pour la refus.." name="raisonrejection" [(ngModel)]='factureToReject.raisonRefusAp' 
+                                  #rsn="ngModel" required></textarea>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                              <button type="button"
+                              *ngIf="!rsn.errors?.required " class="btn btn-primary" (click)="rejectFacture()">Refuser</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+             
+</div></div></div>
+
+              <!-- validate modal -->
+
+
+
+              <div class="container pb-modalreglog-container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4 col-md-offset-4">
+                        <div class="input-group pb-modalreglog-input-group">
+                        </div>
+                        <div class="modal fade" id="myModalvalidate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-sm" role="document" style="max-width: 30%;">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <label for="codeAp">Code</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input type="text" class="form-control" id="codeAp" placeholder="Code AP" name="codeap" [(ngModel)]='factureToValidate.codeAp'   #cdap="ngModel" required>
+                                        <div class="error" *ngIf="cdap.errors?.required && cdap.touched" 
+                                        style="color:firebrick;" >Obligatoire !</div>
+                                    </div>
+                                    </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                      <button type="button"  class="btn btn-primary"  (click)="validateFacture()">Valider</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                     </div>
+                     </div>
+           </div>

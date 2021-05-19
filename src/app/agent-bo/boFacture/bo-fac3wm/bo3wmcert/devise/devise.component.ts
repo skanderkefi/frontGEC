@@ -50,13 +50,13 @@ export class certcrDeviseComponent implements OnInit {
    factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
    "devise": "","direction":"","dossier": "3WM DEVISE CERT" ,"factname":"","fournisseur":"",
    "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
-   "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+   "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":"",
    "pieceJointe":""};
  
   factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
   "devise": "","direction":"","dossier": "3WM DEVISE CERT" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
-  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":Date.now(),
+  "pathPdf":"","periode_conso":"","structure":"","delai":"","idfiscale":"","datereception":"",
   "pieceJointe":""};
  
    constructor(public dataService:DataService) { }
@@ -110,6 +110,8 @@ export class certcrDeviseComponent implements OnInit {
      }
  
      factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
+
        this.factureToCreate= factureToCreate    }
  
        factureUpdateModal(facture){
@@ -265,6 +267,34 @@ export class certcrDeviseComponent implements OnInit {
    }
  
       
+
+   // workflow tools:
+ envoieAp:boolean=false;
+ refusAp:boolean=false;
+ validationAp:boolean=false;
+ refustreso:boolean=false;
+ validationtreso:boolean=false;
+ factureWfDetails:any
+ 
+  factureWorkflow(fact){
+    if (fact.dateEnvoieAuAp!="" && fact.dateEnvoieAuAp!=null){
+      this.envoieAp=true;
+    }
+    if (fact.dateRefusParAp!="" && fact.dateRefusParAp!=null){
+      this.refusAp=true;
+    }
+    if (fact.datValidationParAp!="" && fact.datValidationParAp!=null){
+      this.validationAp=true;
+    }
+    if (fact.dateRefusParTreso!="" && fact.dateRefusParTreso!=null){
+      this.refustreso=true;
+    }
+    if (fact.dateValidationParTreso!="" && fact.dateValidationParTreso!=null){
+      this.validationtreso=true;
+    }
+    this.factureWfDetails=fact;
+  }
+
    
 }
  

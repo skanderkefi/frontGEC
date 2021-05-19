@@ -80,10 +80,11 @@ myTexts: IMultiSelectTexts = {
   showFacture(){
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
+      let j=0;
       for(let i=0; i<data.length; i++){
         if(data[i].dossier=="RISTOURNE - TND" &&  data[i].status=="sent")
-        this.Factures3wmTnd[i]=data[i];
-      }
+        this.Factures3wmTnd[j]=data[i];
+        j++      }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
         if(this.Factures3wmTnd[i]==null)
         this.Factures3wmTnd.splice(i,1)

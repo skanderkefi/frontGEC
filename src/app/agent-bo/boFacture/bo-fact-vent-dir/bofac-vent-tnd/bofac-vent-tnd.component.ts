@@ -26,13 +26,13 @@ export class BofacVentTndComponent implements OnInit {
   "devise": "TND","direction":"","dossier": "VENTILATION DIRECTE TND" ,
   "factname":"","fournisseur":"", "status":"en cours","montant":"","num_fact":"",
   "num_po":"","objet":"", "pathname":"","periode_conso":"","structure":""
-  ,"pieceJointe":"","idfiscale":"","pathpdf":""};
+  ,"pieceJointe":"","idfiscale":"","pathpdf":"","datereception":""};
 
   factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
   "devise": "TND","direction":"","dossier": "VENTILATION DIRECTE TND" ,
   "factname":"","fournisseur":"", "status":"en cours","montant":"","num_fact":"",
   "num_po":"","objet":"", "pathname":"","periode_conso":"","structure":""
-  ,"pieceJointe":"","idfiscale":"","pathpdf":""};
+  ,"pieceJointe":"","idfiscale":"","pathpdf":"","datereception":""};
 
   // Default selection
  optionsModel: number[] = [];
@@ -108,6 +108,7 @@ export class BofacVentTndComponent implements OnInit {
     }
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       factureUpdateModal(facture){

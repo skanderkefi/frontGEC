@@ -369,10 +369,104 @@ import { CmptpitdeviseComponent } from './agentcmpt/cmp-fact-fisc/paiementImpotT
 import { CmptpittndComponent } from './agentcmpt/cmp-fact-fisc/paiementImpotTaxes/cmptpittnd/cmptpittnd.component';
 import { CmptretsaldeviseComponent } from './agentcmpt/cmp-fact-fisc/retenueSurSalaire/cmptretsaldevise/cmptretsaldevise.component';
 import { CmptretsaltndComponent } from './agentcmpt/cmp-fact-fisc/retenueSurSalaire/cmptretsaltnd/cmptretsaltnd.component';
-import { BofactcrdeviseComponent } from './agent-bo/boFacture/bo-fact-comdist/bofactcrdevise/bofactcrdevise.component'
+import { BofactcrdeviseComponent } from './agent-bo/boFacture/bo-fact-comdist/bofactcrdevise/bofactcrdevise.component';
+import { TresochsocdeviseComponent } from './agent-treso/tresofisc/chargeSociale/tresochsocdevise/tresochsocdevise.component';
+import { TresochsoctndComponent } from './agent-treso/tresofisc/chargeSociale/tresochsoctnd/tresochsoctnd.component';
+import { TresofisclocdeviseComponent } from './agent-treso/tresofisc/fiscalitéLocale/tresofisclocdevise/tresofisclocdevise.component';
+import { TresofiscloctndComponent } from './agent-treso/tresofisc/fiscalitéLocale/tresofiscloctnd/tresofiscloctnd.component';
+import { TresoformintdeviseComponent } from './agent-treso/tresofisc/formateursInternes/tresoformintdevise/tresoformintdevise.component';
+import { TresoforminttndComponent } from './agent-treso/tresofisc/formateursInternes/tresoforminttnd/tresoforminttnd.component';
+import { TresojetpresdeviseComponent } from './agent-treso/tresofisc/jetonPresence/tresojetpresdevise/tresojetpresdevise.component';
+import { TresojetprestndComponent } from './agent-treso/tresofisc/jetonPresence/tresojetprestnd/tresojetprestnd.component';
+import { TresopeadeviseComponent } from './agent-treso/tresofisc/paieEtAutres/tresopeadevise/tresopeadevise.component';
+import { TresopeatndComponent } from './agent-treso/tresofisc/paieEtAutres/tresopeatnd/tresopeatnd.component';
+import { TresopitdeviseComponent } from './agent-treso/tresofisc/paiementImpotsEtTaxes/tresopitdevise/tresopitdevise.component';
+import { TresopittndComponent } from './agent-treso/tresofisc/paiementImpotsEtTaxes/tresopittnd/tresopittnd.component';
+import { TresoretsaldeviseComponent } from './agent-treso/tresofisc/retenueSurSalaire/tresoretsaldevise/tresoretsaldevise.component';
+import { TresoretsaltndComponent } from './agent-treso/tresofisc/retenueSurSalaire/tresoretsaltnd/tresoretsaltnd.component';
+import { TresoancedeviseComponent } from './agent-treso/treso3wm/ance/tresoancedevise/tresoancedevise.component';
+import { TresoancetndComponent } from './agent-treso/treso3wm/ance/tresoancetnd/tresoancetnd.component';
+import { TresocertdeviseComponent } from './agent-treso/treso3wm/cert/tresocertdevise/tresocertdevise.component';
+import { TresocerttndComponent } from './agent-treso/treso3wm/cert/tresocerttnd/tresocerttnd.component';
+import { TresochloctndComponent } from './agent-treso/treso3wm/chargeLocative/tresochloctnd/tresochloctnd.component';
+import { TresochlocdeviseComponent } from './agent-treso/treso3wm/chargeLocative/tresochlocdevise/tresochlocdevise.component';
+import { TresodouanedeviseComponent } from './agent-treso/treso3wm/douane/tresodouanedevise/tresodouanedevise.component';
+import { TresodouanetndComponent } from './agent-treso/treso3wm/douane/tresodouanetnd/tresodouanetnd.component';
+import { TresooacadeviseComponent } from './agent-treso/treso3wm/oaca/tresooacadevise/tresooacadevise.component';
+import { TresooacatndComponent } from './agent-treso/treso3wm/oaca/tresooacatnd/tresooacatnd.component';
+import { TresoristdeviseComponent } from './agent-treso/treso3wm/ristourne/tresoristdevise/tresoristdevise.component';
+import { TresoristtndComponent } from './agent-treso/treso3wm/ristourne/tresoristtnd/tresoristtnd.component';
+import { TresosotdeviseComponent } from './agent-treso/treso3wm/sotetel/tresosotdevise/tresosotdevise.component';
+import { TresosottndComponent } from './agent-treso/treso3wm/sotetel/tresosottnd/tresosottnd.component';
+import { TresostegdeviseComponent } from './agent-treso/treso3wm/steg/tresostegdevise/tresostegdevise.component';
+import { TresostegtndComponent } from './agent-treso/treso3wm/steg/tresostegtnd/tresostegtnd.component';
+import { TresocomdistdeviseComponent } from './agent-treso/tresocomdist/tresocomdistdevise/tresocomdistdevise.component';
+import { TresocomdisttndComponent } from './agent-treso/tresocomdist/tresocomdisttnd/tresocomdisttnd.component';
+import { TresofddeviseComponent } from './agent-treso/tresofd/tresofddevise/tresofddevise.component';
+import { TresofdtndComponent } from './agent-treso/tresofd/tresofdtnd/tresofdtnd.component';
+import { TresofindeviseComponent } from './agent-treso/tresofin/tresofindevise/tresofindevise.component';
+import { TresofintndComponent } from './agent-treso/tresofin/tresofintnd/tresofintnd.component';
+import { TresolcdeviseComponent } from './agent-treso/tresolc/tresolcdevise/tresolcdevise.component';
+import { TresolctndComponent } from './agent-treso/tresolc/tresolctnd/tresolctnd.component';
+import { TresooperdeviseComponent } from './agent-treso/tresooper/tresooperdevise/tresooperdevise.component';
+import { TresoopertndComponent } from './agent-treso/tresooper/tresoopertnd/tresoopertnd.component';
+import { TresorembdeviseComponent } from './agent-treso/tresoremb/tresorembdevise/tresorembdevise.component';
+import { TresorembtndComponent } from './agent-treso/tresoremb/tresorembtnd/tresorembtnd.component';
+import { TresoventdirdeviseComponent } from './agent-treso/tresoventdir/tresoventdirdevise/tresoventdirdevise.component';
+import { TresoventdirtndComponent } from './agent-treso/tresoventdir/tresoventdirtnd/tresoventdirtnd.component';
+import { TresoComponent } from './agent-treso/treso/treso.component'
 
-
+ 
 const appRoute : Routes = [
+  {path:'Tresoopertnd', component:TresoopertndComponent},
+  {path:'Tresolcdevise', component:TresolcdeviseComponent},
+  {path:'Tresolctnd', component:TresolctndComponent},
+  {path:'Tresooperdevise', component:TresooperdeviseComponent},
+  {path:'Tresorembdevise', component:TresorembdeviseComponent},
+  {path:'Tresorembtnd', component:TresorembtndComponent},
+  {path:'Tresoventdirdevise', component:TresoventdirdeviseComponent},
+  {path:'Tresoventdirtnd', component:TresoventdirtndComponent},
+  {path:'Treso', component:TresoComponent},
+
+  {path:'Tresooacatnd', component:TresooacatndComponent},
+  {path:'Tresoancedevise', component:TresoancedeviseComponent},
+  {path:'Tresoristdevise', component:TresoristdeviseComponent},
+  {path:'Tresoristtnd', component:TresoristtndComponent},
+  {path:'Tresosotdevise', component:TresosotdeviseComponent},
+  {path:'Tresosottnd', component:TresosottndComponent},
+  {path:'Tresostegdevise', component:TresostegdeviseComponent},
+  {path:'Tresostegtnd', component:TresostegtndComponent},
+  {path:'Tresocomdistdevise', component:TresocomdistdeviseComponent},
+  {path:'Tresocomdisttnd', component:TresocomdisttndComponent},
+  {path:'Tresofddevise', component:TresofddeviseComponent},
+  {path:'Tresofdtnd', component:TresofdtndComponent},
+  {path:'Tresofindevise', component:TresofindeviseComponent},
+  {path:'Tresofintnd', component:TresofintndComponent},
+
+  {path:'Tresoancetnd', component:TresoancetndComponent},
+  {path:'Tresocertdevise', component:TresocertdeviseComponent},
+  {path:'Tresocerttnd', component:TresocerttndComponent},
+  {path:'Tresochloctnd', component:TresochloctndComponent},
+  {path:'Tresochlocdevise', component:TresochlocdeviseComponent},
+  {path:'Tresodouanedevise', component:TresodouanedeviseComponent},
+  {path:'Tresodouanetnd', component:TresodouanetndComponent},
+  {path:'Tresooacadevise', component:TresooacadeviseComponent},
+
+  {path:'Tresochsocdevise', component:TresochsocdeviseComponent},
+  {path:'Tresochsoctnd', component:TresochsoctndComponent},
+  {path:'Tresofisclocdevise', component:TresofisclocdeviseComponent},
+  {path:'Tresofiscloctnd', component:TresofiscloctndComponent},
+  {path:'Tresoformintdevise', component:TresoformintdeviseComponent},
+  {path:'Tresoforminttnd', component:TresoforminttndComponent},
+  {path:'Tresojetpresdevise', component:TresojetpresdeviseComponent},
+  {path:'Tresojetprestnd', component:TresojetprestndComponent},
+  {path:'Tresopeadevise', component:TresopeadeviseComponent},
+  {path:'Tresopeatnd', component:TresopeatndComponent},
+  {path:'Tresopitdevise', component:TresopitdeviseComponent},
+  {path:'Tresopittnd', component:TresopittndComponent},
+  {path:'Tresoretsaldevise', component:TresoretsaldeviseComponent},
+  {path:'Tresoretsaltnd', component:TresoretsaltndComponent},
+
   {path:'FactureComdist', component:FactureComdistComponent},
   {path:'Bofactcrdevise', component:BofactcrdeviseComponent},
   {path:'boBordComdistTnd', component:boBordComdistTndComponent},
@@ -922,6 +1016,7 @@ const appRoute : Routes = [
     CmpventtndComponent,
     DashboardComponent,
     BocrchlocdeviseComponent,
+    TresochlocdeviseComponent,
     BocrchloctndComponent,
     CrdouanedeviseComponent,
     CrdouanetndComponent,
@@ -1083,7 +1178,51 @@ const appRoute : Routes = [
     CmptpittndComponent,
     CmptretsaldeviseComponent,
     CmptretsaltndComponent,
-    BofactcrdeviseComponent
+    BofactcrdeviseComponent,
+    TresochsocdeviseComponent,
+    TresochsoctndComponent,
+    TresofisclocdeviseComponent,
+    TresofiscloctndComponent,
+    TresoformintdeviseComponent,
+    TresoforminttndComponent,
+    TresojetpresdeviseComponent,
+    TresojetprestndComponent,
+    TresopeadeviseComponent,
+    TresopeatndComponent,
+    TresopitdeviseComponent,
+    TresopittndComponent,
+    TresoretsaldeviseComponent,
+    TresoretsaltndComponent,
+    TresoancedeviseComponent,
+    TresoancetndComponent,
+    TresocertdeviseComponent,
+    TresocerttndComponent,
+    TresochloctndComponent,
+    TresodouanedeviseComponent,
+    TresodouanetndComponent,
+    TresooacadeviseComponent,
+    TresooacatndComponent,
+    TresoristdeviseComponent,
+    TresoristtndComponent,
+    TresosotdeviseComponent,
+    TresosottndComponent,
+    TresostegdeviseComponent,
+    TresostegtndComponent,
+    TresocomdistdeviseComponent,
+    TresocomdisttndComponent,
+    TresofddeviseComponent,
+    TresofdtndComponent,
+    TresofindeviseComponent,
+    TresofintndComponent,
+    TresolcdeviseComponent,
+    TresolctndComponent,
+    TresooperdeviseComponent,
+    TresoopertndComponent,
+    TresorembdeviseComponent,
+    TresorembtndComponent,
+    TresoventdirdeviseComponent,
+    TresoventdirtndComponent,
+    TresoComponent
   ],
   imports: [
     NgxBootstrapMultiselectModule,

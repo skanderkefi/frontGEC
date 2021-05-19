@@ -54,12 +54,13 @@ export class CmptchsocdeviseComponent implements OnInit {
 
  
   showFacture(){
-    this.dataService.showFacture3wm().subscribe((data: any[])=>{
+    this.dataService.showFactureFisc().subscribe((data: any[])=>{
       console.log(data);
+      let j=0;
       for(let i=0; i<data.length; i++){
         if(data[i].dossier=="CHARGE SOCIALE DEVISE" && data[i].status=="sent")
-        this.Factures3wmTnd[i]=data[i];
-      }
+        this.Factures3wmTnd[j]=data[i];
+        j++;      }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
         if(this.Factures3wmTnd[i]==null)
         this.Factures3wmTnd.splice(i,1)
@@ -106,7 +107,7 @@ export class CmptchsocdeviseComponent implements OnInit {
 
         rejectFacture(){
           this.factureToReject.status="rejected";
-          this.dataService.updateFacture3wm(this.factureToReject).subscribe((msg: any[])=>{
+          this.dataService.updateFactureFisc(this.factureToReject).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
           // location.reload();
@@ -114,7 +115,7 @@ export class CmptchsocdeviseComponent implements OnInit {
 
         validateFacture(){
           this.factureToValidate.status="validatedFromAp";
-          this.dataService.updateFacture3wm(this.factureToValidate).subscribe((msg: any[])=>{
+          this.dataService.updateFactureFisc(this.factureToValidate).subscribe((msg: any[])=>{
             console.log(msg);
           }) 
           // location.reload();

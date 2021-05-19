@@ -5,7 +5,7 @@ import autoTable from 'jspdf-autotable';
 import { formatDate } from '@angular/common';
 import { IMultiSelectOption,IMultiSelectTexts, IMultiSelectSettings } from 'ngx-bootstrap-multiselect';
 
-@Component({
+@Component({ 
   selector: 'app-cmptchlocdevise',
   templateUrl: './cmptchlocdevise.component.html',
   styleUrls: ['./cmptchlocdevise.component.css']
@@ -58,9 +58,11 @@ export class CmptchlocdeviseComponent implements OnInit {
   showFacture(){
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
+      let j=0;
       for(let i=0; i<data.length; i++){
         if(data[i].dossier=="CHARGE LOCATIVE - DEVISE" && data[i].status=="sent")
-        this.Factures3wmTnd[i]=data[i];
+        this.Factures3wmTnd[j]=data[i];
+        j++;
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
         if(this.Factures3wmTnd[i]==null)

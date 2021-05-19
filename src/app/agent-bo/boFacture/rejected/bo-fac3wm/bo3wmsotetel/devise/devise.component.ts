@@ -88,10 +88,11 @@ export class sotrjcDeviseComponent implements OnInit {
   showFacture(){
     this.dataService.showFacture3wm().subscribe((data: any[])=>{
       console.log(data);
+      let j=0;
       for(let i=0; i<data.length; i++){
         if(data[i].dossier=="3WM DEVISE SOTETEL" &&data[i].status=="rejected")
-        this.Factures3wmdevise[i]=data[i];
-      }
+        this.Factures3wmdevise[j]=data[i];
+        j++      }
       for(let i=0; i<this.Factures3wmdevise.length; i++){
         if(this.Factures3wmdevise[i]==null)
         this.Factures3wmdevise.splice(i,1)

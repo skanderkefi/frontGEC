@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DataService} from "../../../../dataservice/data.service";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-bofacletrdevise',
@@ -74,6 +75,7 @@ export class BofacletrdeviseComponent implements OnInit {
     }
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       factureUpdateModal(facture){

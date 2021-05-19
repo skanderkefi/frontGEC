@@ -271,5 +271,32 @@ export class FactureFinancementComponent implements OnInit {
   }
 
      
+   // workflow tools:
+ envoieAp:boolean=false;
+ refusAp:boolean=false;
+ validationAp:boolean=false;
+ refustreso:boolean=false;
+ validationtreso:boolean=false;
+ factureWfDetails:any
+ 
+  factureWorkflow(fact){
+    if (fact.dateEnvoieAuAp!="" && fact.dateEnvoieAuAp!=null){
+      this.envoieAp=true;
+    }
+    if (fact.dateRefusParAp!="" && fact.dateRefusParAp!=null){
+      this.refusAp=true;
+    }
+    if (fact.datValidationParAp!="" && fact.datValidationParAp!=null){
+      this.validationAp=true;
+    }
+    if (fact.dateRefusParTreso!="" && fact.dateRefusParTreso!=null){
+      this.refustreso=true;
+    }
+    if (fact.dateValidationParTreso!="" && fact.dateValidationParTreso!=null){
+      this.validationtreso=true;
+    }
+    this.factureWfDetails=fact;
+  }
+
 
 }

@@ -21,14 +21,14 @@ export class CrfdtndComponent implements OnInit {
   firstn:any;
   p:number=1;
   factureToCreate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
-  "devise": "TND","direction":"","dossier": "FOND DE ROULEMENT DEVISE" ,"factname":"","fournisseur":"",
+  "devise": "TND","direction":"","dossier": "FOND DE ROULEMENT TND" ,"factname":"","fournisseur":"",
   "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
 "pathname":"","periode_conso":"","structure":"","pieceJointe":"","idfiscale":"",
 "pathpdf":"","benefice":"","codeAp":"","created_by":"","datValidationParAp":"","dateOrdreP":"",
  "datereception":""};
 
 factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":"",
-"devise": "TND","direction":"","dossier": "FOND DE ROULEMENT DEVISE" ,"factname":"","fournisseur":"",
+"devise": "TND","direction":"","dossier": "FOND DE ROULEMENT TND" ,"factname":"","fournisseur":"",
 "status":"en cours","montant":"","num_fact":"","num_po":"","objet":"",
 "pathname":"","periode_conso":"","structure":"","pieceJointe":"","idfiscale":"",
 "pathpdf":"","benefice":"","codeAp":"","created_by":"","datValidationParAp":"","dateOrdreP":"",
@@ -84,8 +84,10 @@ factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":""
     this.dataService.showFacturefd().subscribe((data: any[])=>{
       console.log(data);
       for(let i=0; i<data.length; i++){
-        if(data[i].dossier=="FOND DE ROULEMENT" )
-        this.Factures3wmTnd[i]=data[i];
+        let j=0;
+        if(data[i].dossier=="FOND DE ROULEMENT TND" )
+        this.Factures3wmTnd[j]=data[i];
+        j++;
       }
       for(let i=0; i<this.Factures3wmTnd.length; i++){
         if(this.Factures3wmTnd[i]==null)
@@ -108,6 +110,7 @@ factureToUpdate={"bordereau":"","createdBy":"4125","dateFact":Date.now(),"id":""
     }
 
     factureCreateModal(factureToCreate){
+      this.factureToCreate.datereception= formatDate(Date.now(),'yyyy-MM-dd','en_US').toString();
       this.factureToCreate= factureToCreate    }
 
       factureUpdateModal(facture){
